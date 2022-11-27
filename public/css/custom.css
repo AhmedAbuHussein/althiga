@@ -1,0 +1,39 @@
+.aside-menu .menu-item .menu-link .menu-icon i {
+    font-size: 16px;
+    color: #9696a7 !important;
+}
+.aside-dark .menu .menu-item .menu-link .menu-title{
+    font-size: 18px !important;
+}
+.custom-list ul li{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #525252;
+    font-size: 13pt;
+}
+.custom-list ul li:nth-child(odd){
+    background: #efefef;
+}
+.text-bold{
+    font-weight: bold;
+}
+#prefix {
+    position: absolute;
+    bottom: 0px;
+    background: #ddd;
+    padding: 11px;
+    left: 0px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 43px;
+    min-width: 40px;
+}
+
+.phone {
+    padding-left: 65px;
+}
+
+.vs__dropdown-option--selected{
+    background: #dbdbdb;
+}

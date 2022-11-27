@@ -37,4 +37,18 @@ if (!function_exists("uploadImage")) {
 }
 
 
+
+
+if (!function_exists('active')) {
+    function active($route, $class = "active", $key = null, $params = null)
+    {
+        if ($key && $params) {
+            return (request()->routeIs("$route") ||  request()->routeIs("$route.*")) && (request()->route($key) == $params) ? $class : '';
+        } else {
+            return (request()->routeIs("$route") ||  request()->routeIs("$route.*")) ? $class : '';
+        }
+    }
+}
+
+
 ?>
