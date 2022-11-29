@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,14 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['verify' => true]);
 
-Route::get('/language/{lang}', function($lang){
-    if(in_array($lang, ['en', 'ar'])){
-        App::setLocale($lang);
-        session()->put('locale', $lang);
-    }
-    return redirect()->back();
-})->name('change.lang');
+Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'=> 'admin.'], function () {
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+    
+    Route::post('/change-mode', [App\Http\Controllers\Admin\HomeController::class, 'change_mode'])->name('change.mode');
+});

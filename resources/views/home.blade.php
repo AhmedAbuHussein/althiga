@@ -14,11 +14,11 @@
         <div class="card" style="height: 200px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="20">0</p>
-                    <i class="fa fa-users" style="font-size: 80px;"></i> 
+                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="{{ \App\Models\Course::count() }}">0</p>
+                    <i class="fa fa-book" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.users')</a>
+                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.courses')</a>
                 </div>
             </div>
         </div>
@@ -28,11 +28,11 @@
         <div class="card" style="height: 200px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="20">0</p>
+                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="{{ \App\Models\Category::count() }}">0</p>
                     <i class="fa fa-list-alt" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.orders')</a>
+                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.categories')</a>
                 </div>
             </div>
         </div>
@@ -42,11 +42,11 @@
         <div class="card" style="height: 200px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="20">0</p>
-                    <i class="fa fa-envelope-open-text" style="font-size: 80px;"></i> 
+                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="{{ \App\Models\Contact::count() }}">0</p>
+                    <i class="fa fa-phone" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.complains')</a>
+                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.contacts')</a>
                 </div>
             </div>
         </div>
@@ -56,11 +56,11 @@
         <div class="card" style="height: 200px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="20">0</p>
-                    <i class="fa fa-user" style="font-size: 80px;"></i> 
+                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="{{ \App\Models\Gallery::count() }}">0</p>
+                    <i class="fa fa-image" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.captains')</a>
+                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.gallery')</a>
                 </div>
             </div>
         </div>
@@ -70,11 +70,11 @@
         <div class="card" style="height: 200px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="20">0</p>
-                    <i class="fa fa-car" style="font-size: 80px;"></i> 
+                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="{{ \App\Models\Subscribe::count() }}">0</p>
+                    <i class="fa fa-play" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.vehicles')</a>
+                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.subscribe')</a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
         <div class="card" style="height: 200px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="20">0</p>
+                    <p style="font-size: 60px;" class="text-muted" data-kt-countup="true" data-kt-countup-value="{{ \App\Models\Partner::count() }}">0</p>
                     <i class="fa fa-handshake" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">

@@ -68,4 +68,9 @@ class Course extends Model
     {
         return $this->hasMany(Requirement::class, 'course_id');
     }
+
+    public function subscribes()
+    {
+        return $this->hasMany(Subscribe::class, 'course_id');
+    }
 }

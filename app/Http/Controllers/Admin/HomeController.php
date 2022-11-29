@@ -16,4 +16,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function change_mode()
+    {
+        if(session()->has('mode') && session()->get('mode', 'light') == "dark"){
+            session()->put('mode', 'light');
+        }else{
+            session()->put('mode', 'dark');
+        }
+        return response()->json();
+    }
+    
 }

@@ -7,7 +7,7 @@
     @include('layouts.partials.head')
 </head>
 
-<body id="kt_body"
+<body id="kt_body" dir="{{ app()->isLocale('en') ? 'ltr' : 'rtl' }}"
     class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed"
     style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
     <div class="d-flex flex-column flex-root" id="app">
@@ -17,8 +17,8 @@
                 data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
-                    <a href="{{ route('home') }}">
-                        <img alt="Logo" src="{{ asset('images/logo.png') }}" class="logo" style="height:40px" />
+                    <a href="{{ route('admin.home') }}">
+                        <img alt="Logo" src="{{ asset('images/logo.png') }}" class="logo" style="height:55px" />
                     </a>
                     <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
                         data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"

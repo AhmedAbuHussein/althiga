@@ -23,6 +23,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
+        view()->composer('layouts.partials.header', function($view) {
+            $notifications = [];
+            if(auth()->check()){
+                $notifications = auth()->user()->unreadNotification;
+            }
+            $view->with(['_notifys'=> $notifications ?? []]);
+        });
+        
     }
 }

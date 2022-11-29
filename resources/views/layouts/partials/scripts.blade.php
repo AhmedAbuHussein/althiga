@@ -18,7 +18,7 @@
             try{
                 $('#night-mode').on('click', function(){
                     $.ajax({
-                        url: "{{ route('change.mode') }}",
+                        url: "{{ route('admin.change.mode') }}",
                         type: 'POST',
                         data: {
                             '_token': '{{ csrf_token() }}'
