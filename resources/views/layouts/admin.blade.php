@@ -5,6 +5,7 @@
 
     <title>@lang('site.dashboard') | @yield('title')</title>
     @include('layouts.partials.head')
+    
 </head>
 
 <body id="kt_body" dir="{{ app()->isLocale('en') ? 'ltr' : 'rtl' }}"

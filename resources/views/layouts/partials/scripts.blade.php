@@ -12,7 +12,53 @@
     @if (Session::get('notify-message'))
         @include("layouts.partials.notify")
     @endif
+
     <script>
+
+        function readURL(input,$seleector) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $($seleector).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+          }
+        }
+
+        function deleteItem(url){
+            Swal.fire({
+                title: "@lang('site.are you sure')",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: "@lang('site.yes')",
+                cancelButtonText: "@lang('site.no')",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url : url,
+                        type : "POST",
+                        data : { '_token' : "{{ csrf_token() }}", '_method': 'DELETE'},
+                        success : function(data) {
+                            Swal.fire({
+                                text: data.message,
+                                icon: 'success',                            
+                            });
+                            window.LaravelDataTables["categories-table"].ajax.reload();
+                        },
+                        error : function (error) {
+                            console.log(error)
+                            Swal.fire({
+                                title: 'Oops...',
+                                text: error.responseJSON.message,
+                                icon: 'error',
+                            })
+                        }
+                    });
+                }
+              })
+        }
 
         $(function(){
             try{
@@ -31,15 +77,12 @@
             }catch(e){}
         
             $(".select2").select2();
+
+            $("input[type='file']").change(function() { readURL(this, $(this).siblings('label.preview').children('img')); });
+
         });
 
-        window.addEventListener('alert', event => {
-            toastr[event.detail.type](event.detail.message,
-                event.detail.title ?? "@lang('site.alert')"), toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-            }
-        });
+       
 
     </script>
     @stack('js')

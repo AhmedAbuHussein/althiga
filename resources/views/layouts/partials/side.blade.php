@@ -16,7 +16,7 @@
 
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.categories') }}" href="#">
+                <a class="menu-link {{ active('admin.categories') }}" href="{{ route('admin.categories.index') }}">
                     <span class="menu-icon">
                         <i class="la la-list-alt"></i>
                     </span>

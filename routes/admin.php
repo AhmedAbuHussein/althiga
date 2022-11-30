@@ -18,6 +18,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'=> 'admin.'], function () {
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
-    
     Route::post('/change-mode', [App\Http\Controllers\Admin\HomeController::class, 'change_mode'])->name('change.mode');
+
+    Route::resource("categories", \App\Http\Controllers\Admin\CategoryController::class);
 });
