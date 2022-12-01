@@ -262,7 +262,22 @@
         },
 
         action: function (e, dt, button, config) {
-            window.location = window.location.href.replace(/\/+$/, "") + '/create';
+            let route = $('#create-btn').val();
+            if(route){
+                window.location = route
+            }else{
+                window.location = window.location.href.replace(/\/+$/, "") + '/create';
+            }
+        }
+    };
+
+    DataTable.ext.buttons.link = {
+        className: 'buttons-link',
+        text: function (dt, button, config) {
+            return  `<i class="fa ${config.fa}"></i> ${config.title}`;
+        },
+        action: function (e, dt, button, config) {
+            window.location = config.url;
         }
     };
 

@@ -7,6 +7,8 @@
     <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/summernote/summernote-ar-AR.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     
     @if (Session::get('notify-message'))
@@ -76,11 +78,30 @@
                 })
             }catch(e){}
         
-            $(".select2").select2();
+            $(".select2").select2({
+                "placeholder": "{{ __('site.select') }}",
+            });
 
             $("input[type='file']").change(function() { readURL(this, $(this).siblings('label.preview').children('img')); });
 
+
+            try{
+                $('.summernote').summernote({
+                    lang: "{{ app()->isLocale('ar') ? 'ar-AR' : 'en-US' }}",
+                    height: 120,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'underline', 'clear']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['link']],
+                        ['view', ['codeview', 'help']]
+                    ]
+                });
+            }catch(e){}
+
         });
+
 
        
 

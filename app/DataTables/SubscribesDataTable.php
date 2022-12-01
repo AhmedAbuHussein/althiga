@@ -2,37 +2,33 @@
 
 namespace App\DataTables;
 
-use App\Models\Category;
+use App\Models\Subscribe;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoriesDataTable extends DataTable
+class SubscribesDataTable extends DataTable
 {
     public function ajax()
     {
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.categories.edit', ['category'=> $item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
-            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.categories.show', ['category'=> $item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.categories.destroy', ['category'=> $item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.subscribes.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             return $action;
         })
-        ->editColumn('title', function($item){
-            return $item->getTranslation('title', app()->getLocale());
+        ->editColumn('email', function($item){
+            return '<a href="mailto:'.$item->email.'">'.$item->email.'</a>';
         })
-        ->editColumn('icon', function($item){
-            return '<img src="'.$item->url.'" style="width:60px;">';
+        ->editColumn('course.title', function($item){
+            return $item->course_id ? $item->course->title : '--------';
         })
-        ->filterColumn('title', function($query, $keyword) {
-            $query->where(function($builder) use($keyword){
-                $builder->where('title->en',"LIKE","%{$keyword}%")->orWhere("title->ar", "LIKE","%{$keyword}%");
-            });
+        ->editColumn('is_all', function($item){
+            return $item->is_all ? __('site.all') : '--------';
         })
-        ->rawColumns(['action', 'icon'])
+        ->rawColumns(['action', 'email'])
         
         ->make(true);
     }
@@ -40,10 +36,10 @@ class CategoriesDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\Subscribe $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Category $model)
+    public function query(Subscribe $model)
     {
         return $model->newQuery();
     }
@@ -56,7 +52,7 @@ class CategoriesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('categories-table')
+                    ->setTableId('subscribes-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -65,15 +61,22 @@ class CategoriesDataTable extends DataTable
                         "language" => [
                             "url"=> asset('lang/arabic.json')
                         ],
+                        'buttons' =>[
+                            [
+                                "title"=> __('site.send'),
+                                "fa"=> "fa-envelope",
+                                'className' => 'btn btn-primary',
+                                'extend'=> "link",
+                                'url'=> route('admin.subscribes.mails'),
+                                "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
+                            ]
+                        ]
                     ])
                     ->buttons(
                         Button::make([
-                            "extend"=> "create",
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-plus\"></i> ".__('site.create')."'}"
-                        ])->addClass("btn btn-primary"),
-                        Button::make([
                             "extend"=> "export",
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-download\"></i> ".__('site.export')." &nbsp;<span class=\"caret\"/>'}"
+                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-download\"></i> ".__('site.export')." &nbsp;<span class=\"caret\"/>'}",
+                            "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
                         ])->addClass("btn btn-danger"),
 
                         Button::make([
@@ -96,8 +99,9 @@ class CategoriesDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('site.id'))->addClass("text-center"),
-            Column::make('title')->title(__('site.title'))->addClass("text-center"),
-            Column::make('icon')->title(__('site.image'))->addClass("text-center"),
+            Column::make('email')->title(__('site.email'))->addClass("text-center"),
+            Column::make('course.title')->title(__('site.courses'))->addClass("text-center"),
+            Column::make('is_all')->title(__('site.subscribe'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)
             ->addClass('text-center'),
@@ -111,6 +115,6 @@ class CategoriesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Categories_' . date('YmdHis');
+        return 'Subscribes_' . date('YmdHis');
     }
 }

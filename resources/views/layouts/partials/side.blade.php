@@ -25,7 +25,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.subscribes') }}" href="#">
+                <a class="menu-link {{ active('admin.subscribes') }}" href="{{ route('admin.subscribes.index') }}">
                     <span class="menu-icon">
                         <i class="la la-play"></i>
                     </span>

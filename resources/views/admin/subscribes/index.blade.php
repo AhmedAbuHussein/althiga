@@ -1,16 +1,15 @@
 @extends('layouts.admin')
 @section('title')
-    @lang('site.categories')
+    @lang('site.subscribes')
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
-    <li class="breadcrumb-item text-muted">@lang('site.categories')</li>
+    <li class="breadcrumb-item text-muted">@lang('site.subscribes')</li>
 @endsection
 @section('content')
     <div class="card">
         <div class="card-body">
             {!! $dataTable->table(['class'=> 'table table-row-dashed table-row-gray-300 text-center table-striped']) !!}
-            <input type="hidden" id="create-btn" value="{{ route('admin.categories.create') }}">
         </div>
     </div>
 @endsection

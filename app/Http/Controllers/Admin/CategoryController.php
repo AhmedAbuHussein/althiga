@@ -51,6 +51,29 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
+    public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            "title"=> "required|array",
+            "title.en"=> "required|string",
+            "title.ar"=> "required|string",
+            "text"=> "required|array",
+            "text.en"=> "required|string",
+            "text.ar"=> "required|string",
+            "image"=> "nullable|image",
+        ]);
+        $data = $request->except(['_token', "_method", "image"]);
+        if($request->hasFile('image')){
+            $data['icon'] = uploadImage($request->file('image'), $category->icon, 'category-', true, 100, 100);
+        }
+        $category->update($data);
+        return redirect()->route('admin.categories.index')->with([
+            "notify-type"=> "success",
+            "notify-message"=> __('site.updated_msg')
+        ]);
+    }
+
+
     public function destroy(Category $category)
     {
         $category->delete();

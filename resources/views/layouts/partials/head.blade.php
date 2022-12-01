@@ -33,6 +33,7 @@
             }
         </style>
     @endif
+    
 @else
     @if (session()->get("mode", 'light') == 'light')
         {{--  <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"/>  --}}
@@ -54,7 +55,9 @@
         </style>
     @endif
 @endif
+
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/summernote/summernote.min.css') }}">
 <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
@@ -78,6 +81,9 @@
     }
     .menu-title{
         font-weight: bold;
+    }
+    .note-editor .note-toolbar .note-color-all .note-dropdown-menu, .note-popover .popover-content .note-color-all .note-dropdown-menu{
+        min-width: 345px;
     }
 </style>
 @stack('css')

@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">@lang('site.arabic details')</label>
-                            <textarea name="text[ar]" class="form-control" rows="5">{{ old('text.ar', $category->getTranslation('text', 'en')) }}</textarea>
+                            <textarea name="text[ar]" class="form-control" rows="5">{{ old('text.ar', $category->getTranslation('text', 'ar')) }}</textarea>
                             @error('text.ar')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
