@@ -32,7 +32,7 @@
                     <i class="fa fa-list-alt" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.categories')</a>
+                    <a href="{{ route('admin.categories.index') }}" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.categories')</a>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                     <i class="fa fa-phone" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.contacts')</a>
+                    <a href="{{ route('admin.contacts.index') }}" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.contacts')</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     <i class="fa fa-image" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.gallery')</a>
+                    <a href="{{ route('admin.galleries.index') }}" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.gallery')</a>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                     <i class="fa fa-play" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.subscribe')</a>
+                    <a href="{{ route('admin.subscribes.index') }}" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.subscribe')</a>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                     <i class="fa fa-handshake" style="font-size: 80px;"></i> 
                 </div>
                 <div class="footer">
-                    <a href="#" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.partners')</a>
+                    <a href="{{ route('admin.partners.index') }}" class="fs-4 fw-bold text-hover-primary text-gray-600 m-0">@lang('site.partners')</a>
                 </div>
             </div>
         </div>

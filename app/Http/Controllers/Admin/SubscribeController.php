@@ -50,4 +50,10 @@ class SubscribeController extends Controller
         ]);
     }
 
+    
+    public function destroy(Subscribe $subscribe)
+    {
+        $subscribe->delete();
+        return response()->json(['message'=> __('site.item deleted successfully')], 200);
+    }
 }

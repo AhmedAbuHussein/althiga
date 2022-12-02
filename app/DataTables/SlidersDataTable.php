@@ -2,37 +2,40 @@
 
 namespace App\DataTables;
 
-use App\Models\Category;
+use App\Models\Slider;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoriesDataTable extends DataTable
+class SlidersDataTable extends DataTable
 {
     public function ajax()
     {
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.categories.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
-            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.categories.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.categories.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.sliders.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.sliders.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
+            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.sliders.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             return $action;
         })
         ->editColumn('title', function($item){
             return $item->getTranslation('title', app()->getLocale());
         })
-        ->editColumn('icon', function($item){
-            return '<img src="'.$item->url.'" style="width:60px;">';
+        ->editColumn('link', function($item){
+            return $item->link ? '<a href='.$item->link.'>'.$item->link.'</a>': '------';
+        })
+        ->editColumn('image', function($item){
+            return '<img src="'.$item->url.'" style="width:135px;">';
         })
         ->filterColumn('title', function($query, $keyword) {
             $query->where(function($builder) use($keyword){
                 $builder->where('title->en',"LIKE","%{$keyword}%")->orWhere("title->ar", "LIKE","%{$keyword}%");
             });
         })
-        ->rawColumns(['action', 'icon'])
+        ->rawColumns(['action', 'image', 'link'])
         
         ->make(true);
     }
@@ -40,10 +43,10 @@ class CategoriesDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\Slider $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Category $model)
+    public function query(Slider $model)
     {
         return $model->newQuery();
     }
@@ -56,7 +59,7 @@ class CategoriesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('categories-table')
+                    ->setTableId('sliders-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -98,7 +101,8 @@ class CategoriesDataTable extends DataTable
         return [
             Column::make('id')->title(__('site.id'))->addClass("text-center"),
             Column::make('title')->title(__('site.title'))->addClass("text-center"),
-            Column::make('icon')->title(__('site.image'))->addClass("text-center"),
+            Column::make('link')->title(__('site.external_link'))->addClass("text-center"),
+            Column::make('image')->title(__('site.image'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)
             ->addClass('text-center'),
@@ -112,6 +116,6 @@ class CategoriesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Categories_' . date('YmdHis');
+        return 'Sliders_' . date('YmdHis');
     }
 }

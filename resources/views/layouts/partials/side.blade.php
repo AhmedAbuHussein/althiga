@@ -43,7 +43,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.contacts') }}" href="#">
+                <a class="menu-link {{ active('admin.contacts') }}" href="{{ route('admin.contacts.index') }}">
                     <span class="menu-icon">
                         <i class="la la-phone"></i>
                     </span>
@@ -52,7 +52,16 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.galleries') }}" href="#">
+                <a class="menu-link {{ active('admin.partners') }}" href="{{ route('admin.partners.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-users"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.partners')</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.galleries') }}" href="{{ route('admin.galleries.index') }}">
                     <span class="menu-icon">
                         <i class="la la-images"></i>
                     </span>
@@ -61,11 +70,20 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.sliders') }}" href="#">
+                <a class="menu-link {{ active('admin.sliders') }}" href="{{ route('admin.sliders.index') }}">
                     <span class="menu-icon">
                         <i class="la la-sliders-h"></i>
                     </span>
                     <span class="menu-title">@lang('site.sliders')</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.tours') }}" href="{{ route('admin.tours.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-bus"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.tour')</span>
                 </a>
             </div>
 
@@ -87,14 +105,7 @@
                 </a>
             </div>
 
-            <div class="menu-item">
-                <a class="menu-link {{ active('admin.tours') }}" href="#">
-                    <span class="menu-icon">
-                        <i class="la la-bus"></i>
-                    </span>
-                    <span class="menu-title">@lang('site.tour')</span>
-                </a>
-            </div>
+            
 
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.admins') }}" href="#">
