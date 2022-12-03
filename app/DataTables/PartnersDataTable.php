@@ -65,7 +65,7 @@ class PartnersDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('partners-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

@@ -52,7 +52,7 @@ class UsersDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('users-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

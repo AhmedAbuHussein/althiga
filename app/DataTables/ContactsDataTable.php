@@ -57,7 +57,7 @@ class ContactsDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('contacts-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

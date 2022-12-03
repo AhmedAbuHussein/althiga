@@ -62,7 +62,7 @@ class CategoriesDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('categories-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

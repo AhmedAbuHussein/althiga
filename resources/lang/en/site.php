@@ -88,7 +88,7 @@ return [
     "instagram"=>"instagram",
     "youtube"=>"youtube",
     "password_confirmation"=>"Password confirmation",
-    ""=>"",
+    "item deleted successfully"=>"item deleted successfully",
     ""=>"",
     ""=>"",
     ""=>"",

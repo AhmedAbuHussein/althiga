@@ -58,7 +58,7 @@ class GalleriesDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('galleries-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

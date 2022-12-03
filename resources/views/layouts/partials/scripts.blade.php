@@ -47,7 +47,7 @@
                                 text: data.message,
                                 icon: 'success',                            
                             });
-                            window.LaravelDataTables["categories-table"].ajax.reload();
+                            window.LaravelDataTables["items-table"].ajax.reload();
                         },
                         error : function (error) {
                             console.log(error)

@@ -68,7 +68,7 @@ class TeamsDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('teams-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

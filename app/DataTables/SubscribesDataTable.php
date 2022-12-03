@@ -58,7 +58,7 @@ class SubscribesDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('subscribes-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

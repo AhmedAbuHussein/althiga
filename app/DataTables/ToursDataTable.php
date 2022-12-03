@@ -62,7 +62,7 @@ class ToursDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('tours-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

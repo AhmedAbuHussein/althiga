@@ -65,7 +65,7 @@ class SlidersDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('sliders-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

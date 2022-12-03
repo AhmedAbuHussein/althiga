@@ -64,7 +64,7 @@ class AccreditationsDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('accreditations-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
