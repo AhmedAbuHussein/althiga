@@ -6,6 +6,7 @@ use App\DataTables\CategoriesDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -76,6 +77,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $img = $category->image;
+        Storage::delete($img);
         $category->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

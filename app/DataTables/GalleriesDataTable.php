@@ -13,6 +13,7 @@ class GalleriesDataTable extends DataTable
 {
     public function ajax()
     {
+        
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
@@ -50,6 +51,12 @@ class GalleriesDataTable extends DataTable
      */
     public function html()
     {
+        $lang = [];
+        if(app()->isLocale('ar')){
+            $lang = [
+                "url"=> asset('lang/arabic.json')  
+            ];
+        }
         return $this->builder()
                     ->setTableId('galleries-table')
                     ->columns($this->getColumns())
@@ -57,9 +64,7 @@ class GalleriesDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->parameters([
-                        "language" => [
-                            "url"=> asset('lang/arabic.json')
-                        ],
+                        "language" => $lang,
                     ])
                     ->buttons(
                         Button::make([

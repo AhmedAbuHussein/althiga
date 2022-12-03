@@ -2,40 +2,39 @@
 
 namespace App\DataTables;
 
-use App\Models\Partner;
+use App\Models\Accreditation;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PartnersDataTable extends DataTable
+class AccreditationsDataTable extends DataTable
 {
+
     public function ajax()
     {
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.partners.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
-            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.partners.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.partners.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.accreditations.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.accreditations.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
+            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.accreditations.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             return $action;
         })
         ->editColumn('title', function($item){
             return $item->getTranslation('title', app()->getLocale());
         })
-        ->editColumn('link', function($item){
-            return $item->link ? '<a href='.$item->link.'>'.$item->link.'</a>': '------';
+        ->editColumn('type', function($item){
+            return __('site.'.$item->type);
         })
         ->editColumn('image', function($item){
-            return '<img src="'.$item->url.'" style="width:50px;">';
+            return '<img src="'.$item->url.'" style="width:135px;">';
         })
         ->filterColumn('title', function($query, $keyword) {
             $query->where(function($builder) use($keyword){
                 $builder->where('title->en',"LIKE","%{$keyword}%")->orWhere("title->ar", "LIKE","%{$keyword}%");
             });
         })
-        ->rawColumns(['action', 'image', 'link'])
+        ->rawColumns(['action', 'image', 'type'])
         
         ->make(true);
     }
@@ -43,10 +42,10 @@ class PartnersDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Partner $model
+     * @param \App\Models\Accreditation $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Partner $model)
+    public function query(Accreditation $model)
     {
         return $model->newQuery();
     }
@@ -65,7 +64,7 @@ class PartnersDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('partners-table')
+                    ->setTableId('accreditations-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -105,7 +104,7 @@ class PartnersDataTable extends DataTable
         return [
             Column::make('id')->title(__('site.id'))->addClass("text-center"),
             Column::make('title')->title(__('site.title'))->addClass("text-center"),
-            Column::make('link')->title(__('site.external_link'))->addClass("text-center"),
+            Column::make('type')->title(__('site.type'))->addClass("text-center"),
             Column::make('image')->title(__('site.image'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)
@@ -120,6 +119,6 @@ class PartnersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Partners_' . date('YmdHis');
+        return 'Accreditations_' . date('YmdHis');
     }
 }

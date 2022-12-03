@@ -12,7 +12,7 @@ class Accreditation extends Model
     use HasFactory, HasTranslations;
     protected $guarded = ['id'];
     protected $appends = ['url', 'fileUrl'];
-    public $translatable = ['title', 'file_title'];
+    public $translatable = ['title', 'text','file_title'];
 
     public function getUrlAttribute()
     {

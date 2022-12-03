@@ -6,6 +6,7 @@ use App\DataTables\PartnersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Partner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
 {
@@ -72,6 +73,8 @@ class PartnerController extends Controller
 
     public function destroy(Partner $partner)
     {
+        $img = $partner->image;
+        Storage::delete($img);
         $partner->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

@@ -37,6 +37,27 @@ if (!function_exists("uploadImage")) {
 }
 
 
+if (!function_exists("uploadFile")) {
+
+    function uploadFile(UploadedFile $file, $oldFileName = null, $prefix="", $folder = 'files')
+    {
+        if (!Storage::exists("$folder")) {
+            Storage::makeDirectory("$folder");
+        }
+        if ($oldFileName && $oldFileName != "default.png") {
+            try {
+                Storage::delete(["$folder/$oldFileName", "$oldFileName"]);
+            } catch (\Throwable $th) {}
+        }
+        $extension = $file->getClientOriginalExtension();
+        $name = $prefix . '.' . Str::random() . '.' . ($extension ? $extension : 'png') ;
+        if(! (Storage::putFileAs("$folder", $file, $name))){
+            throw new Exception("Cant save this file", 400);
+        }
+        return "$folder/$name";
+    }
+}
+
 
 
 if (!function_exists('active')) {

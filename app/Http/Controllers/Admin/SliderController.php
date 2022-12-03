@@ -6,6 +6,7 @@ use App\DataTables\SlidersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
@@ -78,6 +79,8 @@ class SliderController extends Controller
 
     public function destroy(Slider $slider)
     {
+        $img = $slider->image;
+        Storage::delete($img);
         $slider->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

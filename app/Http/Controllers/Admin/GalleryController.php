@@ -6,6 +6,7 @@ use App\DataTables\GalleriesDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -64,6 +65,8 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
+        $img = $gallery->image;
+        Storage::delete($img);
         $gallery->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

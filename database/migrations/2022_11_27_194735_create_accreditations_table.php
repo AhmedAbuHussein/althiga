@@ -18,7 +18,7 @@ class CreateAccreditationsTable extends Migration
             $table->text('title')->nullable();
             $table->string('type')->nullable();
             $table->string('image')->nullable();
-            $table->string('numb')->nullable();
+            $table->text('text')->nullable();
             $table->string('file')->nullable();
             $table->text('file_title')->nullable();
             $table->timestamps();

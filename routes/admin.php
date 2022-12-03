@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("galleries", \App\Http\Controllers\Admin\GalleryController::class);
     Route::resource("partners", \App\Http\Controllers\Admin\PartnerController::class);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
+    Route::resource("accreditations", \App\Http\Controllers\Admin\AccreditationController::class);
 
     Route::group(['prefix'=> "contacts", 'as'=> "contacts."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');

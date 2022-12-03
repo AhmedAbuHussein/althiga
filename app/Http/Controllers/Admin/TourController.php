@@ -6,6 +6,7 @@ use App\DataTables\ToursDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TourController extends Controller
 {
@@ -76,6 +77,8 @@ class TourController extends Controller
 
     public function destroy(Tour $tour)
     {
+        $img = $tour->image;
+        Storage::delete($img);
         $tour->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

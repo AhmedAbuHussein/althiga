@@ -88,7 +88,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.accreditations') }}" href="#">
+                <a class="menu-link {{ active('admin.accreditations') }}" href="{{ route('admin.accreditations.index') }}">
                     <span class="menu-icon">
                         <i class="la la-certificate"></i>
                     </span>

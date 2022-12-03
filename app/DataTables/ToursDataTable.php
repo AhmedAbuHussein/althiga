@@ -55,6 +55,12 @@ class ToursDataTable extends DataTable
      */
     public function html()
     {
+        $lang = [];
+        if(app()->isLocale('ar')){
+            $lang = [
+                "url"=> asset('lang/arabic.json')  
+            ];
+        }
         return $this->builder()
                     ->setTableId('tours-table')
                     ->columns($this->getColumns())
@@ -62,9 +68,7 @@ class ToursDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->parameters([
-                        "language" => [
-                            "url"=> asset('lang/arabic.json')
-                        ],
+                        "language" => $lang,
                     ])
                     ->buttons(
                         Button::make([

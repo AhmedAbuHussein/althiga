@@ -85,5 +85,8 @@
     .note-editor .note-toolbar .note-color-all .note-dropdown-menu, .note-popover .popover-content .note-color-all .note-dropdown-menu{
         min-width: 345px;
     }
+    .form-group{
+        margin-bottom: 15px;
+    }
 </style>
 @stack('css')
