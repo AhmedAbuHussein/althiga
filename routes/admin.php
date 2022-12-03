@@ -20,12 +20,14 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
     Route::post('/change-mode', [App\Http\Controllers\Admin\HomeController::class, 'change_mode'])->name('change.mode');
 
+    Route::resource("accreditations", \App\Http\Controllers\Admin\AccreditationController::class);
     Route::resource("categories", \App\Http\Controllers\Admin\CategoryController::class);
-    Route::resource("sliders", \App\Http\Controllers\Admin\SliderController::class);
     Route::resource("galleries", \App\Http\Controllers\Admin\GalleryController::class);
     Route::resource("partners", \App\Http\Controllers\Admin\PartnerController::class);
+    Route::resource("sliders", \App\Http\Controllers\Admin\SliderController::class);
+    Route::resource("admins", \App\Http\Controllers\Admin\AdminController::class)->except(['show']);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
-    Route::resource("accreditations", \App\Http\Controllers\Admin\AccreditationController::class);
+    Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
 
     Route::group(['prefix'=> "contacts", 'as'=> "contacts."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');

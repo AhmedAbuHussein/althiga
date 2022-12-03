@@ -97,7 +97,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.teams') }}" href="#">
+                <a class="menu-link {{ active('admin.team') }}" href="{{ route('admin.team.index') }}">
                     <span class="menu-icon">
                         <i class="la la-users-cog"></i>
                     </span>
@@ -108,7 +108,7 @@
             
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.admins') }}" href="#">
+                <a class="menu-link {{ active('admin.admins') }}" href="{{ route('admin.admins.index') }}">
                     <span class="menu-icon">
                         <i class="la la-user"></i>
                     </span>
