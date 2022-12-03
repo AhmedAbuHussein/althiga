@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RoutingController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/artisan', function(){
+    Artisan::call("optimize:clear");
+    Artisan::call("storage:link");
+    return 'done';
+});
 
 Route::view('mail', 'admin.mail.index', [
     'title'=> "عنوان البريد الالكتروني", 
