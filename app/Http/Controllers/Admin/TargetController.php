@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\DataTables\TargetDataTable;
+use App\Http\Controllers\Controller;
+use App\Models\Target;
+use App\Models\Team;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class TargetController extends Controller
+{
+    public function index(TargetDataTable $dataTable, $type, $id)
+    {
+        // target not complete yet
+        return $dataTable->with(['type'=> $type, 'id'=> $id])->render('admin.targets.index', ['type'=> $type, 'id'=> $id]);
+    }
+    
+    public function show($type, $id, Target $target)
+    {
+        return view('admin.targets.show', compact('target'));
+    }
+
+    public function create($type, $id)
+    {
+        return view('admin.targets.create', compact('type', 'id'));
+    }
+
+    public function store(Request $request, $type, $id)
+    {
+        $request->validate([
+            "title"=> "required|array",
+            "title.en"=> "required|string",
+            "title.ar"=> "required|string",
+            "text"=> "required|array",
+            "text.en"=> "required|string",
+            "text.ar"=> "required|string",
+            "link"=> "nullable|url",
+            "image"=> "nullable|image",
+        ]);
+        $data = $request->except(['_token', "_method", 'image']);
+        if($request->hasFile('image')){
+            $data['image'] = uploadImage($request->file('image'), null, 'slider-', true, 2048, 1024);
+        }
+        Target::create($data);
+        return redirect()->route('admin.targets.index', [$type, $id])->with([
+            "notify-type"=> "success",
+            "notify-message"=> __('site.saved_msg')
+        ]);
+    }
+
+    public function edit($type, $id, Target $target)
+    {
+        return view('admin.targets.edit', compact('target', 'type', 'id'));
+    }
+
+    public function update(Request $request,$type, $id, Target $target)
+    {
+        $request->validate([
+            "title"=> "required|array",
+            "title.en"=> "required|string",
+            "title.ar"=> "required|string",
+            "text"=> "required|array",
+            "text.en"=> "required|string",
+            "text.ar"=> "required|string",
+            "link"=> "nullable|url",
+            "image"=> "nullable|image",
+        ]);
+        $data = $request->except(['_token', "_method", 'image']);
+        if($request->hasFile('image')){
+            $data['image'] = uploadImage($request->file('image'), $target->image, 'target-', true,  2048, 1024);
+        }
+        $target->update($data);
+        return redirect()->route('admin.targets.index', ['type', 'id'])->with([
+            "notify-type"=> "success",
+            "notify-message"=> __('site.updated_msg')
+        ]);
+    }
+
+
+    public function destroy($type, $id, Target $target)
+    {
+        $img = $target->image;
+        Storage::delete($img);
+        $target->delete();
+        return response()->json(['message'=> __('site.item deleted successfully')], 200);
+    }
+}

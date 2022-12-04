@@ -59,7 +59,6 @@ if (!function_exists("uploadFile")) {
 }
 
 
-
 if (!function_exists('active')) {
     function active($route, $class = "active", $key = null, $params = null)
     {
@@ -71,5 +70,21 @@ if (!function_exists('active')) {
     }
 }
 
+
+if (!function_exists('_splite')) {
+    function _splite($objects, $chuncks = 2, $index = 0)
+    {
+        if(!$objects) return [];
+        $len = $objects->count();
+        if($chuncks < 2) return $objects;
+        if($len <= $chuncks) return $objects;
+
+        $chunk = round($len / $chuncks, 0);
+        $chunks = $objects->chunk($chunk);
+
+        return $chunks[$index];
+
+    }
+}
 
 ?>

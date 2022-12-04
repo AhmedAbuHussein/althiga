@@ -29,6 +29,16 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
     Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
 
+    Route::resource("{type}/{id}/targets", \App\Http\Controllers\Admin\TargetController::class);
+
+    Route::group(['prefix'=> "about", 'as'=> "about."], function() {
+        Route::get("/", [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('index');
+                
+        Route::get("{about}/edit", [\App\Http\Controllers\Admin\AboutController::class, 'edit'])->name('edit');
+        Route::put("{about}/update", [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('update');
+
+    });
+
     Route::group(['prefix'=> "contacts", 'as'=> "contacts."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');
         Route::get("{contact}/show", [\App\Http\Controllers\Admin\ContactController::class, 'show'])->name('show');

@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function(){
+    $collec = collect([
+        collect([1,23,4,5]),
+        collect([1,23,4,5,5,41]),
+        collect([1561,23,4,5,5,41]),
+        collect([845,23,4,5,5,41]),
+        collect([845,23,4,5,51,41]),
+        collect([845,23,4,5,52,41]),
+        collect([845,23,4,5,52,42]),
+    ]);
+    return _splite($collec, 2, 1);
+});
+
 Route::get('/artisan', function(){
     Artisan::call("optimize:clear");
     Artisan::call("storage:link");

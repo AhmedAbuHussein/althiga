@@ -119,7 +119,7 @@
             
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.about') }}" href="#">
+                <a class="menu-link {{ active('admin.about') }}" href="{{ route('admin.about.index') }}">
                     <span class="menu-icon">
                         <i class="la la-id-card"></i>
                     </span>
