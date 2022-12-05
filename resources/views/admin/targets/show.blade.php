@@ -4,6 +4,10 @@
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
+    <li class="breadcrumb-item text-muted">
+        <a class="text-muted text-hover-primary" href="{{ $route }}">@lang('site.'.$type)</a>
+    </li>
+    <li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
             href="{{ route('admin.sliders.index') }}">@lang('site.sliders')</a></li>
 

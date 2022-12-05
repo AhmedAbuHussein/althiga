@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\Extra;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -11,7 +12,8 @@ class AboutController extends Controller
     public function index()
     {
         $about = About::firstOrCreate([]);
-        return view('admin.about.index', compact('about'));
+        $items = Extra::get();
+        return view('admin.about.index', compact('about', 'items'));
     }
 
     public function edit(About $about)

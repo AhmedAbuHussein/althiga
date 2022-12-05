@@ -2,6 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\About;
+use App\Models\Category;
+use App\Models\Course;
 use App\Models\Target;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -40,9 +43,10 @@ class TargetDataTable extends DataTable
      * @param \App\Models\Target $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Target $model)
+    public function query()
     {
-        return $model->newQuery();
+        $class = $this->getClass();
+        return Target::where(["targetable_type"=> $class, 'targetable_id'=> $this->id])->newQuery();
     }
 
     /**
@@ -114,5 +118,14 @@ class TargetDataTable extends DataTable
     protected function filename()
     {
         return 'Target_' . date('YmdHis');
+    }
+
+    public function getClass()
+    {
+        return [
+            "about"=> About::class,
+            "categories"=> Category::class,
+            "courses"=> Course::class,
+        ][$this->type];
     }
 }

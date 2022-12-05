@@ -17,6 +17,7 @@ class CategoriesDataTable extends DataTable
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
             $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.categories.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+            $action .= '<a class="btn btn-info py-1 ps-2 pe-2 ms-1" href="'.route('admin.targets.index', ['type'=> "categories", 'id'=>$item->id]).'" title="'.__('site.targets').'"><i class="fa fa-list-alt"></i></a>';
             $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.categories.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
             $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.categories.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             return $action;

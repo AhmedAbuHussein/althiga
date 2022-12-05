@@ -89,12 +89,12 @@ return [
     "youtube"=>"youtube",
     "password_confirmation"=>"Password confirmation",
     "item deleted successfully"=>"item deleted successfully",
-    // new words
-    "targets"=>"Targets",
+    "targets"=>"Targets",  // new words
     "component"=>"Component",
     "english short details"=>"English short details",
     "arabic short details"=>"Arabic short details",
-    ""=>"",
+    "training_services"=>"Training services",
+    "advisory_services"=>"Advisory services",
     ""=>"",
     ""=>"",
     ""=>"",
