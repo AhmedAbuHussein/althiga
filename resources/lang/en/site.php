@@ -95,7 +95,7 @@ return [
     "arabic short details"=>"Arabic short details",
     "training_services"=>"Training services",
     "advisory_services"=>"Advisory services",
-    ""=>"",
+    "extra"=>"Component",
     ""=>"",
     ""=>"",
     ""=>"",

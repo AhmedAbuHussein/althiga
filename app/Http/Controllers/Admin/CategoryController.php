@@ -77,7 +77,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $img = $category->image;
+        $img = $category->icon;
         Storage::delete($img);
         $category->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);

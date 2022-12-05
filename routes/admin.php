@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("partners", \App\Http\Controllers\Admin\PartnerController::class);
     Route::resource("sliders", \App\Http\Controllers\Admin\SliderController::class);
     Route::resource("admins", \App\Http\Controllers\Admin\AdminController::class)->except(['show']);
+    Route::resource("extra", \App\Http\Controllers\Admin\ExtraController::class);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
     Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
 

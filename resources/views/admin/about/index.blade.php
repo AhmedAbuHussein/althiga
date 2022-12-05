@@ -13,11 +13,11 @@
             <a href="{{ route('admin.about.edit', [$about->id]) }}" class="btn btn-primary">@lang('site.edit')</a>
             
             <a href="{{ route('admin.targets.index', ['type'=>'about', 'id'=>$about->id]) }}" class="btn btn-success">@lang('site.targets')</a>
-            <a href="#" class="btn btn-info">@lang('site.component')</a>
+            <a href="{{ route('admin.extra.index') }}" class="btn btn-info">@lang('site.component')</a>
           </div>
     </div>
     <div class="card-body">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-8">
                 <div>
                     <h4 class="about-title mb-3">{{ $about->title ?? '--------' }}</h4>
@@ -40,24 +40,6 @@
                                 </ul>
                             </div>
                         </div>
-
-                        {{--  components  --}}
-                        <div class="row">
-                            @foreach ($items as $item)
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <img src="{{ $item->url }}" alt="item">
-                                            </div>
-                                            <h3>{{ $item->title }}</h3>
-                                            <p class="mt-2">{{ $item->text }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -66,6 +48,22 @@
                     <img src="{{ $about->url }}" style="width: 100%" alt="">
                 </div>
             </div>
+        </div>
+        {{--  components  --}}
+        <div class="row">
+            @foreach ($items as $item)
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img src="{{ $item->url }}" alt="item">
+                            </div>
+                            <h3>{{ $item->title }}</h3>
+                            <p class="mt-2">{{ $item->text }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
