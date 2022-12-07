@@ -23,7 +23,7 @@ class CreateCoursesTable extends Migration
             $table->string('accreditation_num')->nullable();
             $table->text('days')->nullable(); // السبت من كل اسبوع
             $table->integer('duration')->nullable(); // 5 day
-            $table->float('houre_per_day')->nullable();
+            $table->float('hour_per_day')->nullable();
             $table->text('certification')->nullable();
             $table->text('languages')->nullable();
             $table->boolean('show_single_price')->default(false);

@@ -13,14 +13,13 @@ class Course extends Model
 {
     use HasFactory, HasTranslations, HasSlug;
     protected $guarded = ['id'];
+    protected $casts = ['days' => "array"];
     protected $appends = ['url', 'fileUrl'];
     public $translatable = [
-        'days',
         'title', 
         'title2', 
         'details',
         'details2',
-        "languages",
         "price_role",
         "certification",
         "group_price_role",
@@ -38,7 +37,7 @@ class Course extends Model
         if($this->image){
             return Storage::url($this->image);
         }
-        return asset('images/default.png');
+        return asset('web/img/Althiga_hand.png');
     }
 
     public function getFileUrlAttribute()
@@ -46,7 +45,7 @@ class Course extends Model
         if($this->register_form_file){
             return Storage::url($this->register_form_file);
         }
-        return asset('images/default.png');
+        return asset('web/img/Althiga_hand.png');
     }
 
     public function targets()

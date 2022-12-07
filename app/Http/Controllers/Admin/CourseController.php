@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\CoursesDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -36,21 +37,31 @@ class CourseController extends Controller
         return view('admin.courses.create', compact('categories', 'days'));
     }
 
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        $request->validate([
-            "title"=> "required|array",
-            "title.en"=> "required|string",
-            "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
-            "image"=> "nullable|image",
-        ]);
-        $data = $request->except(['_token', "_method", "image"]);
-        if($request->hasFile('image')){
-            $data['icon'] = uploadImage($request->file('image'), null, 'course-', true, 100, 100);
+        $data = $request->except(['_token', "_method", "image", 'file']);
+        
+        if($request->show_single_price == "0"){ 
+            $data['price'] = NULL;
+            $data['discount_price'] = NULL;
+        }else{
+            $data['price_role'] = NULL;
         }
+
+        if($request->show_group_price == "0"){ 
+            $data['group_price'] = NULL;
+            $data['discount_group_price'] = NULL;
+        }else{
+            $data['group_price_role'] = NULL;
+        }
+
+        if($request->hasFile('image')){
+            $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 2048, 1024);
+        }
+        if($request->hasFile('file')){
+            $data['register_form_file'] = uploadFile($request->file('image'), null, 'course-');
+        }
+
         Course::create($data);
         return redirect()->route('admin.courses.index')->with([
             "notify-type"=> "success",
@@ -61,23 +72,41 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $categories = Category::get();
-        return view('admin.courses.edit', compact('course', 'categories'));
+        $days = [
+            'saturday',
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday'
+           ];
+        return view('admin.courses.edit', compact('course', 'categories', 'days'));
     }
 
-    public function update(Request $request, Course $course)
-    {
-        $request->validate([
-            "title"=> "required|array",
-            "title.en"=> "required|string",
-            "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
-            "image"=> "nullable|image",
-        ]);
-        $data = $request->except(['_token', "_method", "image"]);
+    public function update(CourseRequest $request, Course $course)
+    {      
+        $data = $request->except(['_token', "_method", "image", 'file']);
+
+        if($request->show_single_price == "0"){ 
+            $data['price'] = NULL;
+            $data['discount_price'] = NULL;
+        }else{
+            $data['price_role'] = NULL;
+        }
+
+        if($request->show_group_price == "0"){ 
+            $data['group_price'] = NULL;
+            $data['discount_group_price'] = NULL;
+        }else{
+            $data['group_price_role'] = NULL;
+        }
+
         if($request->hasFile('image')){
-            $data['icon'] = uploadImage($request->file('image'), $course->icon, 'course-', true, 100, 100);
+            $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 2048, 1024);
+        }
+        if($request->hasFile('file')){
+            $data['register_form_file'] = uploadFile($request->file('image'), null, 'course-');
         }
         $course->update($data);
         return redirect()->route('admin.courses.index')->with([
@@ -89,8 +118,7 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        $img = $course->image;
-        Storage::delete($img);
+        Storage::delete([$course->image, $course->register_form_file]);
         $course->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }
