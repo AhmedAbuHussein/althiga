@@ -21,8 +21,8 @@ class CreateSettingsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('register_phone')->nullable();
-            $table->float('lat')->nullable();
-            $table->float('lng')->nullable();
+            $table->float('lat', 8, 8, true)->nullable();
+            $table->float('lng', 8, 8, true)->nullable();
             $table->text('values')->nullable(); // قيمنا تعرض في الصفحة الرئيسية
             $table->timestamps();
         });

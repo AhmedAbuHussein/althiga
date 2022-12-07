@@ -82,7 +82,7 @@
                 "placeholder": "{{ __('site.select') }}",
             });
 
-            $("input[type='file']").change(function() { readURL(this, $(this).siblings('label.preview').children('img')); });
+            $("input[type='file']:not(.file)").change(function() { readURL(this, $(this).siblings('label.preview').children('img')); });
 
 
             try{

@@ -34,7 +34,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.courses') }}" href="#">
+                <a class="menu-link {{ active('admin.courses') }}" href="{{ route('admin.courses.index') }}">
                     <span class="menu-icon">
                         <i class="la la-book"></i>
                     </span>
@@ -128,7 +128,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ active('admin.setting') }}" href="#">
+                <a class="menu-link {{ active('admin.setting') }}" href="{{ route('admin.setting.index') }}">
                     <span class="menu-icon">
                         <i class="la la-cogs"></i>
                     </span>

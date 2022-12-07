@@ -22,6 +22,9 @@
             .preview{
                 background: #d2d2d2;
             }
+            .select2-container--bootstrap5 .select2-selection--multiple{
+                background: #f5f5f5;
+            }
         </style>
     @else
         {{--  <link href="{{ asset('assets/plugins/custom/datatables/datatables.dark.bundle.css') }}" rel="stylesheet"/>  --}}
@@ -30,6 +33,9 @@
         <style>
             .preview{
                 background: #15151d;
+            }
+            .select2-container--bootstrap5 .select2-selection--multiple{
+                background: #282839;
             }
         </style>
     @endif
@@ -43,6 +49,9 @@
             .preview{
                 background: #d2d2d2;
             }
+            .select2-container--bootstrap5 .select2-selection--multiple{
+                background: #f5f5f5;
+            }
         </style>
     @else
         {{--  <link href="{{ asset('assets/plugins/custom/datatables/datatables.dark.bundle.rtl.css') }}" rel="stylesheet"/>  --}}
@@ -51,6 +60,9 @@
         <style>
             .preview{
                 background: #15151d;
+            }
+            .select2-container--bootstrap5 .select2-selection--multiple{
+                background: #282839;
             }
         </style>
     @endif

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true, 'register' => false]);
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'=> 'admin.'], function () {
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("galleries", \App\Http\Controllers\Admin\GalleryController::class);
     Route::resource("partners", \App\Http\Controllers\Admin\PartnerController::class);
     Route::resource("sliders", \App\Http\Controllers\Admin\SliderController::class);
+    Route::resource("courses", \App\Http\Controllers\Admin\CourseController::class);
     Route::resource("admins", \App\Http\Controllers\Admin\AdminController::class)->except(['show']);
     Route::resource("extra", \App\Http\Controllers\Admin\ExtraController::class);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
@@ -32,12 +33,16 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
 
     Route::resource("{type}/{id}/targets", \App\Http\Controllers\Admin\TargetController::class);
 
+    Route::group(['prefix'=> "setting", 'as'=> "setting."], function() {
+        Route::get("/", [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('index');
+        Route::put("{setting}/update", [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('update');
+
+    });
+
     Route::group(['prefix'=> "about", 'as'=> "about."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('index');
-                
         Route::get("{about}/edit", [\App\Http\Controllers\Admin\AboutController::class, 'edit'])->name('edit');
         Route::put("{about}/update", [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('update');
-
     });
 
     Route::group(['prefix'=> "contacts", 'as'=> "contacts."], function() {

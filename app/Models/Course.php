@@ -54,7 +54,7 @@ class Course extends Model
         return $this->morphMany(Target::class, 'targetable');
     }
 
-    public function course()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
