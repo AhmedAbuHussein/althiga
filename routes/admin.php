@@ -41,7 +41,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
 
     Route::group(['prefix'=> "notifications", 'as'=> "notifications."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('index');
-        Route::put("{id}/update", [\App\Http\Controllers\Admin\NotificationController::class, 'update'])->name('update');
+        Route::get("/read", [\App\Http\Controllers\Admin\NotificationController::class, 'mard_as_read'])->name('read');
+        Route::post("{id}/read", [\App\Http\Controllers\Admin\NotificationController::class, 'mark_read'])->name('mark');
+        Route::delete("{id}/destroy", [\App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('destroy');
     });
 
     Route::group(['prefix'=> "about", 'as'=> "about."], function() {

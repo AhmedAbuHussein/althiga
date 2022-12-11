@@ -16,7 +16,8 @@ class NotificationsDataTable extends DataTable
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.categories.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.notifications.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action .= '<button class="btn btn-success py-1 ps-2 pe-2 ms-1" onclick="markAsRead(`'.route('admin.notifications.mark', [$item->id]).'`)" title="'.__('site.mark as read').'"><i class="fa fa-check"></i></button>';
             return $action;
         })
         ->addColumn('uid', function($item){
@@ -28,6 +29,9 @@ class NotificationsDataTable extends DataTable
         })
         ->editColumn('message', function($item){
             return $item->data['message'][app()->getLocale()];
+        })
+        ->editColumn('read_at', function($item){
+            return $item->read_at ? $item->read_at->format("Y-m-d"): '-----';
         })
         ->rawColumns(['action', 'title', 'message', "uid"])
         
@@ -59,7 +63,7 @@ class NotificationsDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('notifications-table')
+                    ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -68,6 +72,13 @@ class NotificationsDataTable extends DataTable
                         "language" => $lang,
                     ])
                     ->buttons(
+                        Button::make([
+                            "extend"=> "link",
+                            'url'=> route('admin.notifications.read'),
+                            "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }",
+                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-link\"></i> ".__('site.mark as read')."'}"
+                        ])->addClass("btn btn-primary"),
+
                         Button::make([
                             "extend"=> "export",
                             "text"=> "function(dt, button, config){ return '<i class=\"fa fa-download\"></i> ".__('site.export')." &nbsp;<span class=\"caret\"/>'}"

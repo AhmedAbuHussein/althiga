@@ -18,6 +18,40 @@
 
 @push('js')
 {!! $dataTable->scripts() !!}
+
+<script>
+    function markAsRead(url){
+        Swal.fire({
+            title: "@lang('site.mark as read')",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: "@lang('site.yes')",
+            cancelButtonText: "@lang('site.no')",
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url : url,
+                    type : "POST",
+                    data : { '_token' : "{{ csrf_token() }}"},
+                    success : function(data) {
+                        window.LaravelDataTables["items-table"].ajax.reload();
+                    },
+                    error : function (error) {
+                        console.log(error)
+                        Swal.fire({
+                            title: 'Oops...',
+                            text: error.responseJSON.message,
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+          })
+    }
+    
+</script>
 @endpush
 @push('css')
     <style>
