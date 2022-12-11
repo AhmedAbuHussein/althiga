@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.partials.header', function($view) {
             $notifications = [];
             if(auth()->check()){
-                $notifications = auth()->user()->unreadNotification;
+                $notifications = auth()->user()->unreadNotifications;
             }
             $view->with(['_notifys'=> $notifications ?? []]);
         });

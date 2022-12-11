@@ -2,42 +2,39 @@
 
 namespace App\DataTables;
 
-use App\Models\Course;
+use App\Models\Content;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CoursesDataTable extends DataTable
+class ContentsDataTable extends DataTable
 {
+    
     public function ajax()
     {
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.courses.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
-            $action .= '<a class="btn btn-info py-1 ps-2 pe-2 ms-1" href="'.route('admin.contents.index', ['course'=> $item->id]).'" title="'.__('site.contents').'"><i class="fa fa-list-alt"></i></a>';
-            $action .= '<a class="btn btn-dark py-1 ps-2 pe-2 ms-1" href="'.route('admin.targets.index', ['type'=> 'courses', 'id'=>$item->id]).'" title="'.__('site.target').'"><i class="fa fa-users"></i></a>';
-            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.courses.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.courses.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.contents.edit', ['course'=> $this->course, 'content'=> $item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.contents.destroy', ['course'=> $this->course, 'content'=> $item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             return $action;
+        })
+        ->addColumn('uid', function($item) {
+            static $id = 1;
+            return $id++;
         })
         ->editColumn('title', function($item){
             return $item->getTranslation('title', app()->getLocale());
         })
-        ->editColumn('category.title', function($item){
-            return $item->category->getTranslation('title', app()->getLocale());
-        })
-        ->editColumn('image', function($item){
-            return '<img src="'.$item->url.'" style="width:60px;">';
+        ->editColumn('created_at', function($item){
+            return $item->created_at->format('Y-m-d');
         })
         ->filterColumn('title', function($query, $keyword) {
             $query->where(function($builder) use($keyword){
                 $builder->where('title->en',"LIKE","%{$keyword}%")->orWhere("title->ar", "LIKE","%{$keyword}%");
             });
         })
-        ->rawColumns(['action', 'image'])
+        ->rawColumns(['action', 'title', 'created_at'])
         
         ->make(true);
     }
@@ -45,12 +42,12 @@ class CoursesDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Course $model
+     * @param \App\Models\Content $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
-        return Course::with('category')->newQuery();
+        return Content::where('course_id', $this->course)->newQuery();
     }
 
     /**
@@ -60,6 +57,7 @@ class CoursesDataTable extends DataTable
      */
     public function html()
     {
+
         $lang = [];
         if(app()->isLocale('ar')){
             $lang = [
@@ -105,11 +103,9 @@ class CoursesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title(__('site.id'))->addClass("text-center"),
+            Column::computed('uid')->title(__('site.id'))->addClass("text-center"),
             Column::make('title')->title(__('site.title'))->addClass("text-center"),
-            Column::make('accreditation_num')->title(__('site.accreditation'))->addClass("text-center"),
-            Column::make('category.title')->title(__('site.categories'))->addClass("text-center"),
-            Column::make('image')->title(__('site.image'))->addClass("text-center"),
+            Column::make('created_at')->title(__('site.created_at'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)
             ->addClass('text-center'),
@@ -123,6 +119,6 @@ class CoursesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Courses_' . date('YmdHis');
+        return 'Contents_' . date('YmdHis');
     }
 }

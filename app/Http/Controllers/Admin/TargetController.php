@@ -95,7 +95,7 @@ class TargetController extends Controller
         return [
             "about"=> route('admin.about.index'),
             "categories"=> route('admin.categories.index'),
-            "courses"=> '#',
+            "courses"=> route('admin.courses.index'),
         ][$type];
     }
 

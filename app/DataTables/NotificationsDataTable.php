@@ -2,39 +2,34 @@
 
 namespace App\DataTables;
 
-use App\Models\About;
-use App\Models\Category;
-use App\Models\Course;
-use App\Models\Target;
+use App\Models\Notification;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class TargetDataTable extends DataTable
+class NotificationsDataTable extends DataTable
 {
     public function ajax()
     {
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.targets.edit', ['type'=> $this->type, 'id'=> $this->id, 'target'=> $item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
-            $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.targets.show', ['type'=> $this->type, 'id'=> $this->id, 'target'=> $item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.targets.destroy', ['type'=> $this->type, 'id'=> $this->id, 'target'=> $item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.categories.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             return $action;
         })
-        ->addColumn('uid', function($item) {
+        ->addColumn('uid', function($item){
             static $id = 1;
             return $id++;
         })
         ->editColumn('title', function($item){
-            return $item->getTranslation('title', app()->getLocale());
+            return '<a href="'.$item->route.'">'. $item->data['title'][app()->getLocale()] .'</a>';
         })
-        ->filterColumn('title', function($query, $keyword) {
-            $query->where(function($builder) use($keyword){
-                $builder->where('title->en',"LIKE","%{$keyword}%")->orWhere("title->ar", "LIKE","%{$keyword}%");
-            });
+        ->editColumn('message', function($item){
+            return $item->data['message'][app()->getLocale()];
         })
-        ->rawColumns(['action', 'title', 'uid'])
+        ->rawColumns(['action', 'title', 'message', "uid"])
         
         ->make(true);
     }
@@ -42,13 +37,12 @@ class TargetDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Target $model
+     * @param \App\Models\Notification $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
-        $class = $this->getClass();
-        return Target::where(["targetable_type"=> $class, 'targetable_id'=> $this->id])->newQuery();
+        return auth()->user()->notifications()->newQuery();
     }
 
     /**
@@ -65,20 +59,15 @@ class TargetDataTable extends DataTable
             ];
         }
         return $this->builder()
-                    ->setTableId('items-table')
+                    ->setTableId('notifications-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->parameters([
                         "language" => $lang,
                     ])
                     ->buttons(
-                        Button::make([
-                            "extend"=> "create",
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-plus\"></i> ".__('site.create')."'}",
-                            "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
-                        ])->addClass("btn btn-primary"),
                         Button::make([
                             "extend"=> "export",
                             "text"=> "function(dt, button, config){ return '<i class=\"fa fa-download\"></i> ".__('site.export')." &nbsp;<span class=\"caret\"/>'}"
@@ -104,8 +93,9 @@ class TargetDataTable extends DataTable
     {
         return [
             Column::computed('uid')->title(__('site.id'))->addClass("text-center"),
-            Column::make('title')->title(__('site.title'))->addClass("text-center"),
-            Column::make('type')->title(__('site.type'))->addClass("text-center"),
+            Column::make('title')->title(__('site.title'))->addClass("text-center")->orderable(false),
+            Column::make('message')->title(__('site.message'))->addClass("text-center")->orderable(false),
+            Column::make('read_at')->title(__('site.read_at'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)
             ->addClass('text-center'),
@@ -119,15 +109,6 @@ class TargetDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Target_' . date('YmdHis');
-    }
-
-    public function getClass()
-    {
-        return [
-            "about"=> About::class,
-            "categories"=> Category::class,
-            "courses"=> Course::class,
-        ][$this->type];
+        return 'Notifications_' . date('YmdHis');
     }
 }

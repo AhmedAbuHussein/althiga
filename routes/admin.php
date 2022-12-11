@@ -30,13 +30,18 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("extra", \App\Http\Controllers\Admin\ExtraController::class);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
     Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
-
+    
+    Route::resource("courses/{course}/contents", \App\Http\Controllers\Admin\ContentController::class)->except('show');
     Route::resource("{type}/{id}/targets", \App\Http\Controllers\Admin\TargetController::class);
 
     Route::group(['prefix'=> "setting", 'as'=> "setting."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('index');
         Route::put("{setting}/update", [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('update');
+    });
 
+    Route::group(['prefix'=> "notifications", 'as'=> "notifications."], function() {
+        Route::get("/", [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('index');
+        Route::put("{id}/update", [\App\Http\Controllers\Admin\NotificationController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix'=> "about", 'as'=> "about."], function() {

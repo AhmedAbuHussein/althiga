@@ -55,12 +55,12 @@
                             <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4">
                                 <div class="menu-item">
                                     <div class="d-flex flex-column bgi-no-repeat rounded-top"
-                                        style="background-image:url('assets/media/misc/pattern-1.jpg')">
+                                        style="background-image:url('{{ asset('assets/media/misc/pattern-1.jpg') }}')">
                                         <h3 class="text-white fw-bold px-9 mt-10 mb-6">
                                             @lang('site.notifications')
                                         </h3>
                                     </div>
-                                    <div class="tab-content">
+                                    <div class="tab-content" style="max-width: 400px;">
                                         <div class="tab-pane fade show active" id="kt_topbar_notifications_1"
                                             role="tabpanel">
                                             <div class="scroll-y mh-325px my-5 px-8">
@@ -75,13 +75,12 @@
                                                                 </span>
                                                             </div>
                                                             <div class="mb-0 me-2">
-                                                                <a href="#"
-                                                                    class="fs-6 text-gray-800 text-hover-primary fw-bolder">Project
-                                                                    Alice</a>
-                                                                <div class="text-gray-400 fs-7">Phase 1 development</div>
+                                                                <a href="{{ $item->data['route'] }}"
+                                                                    class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{ $item->data['title'][app()->getLocale('en')] }}</a>
+                                                                <div class="text-gray-400 fs-7">{!! $item->data['message'][app()->getLocale('en')] !!}</div>
                                                             </div>
                                                         </div>
-                                                        <span class="badge badge-light fs-8">1 hr</span>
+                                                        <span class="badge badge-light fs-8">{{ $item->created_at->diffForHumans() }}</span>
                                                     </div>
                                                 @empty
                                                     <div class="d-flex flex-stack py-4">
@@ -103,7 +102,7 @@
                                                 @endforelse                                                
                                             </div>
                                             <div class="py-3 text-center border-top">
-                                                <a href="#"
+                                                <a href="{{ route('admin.notifications.index') }}"
                                                     class="btn btn-color-gray-600 btn-active-color-primary">@lang('site.see all')
                                                     <span class="svg-icon svg-icon-5">
                                                         <i class="fa fa-chevron-right"></i>
