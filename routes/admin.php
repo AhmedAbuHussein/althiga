@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
     
     Route::resource("courses/{course}/contents", \App\Http\Controllers\Admin\ContentController::class)->except('show');
-    Route::resource("{type}/{id}/targets", \App\Http\Controllers\Admin\TargetController::class);
+    Route::resource("{type}/{id}/targets", \App\Http\Controllers\Admin\TargetController::class)->except('show');
 
     Route::group(['prefix'=> "setting", 'as'=> "setting."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('index');

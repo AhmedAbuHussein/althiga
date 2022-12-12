@@ -20,10 +20,6 @@ class TargetController extends Controller
         return $dataTable->with(['type'=> $type, 'id'=> $id])->render('admin.targets.index', ['type'=> $type, 'id'=> $id, 'route'=> $route]);
     }
     
-    public function show($type, $id, Target $target)
-    {
-        return view('admin.targets.show', compact('target'));
-    }
 
     public function create($type, $id)
     {

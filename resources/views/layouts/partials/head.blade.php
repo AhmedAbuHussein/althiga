@@ -37,6 +37,9 @@
             .select2-container--bootstrap5 .select2-selection--multiple{
                 background: #282839;
             }
+            .note-editor.note-frame .note-editing-area .note-editable{
+                color: #aaa
+            }
         </style>
     @endif
     
@@ -63,6 +66,9 @@
             }
             .select2-container--bootstrap5 .select2-selection--multiple{
                 background: #282839;
+            }
+            .note-editor.note-frame .note-editing-area .note-editable{
+                color: #aaa
             }
         </style>
     @endif
