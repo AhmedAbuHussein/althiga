@@ -13,7 +13,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin.admins.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.admins.update', ['admin'=> $admin->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">

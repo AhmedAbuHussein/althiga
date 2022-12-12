@@ -20,7 +20,7 @@
                     <div class="col-md-8 mx-auto">
                         <div>
                             <label for="image" class="preview" style="height: 50vh">
-                                <img src="{{ $gallery->url }}" alt="">
+                                <img loading="lazy" src="{{ $gallery->url }}" alt="">
                             </label>
                             <input type="file" id="image" name="image" accept="image/*" class="form-control">
                             <p class="text-danger">@lang('site.perfect_size', ['width'=> 2048, 'height'=> 1024])</p>

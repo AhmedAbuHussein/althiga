@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="preview">
-                        <img src="{{ $slider->url }}" class="" alt="">
+                        <img loading="lazy" src="{{ $slider->url }}" class="" alt="">
                     </div>
                 </div>
             </div>

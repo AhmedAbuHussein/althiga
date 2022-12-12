@@ -41,7 +41,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/tvtc.jpg') }}" alt="TVTC">
+                                  <img loading="lazy" src="{{ asset('web/img/tvtc.jpg') }}" alt="TVTC">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -59,7 +59,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/gdcd.png') }}" alt="GDCD">
+                                  <img loading="lazy" src="{{ asset('web/img/gdcd.png') }}" alt="GDCD">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -76,7 +76,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/aramco.png') }}" alt="ARAMCO">
+                                  <img loading="lazy" src="{{ asset('web/img/aramco.png') }}" alt="ARAMCO">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -109,7 +109,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/highfield.jpg') }}" alt="Highfield">
+                                  <img loading="lazy" src="{{ asset('web/img/highfield.jpg') }}" alt="Highfield">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -128,7 +128,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/fsc.png') }}" alt="FSC">
+                                  <img loading="lazy" src="{{ asset('web/img/fsc.png') }}" alt="FSC">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -147,7 +147,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/nasp.png') }}" alt="NASP">
+                                  <img loading="lazy" src="{{ asset('web/img/nasp.png') }}" alt="NASP">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -166,7 +166,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/itcilo.jpg') }}" alt="ITC-ILO">
+                                  <img loading="lazy" src="{{ asset('web/img/itcilo.jpg') }}" alt="ITC-ILO">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -185,7 +185,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/pha.jpg') }}" alt="PHA">
+                                  <img loading="lazy" src="{{ asset('web/img/pha.jpg') }}" alt="PHA">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -204,7 +204,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/efpa.png') }}" alt="EFPA">
+                                  <img loading="lazy" src="{{ asset('web/img/efpa.png') }}" alt="EFPA">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">
@@ -223,7 +223,7 @@
                       <div class="case-block">
                           <div class="row">
                               <div class="col-md-6 col-sm-6 col-12 pr-0">
-                                  <img src="{{ asset('web/img/icem.png') }}" alt="ICEM">
+                                  <img loading="lazy" src="{{ asset('web/img/icem.png') }}" alt="ICEM">
                               </div>
                               <div class="col-md-6 col-sm-6 col-12">
                                   <div class="case-block-inner">

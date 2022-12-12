@@ -60,7 +60,7 @@
                     <div class="col-md-4">
                         <div>
                             <label for="image" class="preview">
-                                <img src="{{ $extra->url }}" alt="">
+                                <img loading="lazy" src="{{ $extra->url }}" alt="">
                             </label>
                             <input type="file" id="image" name="image" accept="image/*" class="form-control">
                         </div>

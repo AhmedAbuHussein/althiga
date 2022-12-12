@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-4">
                 <div class="image">
-                    <img src="{{ $about->url }}" style="width: 100%" alt="">
+                    <img loading="lazy" src="{{ $about->url }}" style="width: 100%" alt="">
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center">
-                                <img src="{{ $item->url }}" alt="item">
+                                <img loading="lazy" src="{{ $item->url }}" alt="item">
                             </div>
                             <h3>{{ $item->title }}</h3>
                             <p class="mt-2">{{ $item->text }}</p>

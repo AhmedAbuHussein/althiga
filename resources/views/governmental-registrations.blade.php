@@ -38,7 +38,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/cr.jpg') }}" alt="Commercial Registration">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/cr.jpg') }}" alt="Commercial Registration">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">
@@ -63,7 +63,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/tvtc.jpg') }}" alt="TVTC">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/tvtc.jpg') }}" alt="TVTC">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">
@@ -89,7 +89,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/gdcd.jpg') }}" alt="GDCD">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/gdcd.jpg') }}" alt="GDCD">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">
@@ -114,7 +114,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/gosi.jpg') }}" alt="GOSI">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/gosi.jpg') }}" alt="GOSI">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">
@@ -139,7 +139,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/gazt.jpg') }}" alt="GAZT">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/gazt.jpg') }}" alt="GAZT">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">
@@ -164,7 +164,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/gazt-branches.jpg') }}" alt="GAZT">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/gazt-branches.jpg') }}" alt="GAZT">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">
@@ -190,7 +190,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/coc.jpg') }}"
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/coc.jpg') }}"
                                   alt="Jeddah_Chamber_of_Commerce">
                               <div class="shop-box-overlay">
                                   <div class="row">
@@ -216,7 +216,7 @@
                   <div class="col-md-3 col-sm-6 col-12">
                       <div class="classic-shop">
                           <div class="classic-shop-img">
-                              <img src="{{ asset('web/img/governmental-registrations/vat.jpg') }}" alt="VAT">
+                              <img loading="lazy" src="{{ asset('web/img/governmental-registrations/vat.jpg') }}" alt="VAT">
                               <div class="shop-box-overlay">
                                   <div class="row">
                                       <div class="col-md-12 col-sm-12 col-12 pr-0">

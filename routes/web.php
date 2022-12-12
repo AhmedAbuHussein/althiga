@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/con', function(){
+    \App\Models\Contact::create([
+        "name"=> "Ahmed Shaker",
+        "email"=> "ahmed.shaker.fci.fcu@gmail.com",
+        "title"=> "test contact",
+        "message"=> "body of contact item for test only"
+    ]);
+    return redirect("/");
+});
+
 Route::get('/test', function(){
     $collec = collect([
         collect([1,23,4,5]),

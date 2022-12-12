@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="preview">
-                        <img src="{{ $team->url }}" class="" alt="">
+                        <img loading="lazy" src="{{ $team->url }}" class="" alt="">
                     </div>
                     <div class="mt-4 text-center">
                         @if ($team->facebook)

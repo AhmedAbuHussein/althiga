@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="preview">
-                        <img src="{{ $accreditation->url }}" class="" alt="">
+                        <img loading="lazy" src="{{ $accreditation->url }}" class="" alt="">
                     </div>
                 </div>
             </div>

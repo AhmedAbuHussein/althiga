@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <div class="preview" style="height: 50vh">
-                        <img src="{{ $gallery->url }}" class="" alt="">
+                        <img loading="lazy" src="{{ $gallery->url }}" class="" alt="">
                     </div>
                 </div>
             </div>

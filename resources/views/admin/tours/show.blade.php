@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="preview">
-                        <img src="{{ $tour->url }}" class="" alt="">
+                        <img loading="lazy" src="{{ $tour->url }}" class="" alt="">
                     </div>
                 </div>
             </div>

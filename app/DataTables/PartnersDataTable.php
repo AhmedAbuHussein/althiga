@@ -28,7 +28,7 @@ class PartnersDataTable extends DataTable
             return $item->link ? '<a href='.$item->link.'>'.$item->link.'</a>': '------';
         })
         ->editColumn('image', function($item){
-            return '<img src="'.$item->url.'" style="width:50px;">';
+            return '<img loading="lazy" src="'.$item->url.'" style="width:50px;">';
         })
         ->filterColumn('title', function($query, $keyword) {
             $query->where(function($builder) use($keyword){

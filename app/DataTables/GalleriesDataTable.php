@@ -26,7 +26,7 @@ class GalleriesDataTable extends DataTable
             return $item->created_at->diffForHumans();
         })
         ->editColumn('image', function($item){
-            return '<img src="'.$item->url.'" style="width:135px;">';
+            return '<img loading="lazy" src="'.$item->url.'" style="width:135px;">';
         })
         ->rawColumns(['action', 'image'])
         

@@ -17,7 +17,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="container">
             <div class="project-single">
                 <div class="project-single-img">
-                    <img src="{{ asset('web/img/aramco.png') }}" class="rounded-border" alt="ARAMCO">
+                    <img loading="lazy" src="{{ asset('web/img/aramco.png') }}" class="rounded-border" alt="ARAMCO">
                 </div>
 
                 <div class="project-single-text project-single-text-aramco">

@@ -28,7 +28,7 @@ class TeamsDataTable extends DataTable
             return $item->getTranslation('title', app()->getLocale());
         })
         ->editColumn('image', function($item){
-            return '<img src="'.$item->url.'" style="width:60px;">';
+            return '<img loading="lazy" src="'.$item->url.'" style="width:60px;">';
         })
         ->filterColumn('title', function($query, $keyword) {
             $query->where(function($builder) use($keyword){

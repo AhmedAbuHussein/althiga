@@ -325,7 +325,7 @@
                     </tbody>
                 </table>
                 <div class="milkyway-header float-center" align="center">
-                    <img src="https://althiga.net/email/logo.png"
+                    <img loading="lazy" src="https://althiga.net/email/logo.png"
                          style="-ms-interpolation-mode: bicubic; clear: both; display: block; max-width: 100%; outline: none; text-decoration: none; width: 210px; !important">
                 </div>
                 <table class="header-spacer-bottom spacer  float-center" align="center"
@@ -383,7 +383,7 @@
                                                                 align="right">
                                                                 <center
                                                                     style="min-width: 0; width: 100%">
-                                                                    <img width="250"
+                                                                    <img loading="lazy" width="250"
                                                                          src="https://althiga.net/email/hand.png"
                                                                          align="center"
                                                                          class=" float-center float-center float-center"
@@ -662,7 +662,7 @@
                                                                     <li
                                                                         style="padding: 0 2px ;    display: inline-block;">
                                                                         <a href="https://althiga.net">
-                                                                            <img alt="Facebook"
+                                                                            <img loading="lazy" alt="Facebook"
                                                                                  src="https://althiga.net/email/fb.png"
                                                                                  width="25"
                                                                                  height="25">
@@ -671,7 +671,7 @@
                                                                     <li
                                                                         style="padding: 0 2px ;    display: inline-block;">
                                                                         <a href="https://althiga.net">
-                                                                            <img alt="twitter"
+                                                                            <img loading="lazy" alt="twitter"
                                                                                  src="https://althiga.net/email/tw.png"
                                                                                  width="25"
                                                                                  height="25">
@@ -681,7 +681,7 @@
                                                                         style="padding: 0 2px ;    display: inline-block;">
 
                                                                         <a href="https://althiga.net">
-                                                                            <img alt="instagram"
+                                                                            <img loading="lazy" alt="instagram"
                                                                                  src="https://althiga.net/email/instagram.png"
                                                                                  width="25"
                                                                                  height="25">

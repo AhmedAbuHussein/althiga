@@ -98,7 +98,7 @@
             <nav id="navigation4" class="container navigation">
                 <div class="nav-header">
                     <a class="nav-brand" href="{{ route('routeName', ['id' => '']) }}">
-                        <img src="{{ asset('web/img/logos/logo.png') }}" class="main-logo" alt="logo" id="main_logo">
+                        <img loading="lazy" src="{{ asset('web/img/logos/logo.png') }}" class="main-logo" alt="logo" id="main_logo">
                     </a>
                     <div class="nav-toggle"></div>
                 </div>
@@ -275,12 +275,12 @@
 
                         @if (App::isLocale('en'))
                             <li>
-                                <img src="{{ asset('web/img/logos/ar.png') }}" alt="ar">
+                                <img loading="lazy" src="{{ asset('web/img/logos/ar.png') }}" alt="ar">
                             </li>
                         @elseif (App::isLocale('ar'))
                             <li>
                                 <a href="{{ url('locale/en') }}">
-                                    <img src="{{ asset('web/img/logos/en.png') }}" alt="ar">
+                                    <img loading="lazy" src="{{ asset('web/img/logos/en.png') }}" alt="ar">
                                 </a>
                             </li>
                         @endif
@@ -302,7 +302,7 @@
                     <div class="col-md-4 col-sm-6 col-12">
                         <h3>@lang('app.About')</h3>
                         <div class="mt-25">
-                            <img src="{{ asset('web/img/logos/logo-footer.png') }}" alt="footer-logo">
+                            <img loading="lazy" src="{{ asset('web/img/logos/logo-footer.png') }}" alt="footer-logo">
                             <p class="mt-25" style="text-align: justify">@lang('app.About_Desc')</p>
                             <div class="footer-social-icons mt-25">
                                 <ul>
@@ -344,7 +344,7 @@
                             <!-- Post Start -->
                             <div class="footer-recent-post clearfix">
                                 <div class="footer-recent-post-thumb">
-                                    <img src="{{ asset('web/img/mini-logos/aramco.png') }}" alt="img">
+                                    <img loading="lazy" src="{{ asset('web/img/mini-logos/aramco.png') }}" alt="img">
                                 </div>
                                 <div class="footer-recent-post-content">
                                     <span>@lang('course-det.EverySunday')</span>
@@ -356,7 +356,7 @@
                             <!-- Post Start -->
                             <div class="footer-recent-post clearfix">
                                 <div class="footer-recent-post-thumb">
-                                    <img src="{{ asset('web/img/mini-logos/safety-observer.jpg') }}" alt="img">
+                                    <img loading="lazy" src="{{ asset('web/img/mini-logos/safety-observer.jpg') }}" alt="img">
                                 </div>
                                 <div class="footer-recent-post-content">
                                     <span>@lang('course-det.EveryWednesday')</span>
@@ -368,7 +368,7 @@
                             <!-- Post Start -->
                             <div class="footer-recent-post clearfix">
                                 <div class="footer-recent-post-thumb">
-                                    <img src="{{ asset('web/img/mini-logos/feasibility-study.png') }}" alt="img">
+                                    <img loading="lazy" src="{{ asset('web/img/mini-logos/feasibility-study.png') }}" alt="img">
                                 </div>
                                 <div class="footer-recent-post-content">
                                     <span>@lang('course-det.EveryMonday')</span>

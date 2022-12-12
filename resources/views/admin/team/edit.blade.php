@@ -98,7 +98,7 @@
                     <div class="col-md-4">
                         <div>
                             <label for="image" class="preview">
-                                <img src="{{ $team->url }}" alt="">
+                                <img loading="lazy" src="{{ $team->url }}" alt="">
                             </label>
                             <input type="file" id="image" name="image" accept="image/*" class="form-control">
                             <p class="text-danger">@lang('site.perfect_size', ['width'=> 350, 'height'=> 280])</p>

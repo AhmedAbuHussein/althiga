@@ -47,7 +47,7 @@ class AdminController extends Controller
     {
         $request->validate([
             "name"=> "required|string",
-            "email"=> "required|string|email|unique:users,email",
+            "email"=> "required|string|email|unique:users,email,".$admin->id,
             "password"=> "nullable|string|confirmed",
         ]);
         $data = $request->except(['_token', "_method", "password"]);

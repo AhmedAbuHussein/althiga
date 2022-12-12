@@ -30,7 +30,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
-                    <img src="{{ asset('web/img/Althiga_hand.png') }}" alt="img">
+                    <img loading="lazy" src="{{ asset('web/img/Althiga_hand.png') }}" alt="img">
                 </div>
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="pl-30-md">
@@ -168,7 +168,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <div class="col-md-4 col-sm-4 col-12">
                         <div class="team-member">
                             <div class="team-member-img">
-                                <img src="{{ asset('web/img/trainers/dr-yahya.bmp') }}">
+                                <img loading="lazy" src="{{ asset('web/img/trainers/dr-yahya.bmp') }}">
                             </div>
                             <div class="team-member-text">
                                 <h4>د . يحيي زكريا قناوي</h4>
@@ -187,7 +187,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <div class="col-md-4 col-sm-4 col-12">
                         <div class="team-member">
                             <div class="team-member-img">
-                                <img src="{{ asset('web/img/trainers/dr-bandar.jpg') }}">
+                                <img loading="lazy" src="{{ asset('web/img/trainers/dr-bandar.jpg') }}">
                             </div>
                             <div class="team-member-text">
                                 <h4>د. بندر عبد الله بارحيم</h4>
@@ -205,7 +205,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <div class="col-md-4 col-sm-4 col-12">
                         <div class="team-member">
                             <div class="team-member-img">
-                                <img src="{{ asset('web/img/trainers/refaat.jpg') }}">
+                                <img loading="lazy" src="{{ asset('web/img/trainers/refaat.jpg') }}">
                             </div>
                             <div class="team-member-text">
                                 <h4>م. رفعت بن عبد الله بن عبد الشك ور باسروان</h4>

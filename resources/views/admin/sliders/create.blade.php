@@ -64,7 +64,7 @@
                     <div class="col-md-4">
                         <div>
                             <label for="image" class="preview">
-                                <img src="{{ asset('images/icon.png') }}" alt="">
+                                <img loading="lazy" src="{{ asset('images/icon.png') }}" alt="">
                             </label>
                             <input type="file" id="image" name="image" accept="image/*" class="form-control">
                             <p class="text-danger">@lang('site.perfect_size', ['width'=> 2048, 'height'=> 1024])</p>

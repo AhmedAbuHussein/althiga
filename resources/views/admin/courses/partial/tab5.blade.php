@@ -4,7 +4,7 @@
             <div class="mx-auto" style="max-width: 350px">
                 <label for="file" class="d-block mb-3">@lang('site.image')</label>
                 <label for="image" class="preview">
-                    <img src="{{ asset('web/img/Althiga_hand.png') }}" alt="">
+                    <img loading="lazy" src="{{ asset('web/img/Althiga_hand.png') }}" alt="">
                 </label>
                 <input type="file" id="image" name="image" accept="image/*"
                     class="form-control">
@@ -14,7 +14,7 @@
             <div class="mx-auto" style="max-width: 350px">
                 <label for="file" class="d-block mb-3">@lang('site.register_form_file')</label>
                 <label for="file" class="preview">
-                    <img src="{{ asset('images/doc.png') }}" alt="">
+                    <img loading="lazy" src="{{ asset('images/doc.png') }}" alt="">
                 </label>
                 <input type="file" id="file" name="file" class="form-control file">
             </div>
