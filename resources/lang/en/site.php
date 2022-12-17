@@ -89,7 +89,7 @@ return [
     "youtube"=>"youtube",
     "password_confirmation"=>"Password confirmation",
     "item deleted successfully"=>"item deleted successfully",
-    "targets"=>"Targets",  // new words
+    "targets"=>"Targets", 
     "component"=>"Component",
     "english short details"=>"English short details",
     "arabic short details"=>"Arabic short details",
@@ -149,9 +149,9 @@ return [
     "read_at"=>"Read At",
     "mark as read"=>"mark as read",
     "notifications_readed_msg"=>"Notifications marked as read",
-    ""=>"",
-    ""=>"",
-    ""=>"",
+    "roles"=>"Roles", // new words
+    "permissions"=>"Permissions",
+    "access denied"=>"access denied !",
     ""=>"",
     ""=>"",
     ""=>"",

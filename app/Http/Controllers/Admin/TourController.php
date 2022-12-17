@@ -12,21 +12,45 @@ class TourController extends Controller
 {
     public function index(ToursDataTable $dataTable)
     {
+        if(auth()->user()->cannot('tour_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.tours.index');
     }
     
     public function show(Tour $tour)
     {
+        if(auth()->user()->cannot('tour_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.tours.show', compact('tour'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('tour_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.tours.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('tour_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -49,11 +73,23 @@ class TourController extends Controller
 
     public function edit(Tour $tour)
     {
+        if(auth()->user()->cannot('tour_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.tours.edit', compact('tour'));
     }
 
     public function update(Request $request, Tour $tour)
     {
+        if(auth()->user()->cannot('tour_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -77,6 +113,9 @@ class TourController extends Controller
 
     public function destroy(Tour $tour)
     {
+        if(auth()->user()->cannot('tour_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $tour->image;
         Storage::delete($img);
         $tour->delete();

@@ -12,21 +12,45 @@ class GalleryController extends Controller
 {
     public function index(GalleriesDataTable $dataTable)
     {
+        if(auth()->user()->cannot('gallery_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.galleries.index');
     }
     
     public function show(Gallery $gallery)
     {
+        if(auth()->user()->cannot('gallery_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.galleries.show', compact('gallery'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('gallery_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.galleries.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('gallery_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "image"=> "required|image",
         ]);
@@ -43,11 +67,23 @@ class GalleryController extends Controller
 
     public function edit(Gallery $gallery)
     {
+        if(auth()->user()->cannot('gallery_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.galleries.edit', compact('gallery'));
     }
 
     public function update(Request $request, Gallery $gallery)
     {
+        if(auth()->user()->cannot('gallery_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "image"=> "required|image",
         ]);
@@ -65,6 +101,9 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
+        if(auth()->user()->cannot('gallery_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $gallery->image;
         Storage::delete($img);
         $gallery->delete();

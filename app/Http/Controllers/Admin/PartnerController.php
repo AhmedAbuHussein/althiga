@@ -12,21 +12,45 @@ class PartnerController extends Controller
 {
     public function index(PartnersDataTable $dataTable)
     {
+        if(auth()->user()->cannot('partners_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.partners.index');
     }
     
     public function show(Partner $partner)
     {
+        if(auth()->user()->cannot('partners_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.partners.show', compact('partner'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('partners_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.partners.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('partners_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -47,11 +71,23 @@ class PartnerController extends Controller
 
     public function edit(Partner $partner)
     {
+        if(auth()->user()->cannot('partners_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.partners.edit', compact('partner'));
     }
 
     public function update(Request $request, Partner $partner)
     {
+        if(auth()->user()->cannot('partners_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -73,6 +109,9 @@ class PartnerController extends Controller
 
     public function destroy(Partner $partner)
     {
+        if(auth()->user()->cannot('partners_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $partner->image;
         Storage::delete($img);
         $partner->delete();

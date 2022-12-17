@@ -16,7 +16,10 @@ class SubscribesDataTable extends DataTable
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.subscribes.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action = '';
+            if(auth()->user()->can("subscribes_delete")){
+                $action = '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.subscribes.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            }
             return $action;
         })
         ->editColumn('email', function($item){
@@ -57,6 +60,19 @@ class SubscribesDataTable extends DataTable
                 "url"=> asset('lang/arabic.json')  
             ];
         }
+        $it = [];
+        if (auth()->user()->can("subscribes_send_mails")){
+            $it =[
+                [
+                    "title"=> __('site.send'),
+                    "fa"=> "fa-envelope",
+                    'className' => 'btn btn-primary',
+                    'extend'=> "link",
+                    'url'=> route('admin.subscribes.mails'),
+                    "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
+                ]
+            ];
+        }
         return $this->builder()
                     ->setTableId('items-table')
                     ->columns($this->getColumns())
@@ -65,16 +81,7 @@ class SubscribesDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         "language" => $lang,
-                        'buttons' =>[
-                            [
-                                "title"=> __('site.send'),
-                                "fa"=> "fa-envelope",
-                                'className' => 'btn btn-primary',
-                                'extend'=> "link",
-                                'url'=> route('admin.subscribes.mails'),
-                                "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
-                            ]
-                        ]
+                        'buttons' =>$it
                     ])
                     ->buttons(
                         Button::make([

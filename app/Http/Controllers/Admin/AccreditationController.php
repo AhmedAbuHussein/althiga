@@ -12,21 +12,45 @@ class AccreditationController extends Controller
 {
     public function index(AccreditationsDataTable $dataTable)
     {
+        if(auth()->user()->cannot('credits_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.accreditations.index');
     }
     
     public function show(Accreditation $accreditation)
     {
+        if(auth()->user()->cannot('credits_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.accreditations.show', compact('accreditation'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('credits_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.accreditations.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('credits_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -62,11 +86,23 @@ class AccreditationController extends Controller
 
     public function edit(Accreditation $accreditation)
     {
+        if(auth()->user()->cannot('credits_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.accreditations.edit', compact('accreditation'));
     }
 
     public function update(Request $request, Accreditation $accreditation)
     {
+        if(auth()->user()->cannot('credits_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -104,6 +140,9 @@ class AccreditationController extends Controller
 
     public function destroy(Accreditation $accreditation)
     {
+        if(auth()->user()->cannot('credits_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $accreditation->image;
         $file = $accreditation->file;
         Storage::delete([$img, $file]);

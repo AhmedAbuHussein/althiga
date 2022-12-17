@@ -15,8 +15,13 @@ class ContentsDataTable extends DataTable
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.contents.edit', ['course'=> $this->course, 'content'=> $item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+            $action = '';
+            if (auth()->user()->can("contents_edit")){
+                $action .= '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.contents.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+            }
+            if (auth()->user()->can("contents_delete")){
             $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.contents.destroy', ['course'=> $this->course, 'content'=> $item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            }
             return $action;
         })
         ->addColumn('uid', function($item) {
@@ -64,35 +69,39 @@ class ContentsDataTable extends DataTable
                 "url"=> asset('lang/arabic.json')  
             ];
         }
+        $buttons= [
+            Button::make([
+                "extend"=> "export",
+                "text"=> "function(dt, button, config){ return '<i class=\"fa fa-download\"></i> ".__('site.export')." &nbsp;<span class=\"caret\"/>'}"
+            ])->addClass("btn btn-danger"),
+
+            Button::make([
+                "extend"=> "print",
+                "text"=> "function(dt, button, config){ return '<i class=\"fa fa-print\"></i> ".__('site.print')."'}"
+            ])->addClass("btn btn-info"),
+            Button::make([
+                "extend"=> 'reload',
+                "text"=> "function(dt, button, config){ return '<i class=\"fa fa-recycle\"></i> ".__('site.reload')."'}"
+            ])->addClass("btn btn-success")
+        ];
+        if (auth()->user()->can("contents_create")){
+            $it = Button::make([
+                "extend"=> "create",
+                "text"=> "function(dt, button, config){ return '<i class=\"fa fa-plus\"></i> ".__('site.create')."'}",
+                "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
+            ])->addClass("btn btn-primary");
+            array_unshift($buttons, $it);
+        }
         return $this->builder()
                     ->setTableId('items-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->parameters([
                         "language" => $lang,
                     ])
-                    ->buttons(
-                        Button::make([
-                            "extend"=> "create",
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-plus\"></i> ".__('site.create')."'}",
-                            "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }"
-                        ])->addClass("btn btn-primary"),
-                        Button::make([
-                            "extend"=> "export",
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-download\"></i> ".__('site.export')." &nbsp;<span class=\"caret\"/>'}"
-                        ])->addClass("btn btn-danger"),
-
-                        Button::make([
-                            "extend"=> "print",
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-print\"></i> ".__('site.print')."'}"
-                        ])->addClass("btn btn-info"),
-                        Button::make([
-                            "extend"=> 'reload',
-                            "text"=> "function(dt, button, config){ return '<i class=\"fa fa-recycle\"></i> ".__('site.reload')."'}"
-                        ])->addClass("btn btn-success")
-                    );
+                    ->buttons($buttons);
     }
 
     /**

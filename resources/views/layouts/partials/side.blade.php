@@ -13,8 +13,8 @@
                     <span class="menu-title">@lang('site.dashboard')</span>
                 </a>
             </div>
-
-
+            
+            @if (auth()->user()->can("categories_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.categories') }}" href="{{ route('admin.categories.index') }}">
                     <span class="menu-icon">
@@ -23,7 +23,9 @@
                     <span class="menu-title">@lang('site.categories')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("subscribes_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.subscribes') }}" href="{{ route('admin.subscribes.index') }}">
                     <span class="menu-icon">
@@ -32,7 +34,9 @@
                     <span class="menu-title">@lang('site.subscribes')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("courses_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.courses') }}" href="{{ route('admin.courses.index') }}">
                     <span class="menu-icon">
@@ -41,7 +45,9 @@
                     <span class="menu-title">@lang('site.courses')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("contact_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.contacts') }}" href="{{ route('admin.contacts.index') }}">
                     <span class="menu-icon">
@@ -50,7 +56,9 @@
                     <span class="menu-title">@lang('site.contact')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("partners_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.partners') }}" href="{{ route('admin.partners.index') }}">
                     <span class="menu-icon">
@@ -59,7 +67,9 @@
                     <span class="menu-title">@lang('site.partners')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("gallery_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.galleries') }}" href="{{ route('admin.galleries.index') }}">
                     <span class="menu-icon">
@@ -68,7 +78,9 @@
                     <span class="menu-title">@lang('site.gallery')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("slider_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.sliders') }}" href="{{ route('admin.sliders.index') }}">
                     <span class="menu-icon">
@@ -77,7 +89,9 @@
                     <span class="menu-title">@lang('site.sliders')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("tour_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.tours') }}" href="{{ route('admin.tours.index') }}">
                     <span class="menu-icon">
@@ -86,7 +100,9 @@
                     <span class="menu-title">@lang('site.tour')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("credits_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.accreditations') }}" href="{{ route('admin.accreditations.index') }}">
                     <span class="menu-icon">
@@ -95,7 +111,9 @@
                     <span class="menu-title">@lang('site.credits')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("team_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.team') }}" href="{{ route('admin.team.index') }}">
                     <span class="menu-icon">
@@ -104,9 +122,9 @@
                     <span class="menu-title">@lang('site.team')</span>
                 </a>
             </div>
+            @endif
 
-            
-
+            @if (auth()->user()->can("admin_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.admins') }}" href="{{ route('admin.admins.index') }}">
                     <span class="menu-icon">
@@ -115,9 +133,9 @@
                     <span class="menu-title">@lang('site.admin')</span>
                 </a>
             </div>
+            @endif
 
-            
-
+            @if (auth()->user()->can("about_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.about') }}" href="{{ route('admin.about.index') }}">
                     <span class="menu-icon">
@@ -126,7 +144,20 @@
                     <span class="menu-title">@lang('site.about')</span>
                 </a>
             </div>
+            @endif
 
+            @if (auth()->user()->can("roles_show"))
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.roles') }}" href="{{ route('admin.roles.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-user-lock"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.roles')</span>
+                </a>
+            </div>
+            @endif
+
+            @if (auth()->user()->can("setting"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.setting') }}" href="{{ route('admin.setting.index') }}">
                     <span class="menu-icon">
@@ -135,50 +166,7 @@
                     <span class="menu-title">@lang('site.setting')</span>
                 </a>
             </div>
-           
-
-            {{--  <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ active('cms', 'show') }}">
-                <span class="menu-link {{ active('cms') }}">
-                    <span class="menu-icon">
-                        <i class="la la-code"></i>
-                    </span>
-                    <span class="menu-title">@lang('site.cms')</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg {{ active('cms', 'show') }} ">
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ active('cms.contact') }}" href="{{ route('cms.contact.index') }}">
-                            <span class="menu-icon">
-                                <i class="la la-phone"></i>
-                            </span>
-                            <span class="menu-title">@lang('site.contact us')</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ active('cms.privacy') }}" href="{{ route('cms.privacy.index') }}">
-                            <span class="menu-icon">
-                                <i class="la la-lock"></i>
-                            </span>
-                            <span class="menu-title">@lang('site.privacy')</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ active('cms.settings') }}" href="{{ route('cms.settings.index') }}">
-                            <span class="menu-icon">
-                                <i class="la la-cogs"></i>
-                            </span>
-                            <span class="menu-title">@lang('site.setting')</span>
-                        </a>
-                    </div>
-
-                </div>
-            </div>  --}}
-
-            
-
+            @endif
             <div class="menu-item">
                 <a class="menu-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();">
                     <span class="menu-icon">

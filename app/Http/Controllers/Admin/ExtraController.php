@@ -12,21 +12,45 @@ class ExtraController extends Controller
 {
     public function index(ExtrasDataTable $dataTable)
     {
+        if(auth()->user()->cannot('about_components')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.extra.index');
     }
     
     public function show(Extra $extra)
     {
+        if(auth()->user()->cannot('about_components')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.extra.show', compact('extra'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('about_components')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.extra.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('about_components')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"     => "required|array",
             "title.en"  => "required|string",
@@ -49,11 +73,23 @@ class ExtraController extends Controller
 
     public function edit(Extra $extra)
     {
+        if(auth()->user()->cannot('about_components')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.extra.edit', compact('extra'));
     }
 
     public function update(Request $request, Extra $extra)
     {
+        if(auth()->user()->cannot('about_components')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -77,6 +113,9 @@ class ExtraController extends Controller
 
     public function destroy(Extra $extra)
     {
+        if(auth()->user()->cannot('about_components')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $extra->icon;
         Storage::delete($img);
         $extra->delete();

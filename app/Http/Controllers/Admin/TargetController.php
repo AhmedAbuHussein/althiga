@@ -16,6 +16,12 @@ class TargetController extends Controller
 {
     public function index(TargetDataTable $dataTable, $type, $id)
     {
+        if(auth()->user()->cannot('targets_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $route = $this->getRoute($type);
         return $dataTable->with(['type'=> $type, 'id'=> $id])->render('admin.targets.index', ['type'=> $type, 'id'=> $id, 'route'=> $route]);
     }
@@ -23,12 +29,24 @@ class TargetController extends Controller
 
     public function create($type, $id)
     {
+        if(auth()->user()->cannot('targets_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $route = $this->getRoute($type);
         return view('admin.targets.create', compact('type', 'id', 'route'));
     }
 
     public function store(Request $request, $type, $id)
     {
+        if(auth()->user()->cannot('targets_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -50,12 +68,24 @@ class TargetController extends Controller
 
     public function edit($type, $id, Target $target)
     {
+        if(auth()->user()->cannot('targets_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $route = $this->getRoute($type);
         return view('admin.targets.edit', compact('target', 'type', 'id', 'route'));
     }
 
     public function update(Request $request,$type, $id, Target $target)
     {
+        if(auth()->user()->cannot('targets_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -80,6 +110,9 @@ class TargetController extends Controller
 
     public function destroy($type, $id, Target $target)
     {
+        if(auth()->user()->cannot('targets_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $target->image;
         Storage::delete($img);
         $target->delete();

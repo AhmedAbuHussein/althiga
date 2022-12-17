@@ -11,6 +11,12 @@ class AboutController extends Controller
 {
     public function index()
     {
+        if(auth()->user()->cannot('about_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $about = About::firstOrCreate([]);
         $items = Extra::get();
         return view('admin.about.index', compact('about', 'items'));
@@ -18,11 +24,23 @@ class AboutController extends Controller
 
     public function edit(About $about)
     {
+        if(auth()->user()->cannot('about_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.about.edit', compact('about'));
     }
 
     public function update(Request $request, About $about)
     {
+        if(auth()->user()->cannot('about_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"      => "required|array",
             "title.ar"   => "required|string",

@@ -12,21 +12,45 @@ class ContentController extends Controller
 {
     public function index(ContentsDataTable $dataTable, $course)
     {
+        if(auth()->user()->cannot('contents_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->with(['course'=> $course])->render('admin.contents.index', ['course'=> $course]);
     }
     
     public function show($course, Content $content)
     {
+        if(auth()->user()->cannot('contents_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.contents.show', compact('content'));
     }
 
     public function create($course)
     {
+        if(auth()->user()->cannot('contents_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.contents.create', compact('course'));
     }
 
     public function store(Request $request, Course $course)
     {
+        if(auth()->user()->cannot('contents_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -42,11 +66,23 @@ class ContentController extends Controller
 
     public function edit($course, Content $content)
     {
+        if(auth()->user()->cannot('contents_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.contents.edit', compact('content', 'course'));
     }
 
     public function update(Request $request, $course, Content $content)
     {
+        if(auth()->user()->cannot('contents_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -63,6 +99,9 @@ class ContentController extends Controller
 
     public function destroy($course, Content $content)
     {
+        if(auth()->user()->cannot('contents_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $content->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

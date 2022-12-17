@@ -15,17 +15,35 @@ class ContactController extends Controller
 {
     public function index(ContactsDataTable $dataTable)
     {
+        if(auth()->user()->cannot('contact_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.contacts.index');
     }
     
     public function show(Contact $contact)
     {
+        if(auth()->user()->cannot('contact_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.contacts.show', compact('contact'));
     }
   
 
     public function send(Request $request, Contact $contact)
     {
+        if(auth()->user()->cannot('contact_send_mail')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|string",
             "body"=> "required|string",
@@ -50,6 +68,9 @@ class ContactController extends Controller
 
     public function destroy(Contact $contact)
     {
+        if(auth()->user()->cannot('contact_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $contact->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

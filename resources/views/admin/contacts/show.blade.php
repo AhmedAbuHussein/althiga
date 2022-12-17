@@ -20,6 +20,7 @@
                         <p class="p-3">{{ $contact->message }}</p>
                     </div>
                 </div>
+                @if (auth()->user()->can('contact_send_mail'))
                 <div class="col-md-8 mx-auto">
                     <form action="{{ route('admin.contacts.mail', [$contact->id]) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -53,6 +54,8 @@
                         </div>
                     </form>
                 </div>
+                @endif
+                
             </div>
         </div>
     </div>

@@ -32,6 +32,19 @@
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="roles">@lang('site.roles') <span class="required"></span></label>
+                            <select name="roles[]" multiple  class="form-control select2" required>
+                                <option value="">@lang('site.select')</option>
+                                @foreach ($roles as $item)
+                                <option {{ in_array($item->id, old('roles', [])) ? 'selected': '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('roles')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     
                         <div class="form-group">
                             <label for="">@lang('site.password')</label>

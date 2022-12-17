@@ -12,21 +12,45 @@ class TeamController extends Controller
 {
     public function index(TeamsDataTable $dataTable)
     {
+        if(auth()->user()->cannot('team_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.team.index');
     }
     
     public function show(Team $team)
     {
+        if(auth()->user()->cannot('team_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.team.show', compact('team'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('team_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.team.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('team_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "name"=> "required|array",
             "name.en"=> "required|string",
@@ -60,11 +84,23 @@ class TeamController extends Controller
 
     public function edit(Team $team)
     {
+        if(auth()->user()->cannot('team_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.team.edit', compact('team'));
     }
 
     public function update(Request $request, Team $team)
     {
+        if(auth()->user()->cannot('team_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "name"=> "required|array",
             "name.en"=> "required|string",
@@ -99,6 +135,9 @@ class TeamController extends Controller
 
     public function destroy(Team $team)
     {
+        if(auth()->user()->cannot('team_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $team->image;
         Storage::delete($img);
         $team->delete();

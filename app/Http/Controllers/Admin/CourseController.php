@@ -14,16 +14,34 @@ class CourseController extends Controller
 {
     public function index(CoursesDataTable $dataTable)
     {
+        if(auth()->user()->cannot('courses_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.courses.index');
     }
     
     public function show(Course $course)
     {
+        if(auth()->user()->cannot('courses_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.courses.show', compact('course'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('courses_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $categories = Category::get();
         $days = [
             'saturday',
@@ -39,6 +57,12 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request)
     {
+        if(auth()->user()->cannot('courses_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $data = $request->except(['_token', "_method", "image", 'file']);
         
         if($request->show_single_price == "0"){ 
@@ -71,6 +95,12 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
+        if(auth()->user()->cannot('courses_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $categories = Category::get();
         $days = [
             'saturday',
@@ -86,6 +116,13 @@ class CourseController extends Controller
 
     public function update(CourseRequest $request, Course $course)
     {      
+        if(auth()->user()->cannot('courses_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
+
         $data = $request->except(['_token', "_method", "image", 'file']);
 
         if($request->show_single_price == "0"){ 
@@ -118,6 +155,9 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
+        if(auth()->user()->cannot('courses_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         Storage::delete([$course->image, $course->register_form_file]);
         $course->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);

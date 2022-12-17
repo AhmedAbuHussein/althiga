@@ -10,12 +10,24 @@ class SettingController extends Controller
 {
     public function index()
     {
+        if(auth()->user()->cannot('setting')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $setting = Setting::firstOrCreate([]);
         return view('admin.setting.index', compact('setting'));
     }
 
     public function update(Request $request, Setting $setting)
     {
+        if(auth()->user()->cannot('setting')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "facebook"          => "required|string",
             "twitter"           => "required|string",

@@ -17,8 +17,13 @@ class ContactsDataTable extends DataTable
         return datatables()
         ->eloquent(app()->call([$this, 'query']))
         ->addColumn('action', function($item){
-            $action = '<a class="btn btn-success py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
+            $action = '';
+            if (auth()->user()->can("contact_show")){
+                $action .= '<a class="btn btn-success py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
+            }
+            if (auth()->user()->can("contact_delete")){
             $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.contacts.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            }
             return $action;
         })
         ->editColumn('email', function($item){

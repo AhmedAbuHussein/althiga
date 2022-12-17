@@ -10,10 +10,15 @@
 <div class="card">
     <div class="card-header">
         <div class="btn-group" role="group" aria-label="Basic example">
+            @if (auth()->user()->can("about_edit"))
             <a href="{{ route('admin.about.edit', [$about->id]) }}" class="btn btn-primary">@lang('site.edit')</a>
-            
+            @endif
+            @if (auth()->user()->can("targets_show"))
             <a href="{{ route('admin.targets.index', ['type'=>'about', 'id'=>$about->id]) }}" class="btn btn-success">@lang('site.targets')</a>
+            @endif
+            @if (auth()->user()->can("about_components"))
             <a href="{{ route('admin.extra.index') }}" class="btn btn-info">@lang('site.component')</a>
+            @endif
           </div>
     </div>
     <div class="card-body">

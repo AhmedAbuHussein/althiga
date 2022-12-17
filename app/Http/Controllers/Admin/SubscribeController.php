@@ -14,11 +14,23 @@ class SubscribeController extends Controller
 {
     public function index(SubscribesDataTable $dataTable)
     {
+        if(auth()->user()->cannot('subscribes_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.subscribes.index');
     }
     
     public function mails()
     {
+        if(auth()->user()->cannot('subscribes_send_mails')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $courses = Course::get();
         return view('admin.subscribes.mails', compact('courses'));
     }
@@ -36,6 +48,12 @@ class SubscribeController extends Controller
 
     public function send(Request $request)
     {
+        if(auth()->user()->cannot('subscribes_send_mails')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|string",
             "course_id"=> "required|numeric",
@@ -53,6 +71,9 @@ class SubscribeController extends Controller
     
     public function destroy(Subscribe $subscribe)
     {
+        if(auth()->user()->cannot('subscribes_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $subscribe->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }

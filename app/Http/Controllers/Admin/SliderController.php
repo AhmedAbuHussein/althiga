@@ -12,21 +12,45 @@ class SliderController extends Controller
 {
     public function index(SlidersDataTable $dataTable)
     {
+        if(auth()->user()->cannot('slider_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return $dataTable->render('admin.sliders.index');
     }
     
     public function show(Slider $slider)
     {
+        if(auth()->user()->cannot('slider_show')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.sliders.show', compact('slider'));
     }
 
     public function create()
     {
+        if(auth()->user()->cannot('slider_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.sliders.create');
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->cannot('slider_create')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -50,11 +74,23 @@ class SliderController extends Controller
 
     public function edit(Slider $slider)
     {
+        if(auth()->user()->cannot('slider_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         return view('admin.sliders.edit', compact('slider'));
     }
 
     public function update(Request $request, Slider $slider)
     {
+        if(auth()->user()->cannot('slider_edit')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $request->validate([
             "title"=> "required|array",
             "title.en"=> "required|string",
@@ -79,6 +115,9 @@ class SliderController extends Controller
 
     public function destroy(Slider $slider)
     {
+        if(auth()->user()->cannot('slider_delete')){
+            return response()->json(['message'=> __('site.access denied')], 200);
+        }
         $img = $slider->image;
         Storage::delete($img);
         $slider->delete();

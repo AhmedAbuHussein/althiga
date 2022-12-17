@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("courses", \App\Http\Controllers\Admin\CourseController::class);
     Route::resource("admins", \App\Http\Controllers\Admin\AdminController::class)->except(['show']);
     Route::resource("extra", \App\Http\Controllers\Admin\ExtraController::class);
+    Route::resource("roles", \App\Http\Controllers\Admin\RoleController::class);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
     Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
     
