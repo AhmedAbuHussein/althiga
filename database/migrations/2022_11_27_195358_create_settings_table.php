@@ -15,15 +15,20 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('register_phone')->nullable();
-            $table->float('lat', 8, 8, true)->nullable();
-            $table->float('lng', 8, 8, true)->nullable();
-            $table->text('values')->nullable(); // قيمنا تعرض في الصفحة الرئيسية
+            $table->string('key')->nullable();
+            $table->longText('value')->nullable();
+            $table->integer('order')->default(0);
+            $table->string('category')->default("OTHER");
+
+            // $table->string('facebook')->nullable();
+            // $table->string('twitter')->nullable();
+            // $table->string('instagram')->nullable();
+            // $table->string('phone')->nullable();
+            // $table->string('email')->nullable();
+            // $table->string('register_phone')->nullable();
+            // $table->float('lat', 8, 8, true)->nullable();
+            // $table->float('lng', 8, 8, true)->nullable();
+           // $table->text('values')->nullable(); // قيمنا تعرض في الصفحة الرئيسية
             $table->timestamps();
         });
     }

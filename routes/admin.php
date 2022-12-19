@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
 
     Route::group(['prefix'=> "setting", 'as'=> "setting."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('index');
-        Route::put("{setting}/update", [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('update');
+        Route::put("update", [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix'=> "notifications", 'as'=> "notifications."], function() {

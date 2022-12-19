@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +33,15 @@ class AppServiceProvider extends ServiceProvider
             }
             $view->with(['_notifys'=> $notifications ?? []]);
         });
+
+        Schema::defaultStringLength(191);
+
+        try{
+            if(Schema::hasTable('settings')){
+                $settings = \App\Models\Setting::first();
+                View::share('settings', $settings);
+            }
+        }catch(\Exception $e){}
         
     }
 }

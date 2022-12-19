@@ -16,6 +16,7 @@
         "spatie/laravel-permission": "^5.7",
         "spatie/laravel-sluggable": "^2.6",
         "spatie/laravel-translatable": "^4.6",
+        "stevebauman/location": "^6.5",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "^9.19"
     },
