@@ -19,7 +19,7 @@ if (!function_exists("uploadImage")) {
             }
         }
         $extension = $file->getClientOriginalExtension();
-        $name = $prefix . '.' . Str::random() . '.' . ($extension ? $extension : 'png') ;
+        $name = $prefix . '' . Str::random() . '.' . ($extension ? $extension : 'png') ;
         if ($resize) {
             $directory = "$folder/$name";
             if (!Storage::exists("$folder")) {

@@ -3,7 +3,6 @@
 
 <head>
 
-    <title>@lang('site.dashboard') | @yield('title')</title>
     @include('layouts.partials.head')
     
 </head>

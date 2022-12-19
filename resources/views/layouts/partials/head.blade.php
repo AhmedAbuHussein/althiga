@@ -1,14 +1,17 @@
 <meta charset="utf-8" />
 
-<meta name="description" content="Althiga Website description" />
-<meta name="keywords" content="althiga, تدريب, الثقة, الفائز" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
+{{--  <meta name="description" content="Althiga Website description" />
+<meta name="keywords" content="althiga, تدريب, الثقة, الفائز" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website cms" />
 <meta property="og:title" content="Althiga Website" />
 <meta property="og:url" content="https://althiga.net/" />
-<meta property="og:site_name" content="Althiga|الثقة" />
+<meta property="og:site_name" content="Althiga|الثقة" />  --}}
+
+@include('SEO.index')
+
 
 <link rel="shortcut icon" href="{{ asset('images/icon.png') }}" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
