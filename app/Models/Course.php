@@ -72,4 +72,9 @@ class Course extends Model
     {
         return $this->hasMany(Subscribe::class, 'course_id');
     }
+
+    public function seens()
+    {
+        return $this->morphMany(Seen::class, 'seenable');
+    }
 }

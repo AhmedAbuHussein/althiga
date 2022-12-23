@@ -94,6 +94,10 @@
         </div>
     </div>
 </div>
+
+<div class="mt-4">
+    <livewire:dashboard-statistics />
+</div>
   
 @endsection
 @push('css')

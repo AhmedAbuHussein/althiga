@@ -81,7 +81,7 @@
 <link rel="stylesheet" href="{{ asset('assets/summernote/summernote.min.css') }}">
 <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-
+@livewireStyles
 <style>
     * {
         font-family: 'Cairo', sans-serif;

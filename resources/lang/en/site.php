@@ -163,7 +163,7 @@ return [
     "arabic address"=>"arabic address",
     "english address"=>"english address",
     "cover"=>"Website cover",
-    ""=>"",
-    ""=>"",
+    "visitor_range"=>"visitors rate",
+    "top_pages"=>"Top pages",
     ""=>"",
 ];

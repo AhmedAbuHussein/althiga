@@ -7,14 +7,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        // dd(auth()->user()->permissions);
         return view('admin.home');
     }
 

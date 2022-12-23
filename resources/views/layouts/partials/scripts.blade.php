@@ -10,6 +10,7 @@
     <script src="{{ asset('assets/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('assets/summernote/summernote-ar-AR.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    @livewireScripts
     
     @if (Session::get('notify-message'))
         @include("layouts.partials.notify")
