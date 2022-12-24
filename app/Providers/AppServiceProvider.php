@@ -34,11 +34,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['_notifys'=> $notifications ?? []]);
         });
 
-        Schema::defaultStringLength(191);
 
         try{
             if(Schema::hasTable('settings')){
-                $settings = \App\Models\Setting::first();
+                $settings = \App\Models\Setting::firstOrCreate();
                 View::share('settings', $settings);
             }
         }catch(\Exception $e){}

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,22 +30,21 @@ Route::get('/con', function(){
 });
 
 Route::get('/test', function(Request $request){
-    return $request->url();
-    $collec = collect([
-        collect([1,23,4,5]),
-        collect([1,23,4,5,5,41]),
-        collect([1561,23,4,5,5,41]),
-        collect([845,23,4,5,5,41]),
-        collect([845,23,4,5,51,41]),
-        collect([845,23,4,5,52,41]),
-        collect([845,23,4,5,52,42]),
+    $user = \App\Models\User::first();
+    $role = \Spatie\Permission\Models\Role::firstOrCreate([
+        "name"=> "superadmin",
+        "guard_name"=> "web",
     ]);
-    return _splite($collec, 2, 1);
+    $permissions = Permission::where('name',"LIKE" ,'%role%')->get();
+    $role->syncPermissions($permissions);
+    $user->roles()->sync($role->id);
+    return 'done';
+
 });
 
 Route::get('/artisan', function(){
     Artisan::call("optimize:clear");
-    Artisan::call("storage:link");
+    Artisan::call("migrate:link");
     return 'done';
 });
 
