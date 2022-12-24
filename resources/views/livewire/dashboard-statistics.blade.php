@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="col-8 text-truncate p-0" style="direction:ltr;font-size: 12px;">
                                         <a href="{{ $page['url'] }}" target="_blank" style="color:inherit">
-                                            <span class="badge badge-info">{{ urldecode(str_replace(env('APP_URL'),'',$page['url'])) ?? '/' }}</span>
+                                            <span class="badge badge-info">{{ urldecode(str_replace(env('APP_URL'),'',$page['url']) ?? '/' ) }}</span>
                                         </a>
                                     </div>
                                 </div>
