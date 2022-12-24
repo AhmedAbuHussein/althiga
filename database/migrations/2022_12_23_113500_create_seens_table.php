@@ -16,16 +16,18 @@ class CreateSeensTable extends Migration
         Schema::create('seens', function (Blueprint $table) {
             $table->id();
             $table->string('ip')->index();
-            $table->integer("visit_count")->default(1);
-            $table->string('domain')->nullable()->index();
-            $table->string('prev_link')->nullable()->index();
-            $table->string('agent_name')->nullable()->index();
-            $table->string('browser')->nullable()->index();
-            $table->string('device')->nullable()->index();
-            $table->string('os')->nullable()->index();
-            $table->string('country_code')->nullable()->index();
-            $table->string('country_name')->nullable()->index();
-            $table->morphs('seenable');       // type  course
+            $table->string('domain')->nullable();
+            $table->string('prev_link')->nullable();
+            $table->string('current_link')->nullable();
+            $table->string('agent_name')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('device_family')->nullable();
+            $table->string('device_name')->nullable();
+            $table->string('os')->nullable();
+            $table->string('os_type')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('country_name')->nullable();
+            $table->nullableMorphs('seenable');       // type  course
             $table->timestamps();
         });
     }

@@ -157,6 +157,16 @@
             </div>
             @endif
 
+            @if (auth()->user()->can('statistics_show'))
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.statistics') }}" href="{{ route('admin.statistics.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-user-lock"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.statistics')</span>
+                </a>
+            </div>
+            @endif
             @if (auth()->user()->can("setting"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.setting') }}" href="{{ route('admin.setting.index') }}">

@@ -94,10 +94,11 @@
         </div>
     </div>
 </div>
-
+@if (auth()->user()->can('statistics_show'))
 <div class="mt-4">
     <livewire:dashboard-statistics />
 </div>
+@endif
   
 @endsection
 @push('css')

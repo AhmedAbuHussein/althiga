@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::post('/change-mode', [App\Http\Controllers\Admin\HomeController::class, 'change_mode'])->name('change.mode');
 
     Route::resource("accreditations", \App\Http\Controllers\Admin\AccreditationController::class);
+    Route::resource("statistics", \App\Http\Controllers\Admin\StatisticsController::class)->only(['index', 'show', 'destroy']);
     Route::resource("categories", \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource("galleries", \App\Http\Controllers\Admin\GalleryController::class);
     Route::resource("partners", \App\Http\Controllers\Admin\PartnerController::class);
