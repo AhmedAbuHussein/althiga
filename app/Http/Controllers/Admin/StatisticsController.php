@@ -28,7 +28,12 @@ class StatisticsController extends Controller
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        return view('admin.statistics.show', compact('category'));
+        return view('admin.statistics.show', compact('statistic'));
+    }
+
+    public function delete()
+    {
+        return view('admin.statistics.delete');
     }
 
     public function destroy(Seen $statistic)
@@ -38,5 +43,18 @@ class StatisticsController extends Controller
         }
         $statistic->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
+    }
+
+    public function delete_post(Request $request)
+    {
+        $request->validate([
+            "date_end"=> "required|date|before:today|date_format:Y-m-d"
+        ]);
+
+        Seen::where('created_at', "<=", $request->date_end ." 00:00:00")->delete();
+        return redirect()->route('admin.statistics.index')->with([
+            "notify-type"=> "success",
+            "notify-message"=> __('site.item deleted successfully')
+        ]);
     }
 }

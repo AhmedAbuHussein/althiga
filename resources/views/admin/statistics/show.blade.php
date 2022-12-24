@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('title')
-    {{ $category->title }}
+    @lang('site.show')
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
-            href="{{ route('admin.categories.index') }}">@lang('site.categories')</a></li>
+            href="{{ route('admin.statistics.index') }}">@lang('site.statistics')</a></li>
 
     <li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
-    <li class="breadcrumb-item text-muted">{{ $category->title }}</li>
+    <li class="breadcrumb-item text-muted">@lang('site.show')</li>
 @endsection
 @section('content')
     <div class="card h-100">
@@ -17,30 +17,61 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <span class="d-inline-block" style="width: 30%">@lang('site.english title') :</span>
-                            <span>{{ $category->getTranslation("title", 'en') }}</span>    
+                            <span class="d-inline-block" style="width: 30%">@lang('site.ip') :</span>
+                            <span>{{ $statistic->ip }}</span>    
                         </li>
                         <li class="list-group-item">
-                            <span class="d-block">@lang('site.english details') :</span>
-                            <span>{{ $category->getTranslation("text", "en") }}</span>    
+                            <span class="d-inline-block" style="width: 30%">@lang('site.domain') :</span>
+                            <a href="{{ $statistic->domain }}">{{ $statistic->domain }}</a>    
                         </li>
                         <li class="list-group-item">
-                            <span class="d-inline-block" style="width: 30%">@lang('site.arabic title') :</span>
-                            <span>{{ $category->getTranslation("title", 'ar') }}</span>    
+                            <span class="d-inline-block" style="width: 30%">@lang('site.prev') :</span>
+                            <a href="{{ $statistic->prev_link }}">{{ $statistic->prev_link }}</a>    
                         </li>
                         <li class="list-group-item">
-                            <span class="d-block">@lang('site.arabic details') :</span>
-                            <span>{{ $category->getTranslation("text", "ar") }}</span>    
+                            <span class="d-inline-block" style="width: 30%">@lang('site.current') :</span>
+                            <a href="{{ $statistic->current_link }}">{{ $statistic->current_link }}</a>    
                         </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.agent_name') :</span>
+                            <span>{{ $statistic->agent_name }}</span>    
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.browsers') :</span>
+                            <span>{{ $statistic->browser }}</span>    
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.device_family') :</span>
+                            <span>{{ $statistic->device_family }}</span>    
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.device_name') :</span>
+                            <span>{{ $statistic->device_name }}</span>    
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.os') :</span>
+                            <span>{{ $statistic->os_type }} - {{ $statistic->os }}</span>    
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.country_code') :</span>
+                            <span>{{ $statistic->country_code }}</span>    
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-inline-block" style="width: 30%">@lang('site.country_name') :</span>
+                            <span>{{ $statistic->country_name }}</span>    
+                        </li>
+
+                        @if ($statistic->seenable)
+                            <li class="list-group-item">
+                                <span class="d-inline-block" style="width: 30%">@lang('site.courses') :</span>
+                                <span>{{ optional($statistic->seenable)->title }}</span>    
+                            </li>
+                        @endif
+                       
                     </ul>
-                </div>
-                <div class="col-md-4">
-                    <div class="preview">
-                        <img loading="lazy" src="{{ $category->url }}" class="" alt="">
-                    </div>
                 </div>
             </div>
             

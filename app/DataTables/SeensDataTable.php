@@ -28,6 +28,9 @@ class SeensDataTable extends DataTable
         ->editColumn('seenable.title', function($item){
             return $item->seenable ? $item->seenable->getTranslation('title', app()->getLocale('en')) : '---------';
         })
+        ->editColumn('created_at', function($item){
+            return $item->created_at->diffForHumans();
+        })
         ->rawColumns(['action', 'seenable.title'])
         ->make(true);
     }
@@ -75,7 +78,7 @@ class SeensDataTable extends DataTable
         if (auth()->user()->can("statistics_delete")){
             $it = Button::make([
                 "extend"=> "link",
-                'url'=> route('admin.subscribes.mails'),
+                'url'=> route('admin.statistics.delete'),
                 "text"=> "function(dt, button, config){ return '<i class=\"fa fa-trash\"></i> ".__('site.delete')."'}",
                 "init" => "function(api, node, config){ $(node).removeClass('btn-secondary'); }",
             ])->addClass("btn btn-danger");
@@ -106,6 +109,7 @@ class SeensDataTable extends DataTable
             Column::make('domain')->title(__('site.domain'))->addClass("text-center"),
             Column::make('os_type')->title(__('site.os'))->addClass("text-center"),
             Column::computed('seenable.title')->title(__('site.courses'))->addClass("text-center"),
+            Column::computed('created_at')->title(__('site.created_at'))->addClass("text-center"),
             Column::computed('action', __('site.action'))->exportable(false)
             ->printable(false)
             ->addClass('text-center'),
