@@ -2,18 +2,18 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="">@lang('site.english requirements')</label>
-                <textarea name="requirements[en]" class="form-control summernote_en" rows="5">{{ old('requirements.en', isset($course) ? $course->getTranslation('requirements', 'en') : '') }}</textarea>
-                @error('requirements.en')
+                <label for="">@lang('site.english policy')</label>
+                <textarea name="policy[en]" class="form-control summernote_en" rows="5">{{ old('policy.en', isset($course) ? $course->getTranslation('policy', 'en') : '') }}</textarea>
+                @error('policy.en')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="">@lang('site.arabic requirements')</label>
-                <textarea name="requirements[ar]" class="form-control summernote_ar" rows="5">{{ old('requirements.ar', isset($course) ? $course->getTranslation('requirements', 'ar') : '') }}</textarea>
-                @error('requirements.ar')
+                <label for="">@lang('site.arabic policy')</label>
+                <textarea name="policy[ar]" class="form-control summernote_ar" rows="5">{{ old('policy.ar', isset($course) ? $course->getTranslation('policy', 'ar') : '') }}</textarea>
+                @error('policy.ar')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>

@@ -19,10 +19,10 @@ class TargetDataTable extends DataTable
         ->addColumn('action', function($item){
             $action = '';
             if (auth()->user()->can("targets_edit")){
-                $action .= '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.targets.edit', [$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
+                $action .= '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.targets.edit', ['type'=> $this->type, 'id'=> $this->id, 'target'=>$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
             }
             if (auth()->user()->can("targets_delete")){
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.targets.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.targets.destroy', ['type'=> $this->type, 'id'=> $this->id, 'target'=>$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             }
             return $action;
         })

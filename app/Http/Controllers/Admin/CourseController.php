@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,6 +43,7 @@ class CourseController extends Controller
                 "notify-message"=> __('site.access denied')
             ]);
         }
+        $tags = Tag::get();
         $categories = Category::get();
         $days = [
             'saturday',
@@ -52,7 +54,7 @@ class CourseController extends Controller
             'thursday',
             'friday'
            ];
-        return view('admin.courses.create', compact('categories', 'days'));
+        return view('admin.courses.create', compact('categories', 'days', 'tags'));
     }
 
     public function store(CourseRequest $request)
@@ -63,7 +65,7 @@ class CourseController extends Controller
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        $data = $request->except(['_token', "_method", "image", 'file']);
+        $data = $request->except(['_token', "_method", "image", 'file', 'tags']);
         
         if($request->show_single_price == "0"){ 
             $data['price'] = NULL;
@@ -80,13 +82,14 @@ class CourseController extends Controller
         }
 
         if($request->hasFile('image')){
-            $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 2048, 1024);
+            $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 1024, 256);
         }
         if($request->hasFile('file')){
             $data['register_form_file'] = uploadFile($request->file('image'), null, 'course-');
         }
 
-        Course::create($data);
+        $course = Course::create($data);
+        $course->tags()->sync($request->tags);
         return redirect()->route('admin.courses.index')->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
@@ -101,6 +104,7 @@ class CourseController extends Controller
                 "notify-message"=> __('site.access denied')
             ]);
         }
+        $tags = Tag::get();
         $categories = Category::get();
         $days = [
             'saturday',
@@ -111,7 +115,7 @@ class CourseController extends Controller
             'thursday',
             'friday'
            ];
-        return view('admin.courses.edit', compact('course', 'categories', 'days'));
+        return view('admin.courses.edit', compact('course', 'categories', 'days', 'tags'));
     }
 
     public function update(CourseRequest $request, Course $course)
@@ -123,8 +127,10 @@ class CourseController extends Controller
             ]);
         }
 
-        $data = $request->except(['_token', "_method", "image", 'file']);
-
+        $data = $request->except(['_token', "_method", "image", 'file', 'tags']);
+        if(!$request->has('days')){
+            $data['days'] = null;
+        }
         if($request->show_single_price == "0"){ 
             $data['price'] = NULL;
             $data['discount_price'] = NULL;
@@ -140,11 +146,12 @@ class CourseController extends Controller
         }
 
         if($request->hasFile('image')){
-            $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 2048, 1024);
+            $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 1024, 256);
         }
         if($request->hasFile('file')){
             $data['register_form_file'] = uploadFile($request->file('image'), null, 'course-');
         }
+        $course->tags()->sync($request->tags);
         $course->update($data);
         return redirect()->route('admin.courses.index')->with([
             "notify-type"=> "success",

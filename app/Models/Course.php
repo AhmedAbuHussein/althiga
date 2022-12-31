@@ -20,6 +20,10 @@ class Course extends Model
         'title2', 
         'details',
         'details2',
+        "audience",
+        "policy",
+        "copyright",
+        "requirements",
         "price_role",
         "certification",
         "group_price_role",
@@ -37,7 +41,7 @@ class Course extends Model
         if($this->image){
             return Storage::url($this->image);
         }
-        return asset('web/img/Althiga_hand.png');
+        return asset('assets/no.png');
     }
 
     public function getFileUrlAttribute()
@@ -45,7 +49,7 @@ class Course extends Model
         if($this->register_form_file){
             return Storage::url($this->register_form_file);
         }
-        return asset('web/img/Althiga_hand.png');
+        return null;
     }
 
     public function targets()
@@ -60,7 +64,7 @@ class Course extends Model
 
     public function contents()
     {
-        return $this->hasMany(Content::class, 'course_id');
+        return $this->hasMany(Content::class, 'course_id')->whereNull('parent_id');
     }
 
     public function requirements()
@@ -76,5 +80,10 @@ class Course extends Model
     public function seens()
     {
         return $this->morphMany(Seen::class, 'seenable');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class ,'taggable', 'course_id', 'tag_id');
     }
 }

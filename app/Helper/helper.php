@@ -6,6 +6,17 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Stevebauman\Location\Facades\Location;
 
+if(!function_exists('detectURL')){
+    function detectURL($string)
+    {
+        $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i'; 
+        $string = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $string);
+
+        $pattern = '/[a-z0-9_\-\+\.]+@[a-z0-9\-]+\.([a-z]{2,4})(?:\.[a-z]{2})?/i';
+        return preg_replace($pattern, '<a href="mailto:$0" target="_blank" title="$0">$0</a>', $string);
+    }
+}
+
 
 if (!function_exists("uploadImage")) {
 

@@ -27,8 +27,5 @@
         .btn i{
             padding: 0 !important
         }
-        td{
-            line-height: 60px;
-        }
     </style>
 @endpush

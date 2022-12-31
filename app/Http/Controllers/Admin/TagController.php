@@ -2,39 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\ContentsDataTable;
+use App\DataTables\TagsDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\Content;
-use App\Models\Course;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class ContentController extends Controller
+class TagController extends Controller
 {
-    public function index(ContentsDataTable $dataTable, $course)
+    public function index(TagsDataTable $dataTable)
     {
-        if(auth()->user()->cannot('contents_show')){
+        if(auth()->user()->cannot('tags_show')){
             return redirect()->route('admin.home')->with([
                 "notify-type"=> "error",
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        return $dataTable->with(['course'=> $course])->render('admin.contents.index', ['course'=> $course]);
+        return $dataTable->render('admin.tags.index');
     }
-   
-    public function create($course)
+    
+    public function create()
     {
-        if(auth()->user()->cannot('contents_create')){
+        if(auth()->user()->cannot('tags_create')){
             return redirect()->route('admin.home')->with([
                 "notify-type"=> "error",
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        return view('admin.contents.create', compact('course'));
+        return view('admin.tags.create');
     }
 
-    public function store(Request $request, Course $course)
+    public function store(Request $request)
     {
-        if(auth()->user()->cannot('contents_create')){
+        if(auth()->user()->cannot('tags_create')){
             return redirect()->route('admin.home')->with([
                 "notify-type"=> "error",
                 "notify-message"=> __('site.access denied')
@@ -46,27 +45,27 @@ class ContentController extends Controller
             "title.ar"=> "required|string",
         ]);
         $data = $request->except(['_token', "_method"]);
-        $course->contents()->create($data);
-        return redirect()->route('admin.contents.index', ["course"=>$course->id])->with([
+        Tag::create($data);
+        return redirect()->route('admin.tags.index')->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
         ]);
     }
 
-    public function edit($course, Content $content)
+    public function edit(Tag $tag)
     {
-        if(auth()->user()->cannot('contents_edit')){
+        if(auth()->user()->cannot('tags_edit')){
             return redirect()->route('admin.home')->with([
                 "notify-type"=> "error",
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        return view('admin.contents.edit', compact('content', 'course'));
+        return view('admin.tags.edit', compact('tag'));
     }
 
-    public function update(Request $request, $course, Content $content)
+    public function update(Request $request, Tag $tag)
     {
-        if(auth()->user()->cannot('contents_edit')){
+        if(auth()->user()->cannot('tags_edit')){
             return redirect()->route('admin.home')->with([
                 "notify-type"=> "error",
                 "notify-message"=> __('site.access denied')
@@ -78,22 +77,20 @@ class ContentController extends Controller
             "title.ar"=> "required|string",
         ]);
         $data = $request->except(['_token', "_method"]);
-        $content->update($data);
-        return redirect()->route('admin.contents.index', ['course'=> $course])->with([
+        $tag->update($data);
+        return redirect()->route('admin.tags.index')->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.updated_msg')
         ]);
     }
 
 
-    public function destroy($course, Content $content)
+    public function destroy(Tag $tag)
     {
-        if(auth()->user()->cannot('contents_delete')){
+        if(auth()->user()->cannot('tags_delete')){
             return response()->json(['message'=> __('site.access denied')], 200);
         }
-        $content->delete();
+        $tag->delete();
         return response()->json(['message'=> __('site.item deleted successfully')], 200);
     }
-
-   
 }

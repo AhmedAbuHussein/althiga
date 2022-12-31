@@ -109,5 +109,17 @@
     .form-group{
         margin-bottom: 15px;
     }
+
+    .textarea {
+        /*border: 1px solid gray; */
+        /* if you want Flexible textarea/div then give min-height instead of height */
+        overflow: auto;
+        
+        resize: both;
+        max-width: 100%;
+        /*font-size: 15px;
+        padding: 2px;
+        color: #000; */
+      }
 </style>
 @stack('css')

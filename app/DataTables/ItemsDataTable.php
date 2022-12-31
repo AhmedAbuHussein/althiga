@@ -3,13 +3,15 @@
 namespace App\DataTables;
 
 use App\Models\Content;
+use App\Models\Item;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ContentsDataTable extends DataTable
+class ItemsDataTable extends DataTable
 {
-    
     public function ajax()
     {
         return datatables()
@@ -17,13 +19,10 @@ class ContentsDataTable extends DataTable
         ->addColumn('action', function($item){
             $action = '';
             if (auth()->user()->can("contents_edit")){
-                $action .= '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.contents.edit', ['course'=>$this->course, 'content'=>$item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
-            }
-            if (auth()->user()->can("contents_create")){
-                $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.items.index', ['course'=>$this->course, 'content'=>$item->id]).'" title="'.__('site.items').'"><i class="fa fa-list"></i></a>';
+                $action .= '<a class="btn btn-success py-1 ps-2 pe-2" href="'.route('admin.items.edit', ['course'=>$this->course, 'content'=>$this->content , 'item'=> $item->id]).'" title="'.__('site.edit').'"><i class="fa fa-edit"></i></a>';
             }
             if (auth()->user()->can("contents_delete")){
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.contents.destroy', ['course'=> $this->course, 'content'=> $item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.items.destroy', ['course'=>$this->course, 'content'=>$this->content , 'item'=> $item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             }
             return $action;
         })
@@ -55,7 +54,7 @@ class ContentsDataTable extends DataTable
      */
     public function query()
     {
-        return Content::where('course_id', $this->course)->whereNull('parent_id')->withCount("items")->newQuery();
+        return Content::where(['course_id'=>$this->course, 'parent_id'=> $this->content])->whereNotNull('parent_id')->newQuery();
     }
 
     /**
@@ -117,14 +116,12 @@ class ContentsDataTable extends DataTable
         return [
             Column::computed('uid')->title(__('site.id'))->addClass("text-center"),
             Column::make('title')->title(__('site.title'))->addClass("text-center"),
-            Column::make('items_count')->title(__('site.items'))->addClass("text-center"),
             Column::make('created_at')->title(__('site.created_at'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)
             ->addClass('text-center'),
         ];
     }
-
     /**
      * Get filename for export.
      *
@@ -132,6 +129,6 @@ class ContentsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Contents_' . date('YmdHis');
+        return 'Items_' . date('YmdHis');
     }
 }

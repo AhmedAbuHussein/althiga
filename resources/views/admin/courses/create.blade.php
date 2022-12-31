@@ -36,7 +36,17 @@
 
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="tab5-tab" data-bs-toggle="tab" data-bs-target="#tab5" type="button"
-                            role="tab" aria-controls="tab5" aria-selected="false">@lang('site.files')</button>
+                            role="tab" aria-controls="tab5" aria-selected="false">@lang('site.registration')</button>
+                    </li>
+    
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab6-tab" data-bs-toggle="tab" data-bs-target="#tab6" type="button"
+                            role="tab" aria-controls="tab6" aria-selected="false">@lang('site.policy')</button>
+                    </li>
+    
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab7-tab" data-bs-toggle="tab" data-bs-target="#tab7" type="button"
+                            role="tab" aria-controls="tab7" aria-selected="false">@lang('site.files')</button>
                     </li>
 
                 </ul>
@@ -59,8 +69,16 @@
                     {{--  end tab 4  --}}
 
                     {{--  start tab 5  --}}
-                    @include('admin.courses.partial.tab5', ['id'=> 'tab5', 'prev'=>'#tab4-tab', 'submit'=> true])
+                    @include('admin.courses.partial.tab5', ['id'=> 'tab5', 'prev'=>'#tab4-tab', 'next'=> '#tab6-tab'])
                     {{--  end tab 5  --}}
+
+                    {{--  start tab 6  --}}
+                    @include('admin.courses.partial.tab6', ['id'=> 'tab6', 'prev'=>'#tab5-tab', 'next'=> '#tab7-tab'])
+                    {{--  end tab 6  --}}
+
+                    {{--  start tab 7  --}}
+                    @include('admin.courses.partial.tab7', ['id'=> 'tab7', 'prev'=>'#tab6-tab', 'submit'=> true])
+                    {{--  end tab 7  --}}
 
                 </div>
 

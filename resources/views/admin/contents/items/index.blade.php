@@ -1,0 +1,37 @@
+@extends('layouts.admin')
+@section('title')
+    @lang('site.items')
+@endsection
+@section('breadcrumb')
+<li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
+<li class="breadcrumb-item text-muted">
+    <a class="text-muted text-hover-primary" href="{{ route('admin.courses.index') }}">@lang('site.courses')</a>
+</li>
+
+<li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
+<li class="breadcrumb-item text-muted">
+    <a class="text-muted text-hover-primary" href="{{ route('admin.contents.index', ['course'=> $course]) }}">@lang('site.contents')</a>
+</li>
+
+<li class="breadcrumb-item"><span class="bullet bg-gray-300 w-5px h-2px"></span></li>
+<li class="breadcrumb-item text-muted">@lang('site.items')</li>
+@endsection
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            {!! $dataTable->table(['class'=> 'table table-row-dashed table-row-gray-300 text-center table-striped']) !!}
+            <input type="hidden" id="create-btn" value="{{ route('admin.items.create', ['course'=> $course, 'content'=> $content]) }}">
+        </div>
+    </div>
+@endsection
+
+@push('js')
+{!! $dataTable->scripts() !!}
+@endpush
+@push('css')
+    <style>
+        .btn i{
+            padding: 0 !important
+        }
+    </style>
+@endpush

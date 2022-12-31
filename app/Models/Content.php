@@ -17,4 +17,14 @@ class Content extends Model
         return $this->belongsTo(Course::class, 'course_id');
     }
 
+    public function items()
+    {
+        return $this->hasMany(Content::class, 'parent_id');
+    }
+
+    public function content()
+    {
+        return $this->belongsTo(Content::class, 'parent_id');
+    }
+
 }

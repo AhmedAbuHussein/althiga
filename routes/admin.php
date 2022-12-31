@@ -32,11 +32,16 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("roles", \App\Http\Controllers\Admin\RoleController::class);
     Route::resource("tours", \App\Http\Controllers\Admin\TourController::class);
     Route::resource("team", \App\Http\Controllers\Admin\TeamController::class);
+    Route::resource("tags", \App\Http\Controllers\Admin\TagController::class)->except(['show']);
 
     Route::get('statistics/destroy/all', [\App\Http\Controllers\Admin\StatisticsController::class, 'delete'])->name('statistics.delete');
     Route::post('statistics/destroy/all', [\App\Http\Controllers\Admin\StatisticsController::class, 'delete_post']);
     
-    Route::resource("courses/{course}/contents", \App\Http\Controllers\Admin\ContentController::class)->except('show');
+    Route::group(["prefix"=> "courses/{course}"], function(){
+        Route::resource("contents", \App\Http\Controllers\Admin\ContentController::class)->except('show');
+        Route::resource("contents/{content}/items", \App\Http\Controllers\Admin\ItemController::class)->except('show');
+    });
+
     Route::resource("{type}/{id}/targets", \App\Http\Controllers\Admin\TargetController::class)->except('show');
 
     Route::group(['prefix'=> "setting", 'as'=> "setting."], function() {

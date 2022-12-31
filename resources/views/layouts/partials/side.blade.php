@@ -124,6 +124,17 @@
             </div>
             @endif
 
+            @if (auth()->user()->can("tags_show"))
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.tags') }}" href="{{ route('admin.tags.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-certificate"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.tags')</span>
+                </a>
+            </div>
+            @endif
+
             @if (auth()->user()->can("admin_show"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.admins') }}" href="{{ route('admin.admins.index') }}">

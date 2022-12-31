@@ -53,7 +53,12 @@ class TargetController extends Controller
             "title.ar"=> "required|string",
             "type" => "sometimes|string",
         ]);
+       
         $data = $request->except(['_token', "_method"]);
+        $data['title'] = [
+            'en'=> detectURL($request->title['en']),
+            'ar'=> detectURL($request->title['ar']),
+        ];
         if(!$request->has('type')){
             $data['type'] = $type;
         }
@@ -90,18 +95,18 @@ class TargetController extends Controller
             "title"=> "required|array",
             "title.en"=> "required|string",
             "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
-            "link"=> "nullable|url",
-            "image"=> "nullable|image",
+            "type" => "sometimes|string",
         ]);
-        $data = $request->except(['_token', "_method", 'image']);
-        if($request->hasFile('image')){
-            $data['image'] = uploadImage($request->file('image'), $target->image, 'target-', true,  2048, 1024);
+        $data = $request->except(['_token', "_method"]);
+        $data['title'] = [
+            'en'=> detectURL($request->title['en']),
+            'ar'=> detectURL($request->title['ar']),
+        ];
+        if(!$request->has('type')){
+            $data['type'] = $type;
         }
         $target->update($data);
-        return redirect()->route('admin.targets.index', ['type', 'id'])->with([
+        return redirect()->route('admin.targets.index', ['type'=> $type, 'id'=> $id])->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.updated_msg')
         ]);

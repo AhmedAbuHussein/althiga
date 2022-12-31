@@ -45,9 +45,10 @@ class CourseRequest extends FormRequest
             "details2.en"=> "nullable|string",
             "details2.ar"=> "nullable|string",
             
-            "days"=> "required|array",
+            "days"=> "nullable|array",
+            "tags"=> "nullable|array",
+            "hour_per_day"=> "nullable|numeric",
             "duration"=> "required|numeric",
-            "hour_per_day"=> "required|numeric",
             "languages"=> "required|string",
             
             "certification"=> "required|array",
