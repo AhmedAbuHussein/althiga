@@ -41,11 +41,18 @@ class CoursesDataTable extends DataTable
             return $item->category->getTranslation('title', app()->getLocale());
         })
         ->editColumn('image', function($item){
-            return '<img loading="lazy" src="'.$item->url.'" style="width:50px;">';
+            return '<a href="'.$item->url.'" target="_blank"><img loading="lazy" src="'.$item->url.'" style="width:30px;"></a>';
         })
         ->filterColumn('title', function($query, $keyword) {
             $query->where(function($builder) use($keyword){
                 $builder->where('title->en',"LIKE","%{$keyword}%")->orWhere("title->ar", "LIKE","%{$keyword}%");
+            });
+        })
+        ->filterColumn('category.title', function($query, $keyword) {
+            $query->where(function($builder) use($keyword){
+                $builder->whereHas("category", function($query)use($keyword){
+                    $query->where('title->en',"LIKE","%{$keyword}%")->orWhere("categories.title->ar", "LIKE","%{$keyword}%");
+                });
             });
         })
         ->rawColumns(['action', 'image'])
@@ -105,7 +112,7 @@ class CoursesDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(0, "asc")
+                    ->orderBy(0, "desc")
                     ->parameters([
                         "language" => $lang,
                     ])
@@ -123,7 +130,7 @@ class CoursesDataTable extends DataTable
             Column::make('id')->title(__('site.id'))->addClass("text-center"),
             Column::make('title')->title(__('site.title'))->addClass("text-center"),
             Column::make('accreditation_num')->title(__('site.accreditation'))->addClass("text-center"),
-            Column::make('category.title')->title(__('site.categories'))->addClass("text-center"),
+            Column::make('category.title')->title(__('site.categories'))->addClass("text-center")->orderable(false),
             Column::make('image')->title(__('site.image'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)

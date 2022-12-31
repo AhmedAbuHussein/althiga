@@ -149,7 +149,7 @@ return [
     "read_at"=>"Read At",
     "mark as read"=>"mark as read",
     "notifications_readed_msg"=>"Notifications marked as read",
-    "roles"=>"Roles", // new words
+    "roles"=>"Roles",
     "permissions"=>"Permissions",
     "access denied"=>"access denied !",
     "links"=>"links",

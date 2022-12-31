@@ -24,7 +24,7 @@
             padding: 0 !important
         }
         td{
-            line-height: 40px;
+            line-height: 25px;
         }
     </style>
 @endpush

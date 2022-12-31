@@ -49,7 +49,7 @@ class ItemController extends Controller
         $data = $request->except(['_token', "_method"]);
         $data['course_id']= $course;
         $content->items()->create($data);
-        return redirect()->route('admin.items.index', ["course"=>$course, 'content'=> $content->id])->with([
+        return redirect()->route('admin.items.create', ["course"=>$course, 'content'=> $content->id])->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
         ]);

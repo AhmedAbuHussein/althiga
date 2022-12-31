@@ -55,17 +55,13 @@ class TargetController extends Controller
         ]);
        
         $data = $request->except(['_token', "_method"]);
-        $data['title'] = [
-            'en'=> detectURL($request->title['en']),
-            'ar'=> detectURL($request->title['ar']),
-        ];
         if(!$request->has('type')){
             $data['type'] = $type;
         }
         $data['targetable_type'] = $this->getClass($type);
         $data['targetable_id'] = $id;
         Target::create($data);
-        return redirect()->route('admin.targets.index', [$type, $id])->with([
+        return redirect()->route('admin.targets.create', [$type, $id])->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
         ]);
@@ -98,10 +94,6 @@ class TargetController extends Controller
             "type" => "sometimes|string",
         ]);
         $data = $request->except(['_token', "_method"]);
-        $data['title'] = [
-            'en'=> detectURL($request->title['en']),
-            'ar'=> detectURL($request->title['ar']),
-        ];
         if(!$request->has('type')){
             $data['type'] = $type;
         }

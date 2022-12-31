@@ -47,7 +47,7 @@ class ContentController extends Controller
         ]);
         $data = $request->except(['_token', "_method"]);
         $course->contents()->create($data);
-        return redirect()->route('admin.contents.index', ["course"=>$course->id])->with([
+        return redirect()->route('admin.contents.create', ["course"=>$course->id])->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
         ]);
