@@ -52,20 +52,20 @@ class TourController extends Controller
             ]);
         }
         $request->validate([
-            "title"=> "required|array",
-            "title.en"=> "required|string",
-            "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
-            "image"=> "nullable|image",
+            "title"=> "nullable|array",
+            "title.en"=> "nullable|string",
+            "title.ar"=> "nullable|string",
+            "text"=> "nullable|array",
+            "text.en"=> "nullable|string",
+            "text.ar"=> "nullable|string",
+            "image"=> "required|image",
         ]);
         $data = $request->except(['_token', "_method", 'image']);
         if($request->hasFile('image')){
             $data['image'] = uploadImage($request->file('image'), null, 'tour-', true, 2048, 1024);
         }
         Tour::create($data);
-        return redirect()->route('admin.tours.index')->with([
+        return redirect()->route('admin.tours.create')->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
         ]);
@@ -91,12 +91,12 @@ class TourController extends Controller
             ]);
         }
         $request->validate([
-            "title"=> "required|array",
-            "title.en"=> "required|string",
-            "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
+            "title"=> "nullable|array",
+            "title.en"=> "nullable|string",
+            "title.ar"=> "nullable|string",
+            "text"=> "nullable|array",
+            "text.en"=> "nullable|string",
+            "text.ar"=> "nullable|string",
             "image"=> "nullable|image",
         ]);
         $data = $request->except(['_token', "_method", 'image']);

@@ -52,21 +52,21 @@ class SliderController extends Controller
             ]);
         }
         $request->validate([
-            "title"=> "required|array",
-            "title.en"=> "required|string",
-            "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
+            "title"=> "nullable|array",
+            "title.en"=> "nullable|string",
+            "title.ar"=> "nullable|string",
+            "text"=> "nullable|array",
+            "text.en"=> "nullable|string",
+            "text.ar"=> "nullable|string",
             "link"=> "nullable|url",
-            "image"=> "nullable|image",
+            "image"=> "required|image",
         ]);
         $data = $request->except(['_token', "_method", 'image']);
         if($request->hasFile('image')){
             $data['image'] = uploadImage($request->file('image'), null, 'slider-', true, 2048, 1024);
         }
         Slider::create($data);
-        return redirect()->route('admin.sliders.index')->with([
+        return redirect()->route('admin.sliders.create')->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
         ]);
@@ -92,12 +92,12 @@ class SliderController extends Controller
             ]);
         }
         $request->validate([
-            "title"=> "required|array",
-            "title.en"=> "required|string",
-            "title.ar"=> "required|string",
-            "text"=> "required|array",
-            "text.en"=> "required|string",
-            "text.ar"=> "required|string",
+            "title"=> "nullable|array",
+            "title.en"=> "nullable|string",
+            "title.ar"=> "nullable|string",
+            "text"=> "nullable|array",
+            "text.en"=> "nullable|string",
+            "text.ar"=> "nullable|string",
             "link"=> "nullable|url",
             "image"=> "nullable|image",
         ]);

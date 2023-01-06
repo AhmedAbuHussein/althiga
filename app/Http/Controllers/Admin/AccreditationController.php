@@ -57,9 +57,9 @@ class AccreditationController extends Controller
             "title.ar"=> "required|string",
             "type"=> "required|string|in:national,international",
 
-            "text"=> "nullable|required_if:type,national|array",
-            "text.en"=> "nullable|required_if:type,national|string",
-            "text.ar"=> "nullable|required_if:type,national|string",
+            "text"=> "nullable|array",
+            "text.en"=> "nullable|string",
+            "text.ar"=> "nullable|string",
 
             "file_title"=> "nullable|array",
             "file_title.en"=> "nullable|string",

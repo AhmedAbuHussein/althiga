@@ -85,7 +85,7 @@ class GalleryController extends Controller
             ]);
         }
         $request->validate([
-            "image"=> "required|image",
+            "image"=> "nullable|image",
         ]);
         $data = [];
         if($request->hasFile('image')){
