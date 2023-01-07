@@ -51,15 +51,15 @@
                 ->pluck('value')
                 ->first(),
         ],
-        'website_icon' => $settings->website_icon(),
-        'website_icon_url' => $settings->website_icon(),
-        'website_logo' => $settings->website_logo(),
-        'website_cover' => $settings->website_cover(),
-        'phone' => $settings->phone(),
+        'website_icon' => $settings->first()->website_icon(),
+        'website_icon_url' => $settings->first()->website_icon(),
+        'website_logo' => $settings->first()->website_logo(),
+        'website_cover' => $settings->first()->website_cover(),
+        'phone' => $settings->first()->phone(),
         'search_url' => env('APP_URL') . '/',
         'services_url' => env('APP_URL') . '/services',
         'feed_url' => env('APP_URL') . '/feed',
-        'feed_title' => 'آخر الأخبار',
+        'feed_title' => 'خدماتنا',
         'cache_pages' => 1,
         'canonical' => str_replace('/index.php', '', request()->url()),
         'twitter_author' => 'Althiga',
@@ -85,6 +85,8 @@
 <link rel="manifest" href="{{ url('mix-manifest.json') }}">
 <meta name="mobile-web-app-capable" content="no">
 <meta name="application-name" content="{{ $website_settings['website_name_en'] }}">
+
+<link rel="shortcut icon" href="{{ $website_settings['website_icon'] }}" />
 
 
 <meta name="facebook-domain-verification" content="vymdke86bl9vdcyleijy0r173c6k7c" />

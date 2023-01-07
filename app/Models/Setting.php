@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Translatable\HasTranslations;
 
@@ -13,6 +14,20 @@ class Setting extends Model
     protected $guarded = ['id'];
     public $translatable = ['values'];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function(){
+            Cache::forget("SETTING");
+        });
+        static::updated(function(){
+            Cache::forget("SETTING");
+        });
+        static::deleted(function(){
+            Cache::forget("SETTING");
+        });
+    }
+
     public function website_logo()
     {
         $item = $this->select("value")->where('key', 'website_logo')->first();
@@ -21,6 +36,7 @@ class Setting extends Model
         else
             return asset('web/img/Althiga_hand.png');
     }
+
     public function website_cover()
     {
         $item = $this->select("value")->where('key', 'website_cover')->first();
@@ -29,6 +45,7 @@ class Setting extends Model
         else
             return asset('web/img/Althiga_hand.png');
     }
+
     public function website_wide_logo()
     {
         $item = $this->select("value")->where('key', 'website_wide_logo')->first();
@@ -37,6 +54,7 @@ class Setting extends Model
         else
             return asset('web/img/Althiga_hand.png');
     }
+    
     public function website_icon()
     {
         $item = $this->select("value")->where('key', 'website_icon')->first();

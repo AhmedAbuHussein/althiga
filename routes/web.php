@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\RoutingController;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,45 +19,33 @@ use Spatie\Permission\Models\Permission;
 |
 */
 
-Route::get('/con', function(){
-    \App\Models\Contact::create([
-        "name"=> "Ahmed Shaker",
-        "email"=> "ahmed.shaker.fci.fcu@gmail.com",
-        "title"=> "test contact",
-        "message"=> "body of contact item for test only"
-    ]);
-    return redirect("/");
-});
-
-Route::get('/test', function(Request $request){
-    $user = \App\Models\User::first();
-    $role = \Spatie\Permission\Models\Role::firstOrCreate([
-        "name"=> "superadmin",
-        "guard_name"=> "web",
-    ]);
-    $permissions = Permission::where('name',"LIKE" ,'%role%')->get();
-    $role->syncPermissions($permissions);
-    $user->roles()->sync($role->id);
-    return 'done';
-
+Route::get('/test', function(){
+    $courses = Course::get();
+   // return _splite_by_chuncks($courses, 2, 0);
+   return \App\Models\Category::withCount("courses")->with(['courses'=> function($query){
+        $query->where('is_popular', 1)->inRandomOrder();
+    }])->has('courses')->orderBy("courses_count", "DESC")->get();
 });
 
 Route::get('/artisan', function(){
     Artisan::call("optimize:clear");
-    Artisan::call("migrate:link");
+    // Artisan::call("storage:link");
     return 'done';
 });
 
-Route::view('mail', 'admin.mail.index', [
-    'title'=> "عنوان البريد الالكتروني", 
-    'body'=> "هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت."
-]);
 
-Route::get('/', function () {
-    App::setLocale('ar');
-    session()->put('locale', 'ar');
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
+Route::get('/about', [\App\Http\Controllers\IndexController::class, 'about'])->name('about');
+Route::get('/gallery', [\App\Http\Controllers\IndexController::class, 'gallery'])->name('gallery');
+Route::get('/services', [\App\Http\Controllers\IndexController::class, 'services'])->name('services');
+Route::get('/contact-us', [\App\Http\Controllers\IndexController::class, 'contact'])->name('contact');
+Route::get('/virtual-tour', [\App\Http\Controllers\IndexController::class, 'tours'])->name('tours');
+Route::get('/valuable-customers', [\App\Http\Controllers\IndexController::class, 'partners'])->name('partners');
+Route::get('/accreditations-partnerships', [\App\Http\Controllers\IndexController::class, 'accreditations'])->name('accreditations');
+
+Route::get('courses', [\App\Http\Controllers\CourseController::class, 'index'])->name('courses.index');
+Route::get('courses/{slug}', [\App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
+
 
 Route::get('/language/{lang}', function($lang){
     if(in_array($lang, ['en', 'ar'])){

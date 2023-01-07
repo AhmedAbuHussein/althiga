@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -15,6 +16,20 @@ class Category extends Model
     protected $guarded = ['id'];
     public $translatable = ['title', 'text'];
     protected $appends = ['url'];
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function(){
+            Cache::forget("CATEGORIES");
+        });
+        static::updated(function(){
+            Cache::forget("CATEGORIES");
+        });
+        static::deleted(function(){
+            Cache::forget("CATEGORIES");
+        });
+    }
 
     public function getUrlAttribute()
     {

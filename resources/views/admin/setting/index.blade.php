@@ -69,6 +69,47 @@
                                 <div class="col-md-6">
                                     <div class="form-group pb-3">
                                         <label>
+                                            @lang('site.arabic site welcome')
+                                        </label>
+                                        <input type="" name="settings[website_welcome_ar]" class="form-control"
+                                            value="{{ $settings->where('key', 'website_welcome_ar')->pluck('value')->first() }}"
+                                            maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.english site welcome')
+                                        </label>
+                                        <input type="" name="settings[website_welcome_en]" class="form-control"
+                                            value="{{ $settings->where('key', 'website_welcome_en')->pluck('value')->first() }}"
+                                            maxlength="255">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.email')
+                                        </label>
+                                        <input type="email" name="settings[contact_email]" class="form-control"
+                                            value="{{ $settings->where('key', 'contact_email')->pluck('value')->first() }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.menu_column_count')
+                                        </label>
+                                        <input type="number" name="settings[menu_column_count]" class="form-control" min="5" max="20"
+                                            value="{{ $settings->where('key', 'menu_column_count')->pluck('value')->first() ?? 8 }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
                                             @lang('site.arabic address')
                                         </label>
                                         <textarea name="settings[address_ar]" class="form-control">{{ $settings->where('key', 'address_ar')->pluck('value')->first() }}</textarea>
@@ -93,15 +134,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group pb-3">
-                                        <label>
-                                            @lang('site.email')
-                                        </label>
-                                        <input type="email" name="settings[contact_email]" class="form-control"
-                                            value="{{ $settings->where('key', 'contact_email')->pluck('value')->first() }}">
-                                    </div>
-                                </div>
+                               
 
                             </div>
 
@@ -112,7 +145,7 @@
                                     </label>
                                     <input type="file" name="settings[website_logo]" class="form-control">
                                     <label for="" class="preview" style="width:200px;max-height: 200px;">
-                                        <img src="{{ $settings->website_logo() }}">
+                                        <img src="{{ $settings->first()->website_logo() }}">
                                     </label>
 
                                 </div>
@@ -122,7 +155,7 @@
                                     </label>
                                     <input type="file" name="settings[website_wide_logo]" class="form-control">
                                     <label for="" class="preview" style="width:500px;height: 200px;">
-                                        <img src="{{ $settings->website_wide_logo() }}">
+                                        <img src="{{ $settings->first()->website_wide_logo() }}">
                                     </label>
                                 </div>
                                 <div class="form-group pb-3">
@@ -131,7 +164,7 @@
                                     </label>
                                     <input type="file" name="settings[website_icon]" class="form-control">
                                     <label for="" class="preview" style="width:100px;max-height: 100px;">
-                                        <img src="{{ $settings->website_icon() }}">
+                                        <img src="{{ $settings->first()->website_icon() }}">
                                     </label>
                                 </div>
                                 <div class="form-group pb-3">
@@ -140,7 +173,7 @@
                                     </label>
                                     <input type="file" name="settings[website_cover]" class="form-control">
                                     <label for="" class="preview" style="width:800px;height: 500px;">
-                                        <img src="{{ $settings->website_cover() }}">
+                                        <img src="{{ $settings->first()->website_cover() }}">
                                     </label>
                                 </div>
 

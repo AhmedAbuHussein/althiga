@@ -58,9 +58,13 @@ class CategoryController extends Controller
             "text"=> "required|array",
             "text.en"=> "required|string",
             "text.ar"=> "required|string",
+            "show_in_menu"=> "sometimes|boolean",
             "image"=> "nullable|image",
         ]);
         $data = $request->except(['_token', "_method", "image"]);
+        if(!$request->has('show_in_menu')){
+            $data['show_in_menu'] = 0;
+        }
         if($request->hasFile('image')){
             $data['icon'] = uploadImage($request->file('image'), null, 'category-', true, 100, 100);
         }
@@ -97,9 +101,13 @@ class CategoryController extends Controller
             "text"=> "required|array",
             "text.en"=> "required|string",
             "text.ar"=> "required|string",
+            "show_in_menu"=> "sometimes|boolean",
             "image"=> "nullable|image",
         ]);
         $data = $request->except(['_token', "_method", "image"]);
+        if(!$request->has('show_in_menu')){
+            $data['show_in_menu'] = 0;
+        }
         if($request->hasFile('image')){
             $data['icon'] = uploadImage($request->file('image'), $category->icon, 'category-', true, 100, 100);
         }

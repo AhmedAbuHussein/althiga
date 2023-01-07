@@ -32,14 +32,14 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <ul class="list-unstyled">
-                                    @foreach (_splite($about->targets, 2, 0) as $item)
+                                    @foreach (_splite_by_chuncks($about->targets, 2, 0) as $item)
                                         <li class="py-2">{{ $item->title }}</li>
                                     @endforeach
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-unstyled">
-                                    @foreach (_splite($about->targets, 2, 1) as $item)
+                                    @foreach (_splite_by_chuncks($about->targets, 2, 1) as $item)
                                         <li class="py-2">{{ $item->title }}</li>
                                     @endforeach
                                 </ul>

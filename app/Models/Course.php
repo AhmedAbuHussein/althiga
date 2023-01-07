@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Cache;
 
 class Course extends Model
 {
@@ -29,6 +30,23 @@ class Course extends Model
         "group_price_role",
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function(){
+            Cache::forget("CATEGORIES");
+            Cache::forget("COURSES");
+        });
+        static::updated(function(){
+            Cache::forget("CATEGORIES");
+            Cache::forget("COURSES");
+        });
+        static::deleted(function(){
+            Cache::forget("CATEGORIES");
+            Cache::forget("COURSES");
+        });
+    }
+    
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()

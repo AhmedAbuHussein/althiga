@@ -16,8 +16,7 @@ class SettingController extends Controller
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        $settings = Setting::firstOrCreate([]);
-        return view('admin.setting.index', compact('settings'));
+        return view('admin.setting.index');
     }
 
     public function update(Request $request, Setting $setting)

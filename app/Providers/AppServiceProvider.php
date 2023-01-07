@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Course;
+use App\Models\Setting;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -34,13 +39,31 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['_notifys'=> $notifications ?? []]);
         });
 
+        view()->composer(['layouts.admin', 'SEO.index', 'admin.setting.index', 'layouts.website.header'], function($view) {
+            $settings = Cache::remember("SETTING", Carbon::now()->addDays(6), function(){
+                return \App\Models\Setting::get();
+            });
+            $view->with(['settings'=> $settings]);
+        });
 
-        try{
-            if(Schema::hasTable('settings')){
-                $settings = \App\Models\Setting::firstOrCreate();
-                View::share('settings', $settings);
-            }
-        }catch(\Exception $e){}
+        view()->composer(['layouts.website.header'], function($view) {
+            $_categories = Cache::remember("CATEGORIES", Carbon::now()->addDays(30), function(){
+                return \App\Models\Category::where("show_in_menu", 1)->withCount("courses")->with(['courses'=> function($query){
+                    $query->where('is_popular', 1)->inRandomOrder();
+                }])->has('courses')->orderBy("courses_count", "DESC")->get();
+            });
+            $_courses = Cache::remember("COURSES", Carbon::now()->addDays(30), function(){
+                return Course::where('main_header', "1")->get();
+            });
+            $view->with(['_categories'=> $_categories, '_courses'=> $_courses]);
+        });
+
+        // try{
+        //     if(Schema::hasTable('settings')){
+        //         $settings = Setting::firstOrCreate();
+        //         View::share('settings', $settings);
+        //     }
+        // }catch(\Exception $e){}
         
     }
 }

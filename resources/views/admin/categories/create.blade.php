@@ -60,6 +60,12 @@
                             <input type="file" id="image" name="image" accept="image/*" class="form-control">
                         </div>
                         <hr>
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" {{ old('show_in_menu') == "1"  ? 'checked' :'' }} name="show_in_menu" value="1"  type="checkbox" id="check">
+                            <label class="form-check-label" for="check">@lang('site.show in menu')</label>
+                        </div>
+
+                        <hr>
                         
                         <div class="mt-4">
                             <div class="form-group mb-3">

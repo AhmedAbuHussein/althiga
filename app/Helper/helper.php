@@ -103,8 +103,8 @@ if (!function_exists('active')) {
 }
 
 
-if (!function_exists('_splite')) {
-    function _splite($objects, $chuncks = 2, $index = 0)
+if (!function_exists('_splite_by_chuncks')) {
+    function _splite_by_chuncks($objects, $chuncks = 2, $index = 0)
     {
         if(!$objects) return [];
         $len = $objects->count();
@@ -113,6 +113,19 @@ if (!function_exists('_splite')) {
 
         $chunk = round($len / $chuncks, 0);
         $chunks = $objects->chunk($chunk);
+
+        return $chunks[$index];
+
+    }
+}
+if (!function_exists('_splite_by_items')) {
+    function _splite_by_items($objects, $chuncks = 8, $index = 0)
+    {
+        if(!$objects) return [];
+        $len = $objects->count();
+        if($chuncks < 1) return $objects;
+        if($len <= $chuncks) return $objects;
+        $chunks = $objects->chunk($chuncks);
 
         return $chunks[$index];
 
