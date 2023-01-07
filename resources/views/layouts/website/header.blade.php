@@ -73,6 +73,7 @@
 
 @php
     $mega_menu_leng = optional($settings->where('key', 'menu_column_count')->first())->value ?? 14; 
+    $categories_in_menu = optional($settings->where('key', 'categories_in_menu')->first())->value ?? 3 ; 
 @endphp
 
 <!-- Navbar START -->
@@ -103,31 +104,60 @@
                 </li>
 
                 <li>
-                   
                     <a href="#">@lang('app.Domains_Courses')</a>
                     <div class="megamenu-panel">
                         <div class="megamenu-lists">
-                            @foreach ($_categories as $category)
+                            @php
+                                $divider = 0;
+                            @endphp
+                            @foreach ($_categories->slice(0, $categories_in_menu) as $index=>$category)
                                 @for ($i = 0; $i < ceil($category->courses->count() / $mega_menu_leng); $i++)
-                                    <ul class="megamenu-list list-col-4">
+                                @php $divider++; @endphp
+                                    <ul class="megamenu-list list-col-4">    
                                         @if ($i == 0)
                                             <li class="megamenu-list-title">
                                                 <h6>
-                                                    <a href="{{ route('routeName', ['id' => 'osh-courses']) }}">
+                                                    <a href="{{ route('services.show', ['id' => $category->id]) }}">
                                                         {{ $category->title }}
                                                     </a>
                                                 </h6>
                                             </li>
                                         @endif
-                                       
+                                    
                                         @foreach (_splite_by_items($category->courses, $mega_menu_leng, $i) as $course)
                                         <li>
                                             <a  href="{{ route('courses.show', ['slug' => $course->slug]) }}">{{ $course->title }}</a>
                                         </li>
                                         @endforeach
                                     </ul>
+                                    @if ($divider%4 == 0)
+                                        <hr style="clear: both; margin: 15px 0;">
+                                    @endif
                                 @endfor
                             @endforeach
+                       
+                            @php
+                                $categories = $_categories->slice($categories_in_menu);
+                            @endphp
+                            @if ($categories->count() > 0)
+                                <ul class="megamenu-list list-col-4">
+                                    <li class="megamenu-list-title">
+                                        <h6>
+                                            <a href="{{ route('services') }}">
+                                                @lang('app.other services')
+                                            </a>
+                                        </h6>
+                                    </li>
+                                    @foreach ($categories->all() as $index=>$category)
+                                        <li>
+                                            <a href="{{ route('services.show', ['id' => $category->id]) }}">
+                                                {{ $category->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                            
                         </div>
                     </div>
                 </li>

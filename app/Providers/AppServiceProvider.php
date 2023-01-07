@@ -49,8 +49,8 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['layouts.website.header'], function($view) {
             $_categories = Cache::remember("CATEGORIES", Carbon::now()->addDays(30), function(){
                 return \App\Models\Category::where("show_in_menu", 1)->withCount("courses")->with(['courses'=> function($query){
-                    $query->where('is_popular', 1)->inRandomOrder();
-                }])->has('courses')->orderBy("courses_count", "DESC")->get();
+                    $query->where('show_in_menu', 1)->inRandomOrder();
+                }])->orderBy("courses_count", "DESC")->get();
             });
             $_courses = Cache::remember("COURSES", Carbon::now()->addDays(30), function(){
                 return Course::where('main_header', "1")->get();

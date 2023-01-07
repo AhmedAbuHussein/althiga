@@ -36,6 +36,7 @@ class CourseRequest extends FormRequest
             "category_id"=> "required|numeric|exists:categories,id",
             "is_popular"=> "required|boolean",
             "main_header"=> "required|boolean",
+            "show_in_menu"=> "required|boolean",
 
             "title2"=> "nullable|array",
             "title2.en"=> "nullable|string",

@@ -87,13 +87,15 @@
                                     </div>
                                 </div>
 
+                                
+
                                 <div class="col-md-6">
                                     <div class="form-group pb-3">
                                         <label>
-                                            @lang('site.email')
+                                            @lang('site.categories_in_menu')
                                         </label>
-                                        <input type="email" name="settings[contact_email]" class="form-control"
-                                            value="{{ $settings->where('key', 'contact_email')->pluck('value')->first() }}">
+                                        <input type="number" name="settings[categories_in_menu]" class="form-control" min="2" max="10"
+                                            value="{{ $settings->where('key', 'categories_in_menu')->pluck('value')->first() ?? 3 }}">
                                     </div>
                                 </div>
 
@@ -133,7 +135,16 @@
                                         <textarea name="settings[website_seo]" class="form-control">{{ $settings->where('key', 'website_seo')->pluck('value')->first() }}</textarea>
                                     </div>
                                 </div>
-
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.email')
+                                        </label>
+                                        <input type="email" name="settings[contact_email]" class="form-control"
+                                            value="{{ $settings->where('key', 'contact_email')->pluck('value')->first() }}">
+                                    </div>
+                                </div>
                                
 
                             </div>

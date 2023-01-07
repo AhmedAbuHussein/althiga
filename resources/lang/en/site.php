@@ -196,10 +196,9 @@ return [
     "items"=>"Items",
     "arabic site welcome"=>"Arabic header Welcome",
     "english site welcome"=>"English header Welcome",
-    "menu_column_count"=>"display courses in menu column",
-    "show in menu"=>"Show in menu",
-    ""=>"",
-    ""=>"",
+    "menu_column_count"=>"display courses in menu column under categories",
+    "show in menu"=>"Show in menu under categories",
+    "categories_in_menu"=>"# of categories displayed with courses",
     ""=>"",
     ""=>"",
 ];

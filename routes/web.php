@@ -37,7 +37,6 @@ Route::get('/artisan', function(){
 Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 Route::get('/about', [\App\Http\Controllers\IndexController::class, 'about'])->name('about');
 Route::get('/gallery', [\App\Http\Controllers\IndexController::class, 'gallery'])->name('gallery');
-Route::get('/services', [\App\Http\Controllers\IndexController::class, 'services'])->name('services');
 Route::get('/contact-us', [\App\Http\Controllers\IndexController::class, 'contact'])->name('contact');
 Route::get('/virtual-tour', [\App\Http\Controllers\IndexController::class, 'tours'])->name('tours');
 Route::get('/valuable-customers', [\App\Http\Controllers\IndexController::class, 'partners'])->name('partners');
@@ -45,6 +44,9 @@ Route::get('/accreditations-partnerships', [\App\Http\Controllers\IndexControlle
 
 Route::get('courses', [\App\Http\Controllers\CourseController::class, 'index'])->name('courses.index');
 Route::get('courses/{slug}', [\App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
+
+Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services');
+Route::get('services/{id}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
 
 
 Route::get('/language/{lang}', function($lang){

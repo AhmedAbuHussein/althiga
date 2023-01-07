@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="is_popular">@lang('site.is_popular') <span class="required"></span></label>
                 <select name="is_popular" id="is_popular" class="form-control" required>
@@ -62,7 +62,23 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="show_in_menu">@lang('site.show in menu') <span class="required"></span></label>
+                <select name="show_in_menu" id="show_in_menu" class="form-control" required>
+                    <option value="">@lang('site.select')</option>
+                    <option {{ old('show_in_menu', isset($course) ? $course->show_in_menu : '') == '1' ? 'selected' : '' }} value="1">
+                        @lang('site.yes')</option>
+                    <option {{ old('show_in_menu', isset($course) ? $course->show_in_menu : '') == '0' ? 'selected' : '' }} value="0">
+                        @lang('site.no')</option>
+                </select>
+                @error('show_in_menu')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="main_header">@lang('site.set_main_header') <span class="required"></span></label>
                 <select name="main_header" id="main_header" class="form-control" required>
