@@ -63,7 +63,7 @@ class SliderController extends Controller
         ]);
         $data = $request->except(['_token', "_method", 'image']);
         if($request->hasFile('image')){
-            $data['image'] = uploadImage($request->file('image'), null, 'slider-', true, 2048, 1024);
+            $data['image'] = uploadImage($request->file('image'), null, 'slider-', true, 2048, 1356);
         }
         Slider::create($data);
         return redirect()->route('admin.sliders.create')->with([
@@ -103,7 +103,7 @@ class SliderController extends Controller
         ]);
         $data = $request->except(['_token', "_method", 'image']);
         if($request->hasFile('image')){
-            $data['image'] = uploadImage($request->file('image'), $slider->image, 'slider-', true,  2048, 1024);
+            $data['image'] = uploadImage($request->file('image'), $slider->image, 'slider-', true,  2048, 1356);
         }
         $slider->update($data);
         return redirect()->route('admin.sliders.index')->with([

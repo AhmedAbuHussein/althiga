@@ -26,6 +26,16 @@
                             <span class="la la-wrench me-2"></span> @lang('site.main')
                         </div>
                         <div class="d-flex justify-content-center align-items-center p-0 settings-tab-opener"
+                            data-opentab="menu-tab">
+                            <span class="la la-list-alt me-2"></span> @lang('site.menu')
+                        </div>
+
+                        <div class="d-flex justify-content-center align-items-center p-0 settings-tab-opener"
+                            data-opentab="extra-tab">
+                            <span class="la la-plus me-2"></span> @lang('site.extra data')
+                        </div>
+
+                        <div class="d-flex justify-content-center align-items-center p-0 settings-tab-opener"
                             data-opentab="images-tab">
                             <span class="la la-images me-2"></span> @lang('site.image')
                         </div>
@@ -65,50 +75,6 @@
                                             maxlength="190">
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group pb-3">
-                                        <label>
-                                            @lang('site.arabic site welcome')
-                                        </label>
-                                        <input type="" name="settings[website_welcome_ar]" class="form-control"
-                                            value="{{ $settings->where('key', 'website_welcome_ar')->pluck('value')->first() }}"
-                                            maxlength="255">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pb-3">
-                                        <label>
-                                            @lang('site.english site welcome')
-                                        </label>
-                                        <input type="" name="settings[website_welcome_en]" class="form-control"
-                                            value="{{ $settings->where('key', 'website_welcome_en')->pluck('value')->first() }}"
-                                            maxlength="255">
-                                    </div>
-                                </div>
-
-                                
-
-                                <div class="col-md-6">
-                                    <div class="form-group pb-3">
-                                        <label>
-                                            @lang('site.categories_in_menu')
-                                        </label>
-                                        <input type="number" name="settings[categories_in_menu]" class="form-control" min="2" max="10"
-                                            value="{{ $settings->where('key', 'categories_in_menu')->pluck('value')->first() ?? 3 }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group pb-3">
-                                        <label>
-                                            @lang('site.menu_column_count')
-                                        </label>
-                                        <input type="number" name="settings[menu_column_count]" class="form-control" min="5" max="20"
-                                            value="{{ $settings->where('key', 'menu_column_count')->pluck('value')->first() ?? 8 }}">
-                                    </div>
-                                </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group pb-3">
                                         <label>
@@ -146,6 +112,67 @@
                                     </div>
                                 </div>
                                
+
+                            </div>
+
+                            <div class="row col-12 p-0 taber" id="menu-tab">
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.arabic site welcome')
+                                        </label>
+                                        <input type="" name="settings[website_welcome_ar]" class="form-control"
+                                            value="{{ $settings->where('key', 'website_welcome_ar')->pluck('value')->first() }}"
+                                            maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.english site welcome')
+                                        </label>
+                                        <input type="" name="settings[website_welcome_en]" class="form-control"
+                                            value="{{ $settings->where('key', 'website_welcome_en')->pluck('value')->first() }}"
+                                            maxlength="255">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.categories_in_menu')
+                                        </label>
+                                        <input type="number" name="settings[categories_in_menu]" class="form-control" min="2" max="10"
+                                            value="{{ $settings->where('key', 'categories_in_menu')->pluck('value')->first() ?? 3 }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.menu_column_count')
+                                        </label>
+                                        <input type="number" name="settings[menu_column_count]" class="form-control" min="5" max="20"
+                                            value="{{ $settings->where('key', 'menu_column_count')->pluck('value')->first() ?? 8 }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 p-0 taber" id="extra-tab">
+                               
+                                <div class="col-md-12">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.arabic our values') </label>
+                                        <textarea name="settings[our_values_ar]" class="form-control">{{ $settings->where('key', 'our_values_ar')->pluck('value')->first() }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.english our values') </label>
+                                        <textarea name="settings[our_values_en]" class="form-control">{{ $settings->where('key', 'our_values_en')->pluck('value')->first() }}</textarea>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -289,6 +316,7 @@
                                         value="{{ $settings->where('key', 'another_link2')->pluck('value')->first() }}">
                                 </div>
                             </div>
+
                             <div class="col-12 row p-0 taber" id="codes-tab">
                                 <div class="form-group pb-3">
                                     <label>
@@ -331,10 +359,12 @@
             /*box-shadow: 0px 6px 12px #ebebeb;*/
             border-radius: 0px;
             cursor: pointer;
-            width: 80px;
+            width: auto;
+            margin: 0 3px;
             height: 45px;
             border-left: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
+            padding: 0 7px !important;
         }
 
         .settings-tab-opener.active {

@@ -46,7 +46,7 @@ Route::get('courses', [\App\Http\Controllers\CourseController::class, 'index'])-
 Route::get('courses/{slug}', [\App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
 
 Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services');
-Route::get('services/{id}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
+Route::get('services/{slug}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
 
 
 Route::get('/language/{lang}', function($lang){

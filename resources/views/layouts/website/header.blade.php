@@ -117,7 +117,7 @@
                                         @if ($i == 0)
                                             <li class="megamenu-list-title">
                                                 <h6>
-                                                    <a href="{{ route('services.show', ['id' => $category->id]) }}">
+                                                    <a href="{{ route('services.show', ['slug' => $category->slug]) }}">
                                                         {{ $category->title }}
                                                     </a>
                                                 </h6>
@@ -150,7 +150,7 @@
                                     </li>
                                     @foreach ($categories->all() as $index=>$category)
                                         <li>
-                                            <a href="{{ route('services.show', ['id' => $category->id]) }}">
+                                            <a href="{{ route('services.show', ['slug' => $category->slug]) }}">
                                                 {{ $category->title }}
                                             </a>
                                         </li>

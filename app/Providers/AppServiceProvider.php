@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['_notifys'=> $notifications ?? []]);
         });
 
-        view()->composer(['layouts.admin', 'SEO.index', 'admin.setting.index', 'layouts.website.header'], function($view) {
+        view()->composer(['layouts.admin', 'index', 'SEO.index', 'admin.setting.index', 'layouts.website'], function($view) {
             $settings = Cache::remember("SETTING", Carbon::now()->addDays(6), function(){
                 return \App\Models\Setting::get();
             });
@@ -57,6 +57,17 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with(['_categories'=> $_categories, '_courses'=> $_courses]);
         });
+
+        view()->composer(['layouts.website.footer'], function($view) {
+           
+            $_courses = Cache::remember("COURSES", Carbon::now()->addDays(30), function(){
+                return Course::where('main_header', "1")->get();
+            });
+            $_popular = Course::withCount('seens')->orderBy('seens_count', 'desc')->limit(3)->get();
+            $view->with(['_popular'=> $_popular, '_courses'=> $_courses]);
+        });
+        
+
 
         // try{
         //     if(Schema::hasTable('settings')){

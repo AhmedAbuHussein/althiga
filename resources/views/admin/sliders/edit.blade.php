@@ -66,7 +66,7 @@
                                 <img loading="lazy" src="{{ $slider->url }}" alt="">
                             </label>
                             <input type="file" id="image" name="image" accept="image/*" class="form-control">
-                            <p class="text-danger">@lang('site.perfect_size', ['width'=> 2048, 'height'=> 1024])</p>
+                            <p class="text-danger">@lang('site.perfect_size', ['width'=> 2048, 'height'=> 1356])</p>
                         </div>
                         <hr>
                         

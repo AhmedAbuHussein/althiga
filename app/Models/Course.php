@@ -59,7 +59,7 @@ class Course extends Model
         if($this->image){
             return Storage::url($this->image);
         }
-        return asset('assets/no.png');
+        return asset('web/img/Althiga_hand.png');
     }
 
     public function getFileUrlAttribute()

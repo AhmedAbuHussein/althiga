@@ -37,3 +37,5 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
 
     <script src="https://kit.fontawesome.com/c013fd8535.js" crossorigin="anonymous"></script>
+
+    @stack('css')
