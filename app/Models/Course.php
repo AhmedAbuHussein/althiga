@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -36,14 +37,30 @@ class Course extends Model
         static::created(function(){
             Cache::forget("CATEGORIES");
             Cache::forget("COURSES");
+            Cache::forget("GET.COURSES");
         });
         static::updated(function(){
             Cache::forget("CATEGORIES");
             Cache::forget("COURSES");
+            Cache::forget("GET.COURSES");
         });
         static::deleted(function(){
             Cache::forget("CATEGORIES");
             Cache::forget("COURSES");
+            Cache::forget("GET.COURSES");
+        });
+    }
+
+    public static function _clear()
+    {
+        Cache::forget("CATEGORIES");
+        Cache::forget("COURSES");
+    }
+
+    public static function _get()
+    {
+        return Cache::remember('GET.COURSES', Carbon::now()->addDays(30), function(){
+            return Course::get();
         });
     }
     

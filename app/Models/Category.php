@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -22,12 +23,28 @@ class Category extends Model
         parent::boot();
         static::created(function(){
             Cache::forget("CATEGORIES");
+            Cache::forget("GET.CATEGORY");
         });
         static::updated(function(){
             Cache::forget("CATEGORIES");
+            Cache::forget("GET.CATEGORY");
         });
         static::deleted(function(){
             Cache::forget("CATEGORIES");
+            Cache::forget("GET.CATEGORY");
+            Cache::forget("COURSES");
+        });
+    }
+    public static function _clear()
+    {
+        Cache::forget("CATEGORIES");
+        Cache::forget("GET.CATEGORY");
+    }
+
+    public static function _get()
+    {
+        return Cache::remember('GET.CATEGORY', Carbon::now()->addDays(30), function(){
+            return Category::with(['targets_training', 'targets_advisory'])->get();
         });
     }
 
@@ -51,8 +68,20 @@ class Category extends Model
         return $this->morphMany(Target::class, 'targetable');
     }
 
+    public function targets_training()
+    {
+        return $this->morphMany(Target::class, 'targetable')->where('type', 'training');
+    }
+
+    public function targets_advisory()
+    {
+        return $this->morphMany(Target::class, 'targetable')->where('type', 'advisory');
+    }
+
     public function courses()
     {
         return $this->hasMany(Course::class, 'category_id');
     }
+
+
 }

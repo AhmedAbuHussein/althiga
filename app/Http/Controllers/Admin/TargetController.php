@@ -53,14 +53,18 @@ class TargetController extends Controller
             "title.ar"=> "required|string",
             "type" => "sometimes|string",
         ]);
-       
+        $class  = $this->getClass($type);
         $data = $request->except(['_token', "_method"]);
         if(!$request->has('type')){
             $data['type'] = $type;
         }
-        $data['targetable_type'] = $this->getClass($type);
+        $data['targetable_type'] = $class;
         $data['targetable_id'] = $id;
         Target::create($data);
+        try {
+            $class::_clear();
+        } catch (\Throwable $th) {}
+
         return redirect()->route('admin.targets.create', [$type, $id])->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.saved_msg')
@@ -93,11 +97,18 @@ class TargetController extends Controller
             "title.ar"=> "required|string",
             "type" => "sometimes|string",
         ]);
+
         $data = $request->except(['_token', "_method"]);
+
         if(!$request->has('type')){
             $data['type'] = $type;
         }
+        $class  = $this->getClass($type);
         $target->update($data);
+        try {
+            $class::_clear();
+        } catch (\Throwable $th) {}
+
         return redirect()->route('admin.targets.index', ['type'=> $type, 'id'=> $id])->with([
             "notify-type"=> "success",
             "notify-message"=> __('site.updated_msg')

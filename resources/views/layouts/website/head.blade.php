@@ -37,5 +37,8 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
 
     <script src="https://kit.fontawesome.com/c013fd8535.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 
     @stack('css')

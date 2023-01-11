@@ -17,8 +17,8 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="container">
             <h1>@lang('app.About')</h1>
             <ul class="fa">
-                <li><a href="{{ route('routeName', ['id' => '']) }}">@lang('app.Home')</a></li>
-                <li><a href="{{ route('routeName', ['id' => 'about-us']) }}">@lang('app.AboutUs')</a></li>
+                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
+                <li><a href="#">@lang('app.AboutUs')</a></li>
             </ul>
         </div>
     </div>
@@ -30,34 +30,36 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
-                    <img loading="lazy" src="{{ asset('web/img/Althiga_hand.png') }}" alt="img">
+                    <img loading="lazy" src="{{ $about->url }}" class="mt-15-xs" alt="img">
                 </div>
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="pl-30-md">
                         <div class="section-heading">
-                            <h4>@lang('app.WelcomeTo')</h4>
+                            <h4>{{ $about->title }}</h4>
                         </div>
                         <div class="section-heading-line-right"></div>
                         <div class="text-content-big mt-20">
-                            <p>@lang('app.About_Long_Desc')</p>
+                            <p style="text-align: justify">
+                                {{ $about->description }}
+                            </p>
+                            <p style="text-align: justify">
+                                {{ $about->details }}
+                            </p>
                         </div>
                         <div class="row mt-20">
                             <div class="col-md-6">
                                 <ul class="primary-list">
-                                    <li><i class="fa fa-caret-left"></i>@lang('domains.OSH')</li>
-                                    <li><i class="fa fa-caret-left"></i>@lang('domains.Env_FoodSafety')</li>
-                                    <li><i class="fa fa-caret-left"></i>@lang('domains.Tourism_Hospitality')</li>
+                                    @foreach (_splite_by_chuncks($about->targets, 2, 0) as $item)
+                                        <li><i class="fa fa-check-square"></i>{{ $item->title }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="primary-list">
-                                    <li><i class="fa fa-caret-left"></i>@lang('domains.Financial_Admin')</li>
-                                    <li><i class="fa fa-caret-left"></i>@lang('domains.Social_SelfDev')</li>
-                                    <li><i class="fa fa-caret-left"></i>@lang('domains.Legal')</li>
+                                    @foreach (_splite_by_chuncks($about->targets, 2, 1) as $item)
+                                        <li><i class="fa fa-check-square"></i>{{ $item->title }}</li>
+                                    @endforeach
                                 </ul>
-                            </div>
-                            <div class="mt-35">
-                                <a href="#" class="primary-button button-sm mb-15-xs">@lang('app.ContactUs')</a>
                             </div>
                         </div>
                     </div>
@@ -65,49 +67,21 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 
                 <!-- Feature Boxes START -->
                 <div class="row mt-35">
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="feature-flex-square">
-                            <div class="clearfix">
-                                <div class="feature-flex-square-icon">
-                                    <i class="fa fa-history"></i>
-                                </div>
-                                <div class="feature-flex-square-content">
-                                    <h4><a href="#">@lang('about.Our_History')</a></h4>
-                                    <p>@lang('about.Our_History_Text')</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="feature-flex-square">
-                            <div class="clearfix">
-                                <div class="feature-flex-square-icon">
-                                    <i class="fa fa-eye"></i>
-                                </div>
-                                <div class="feature-flex-square-content">
-                                    <h4><a href="#">@lang('about.Our_Vision')</a></h4>
-                                    <p>@lang('about.Our_Vision_Text')</p>
+                    @foreach ($extra as $item)    
+                        <div class="col-md-4 col-sm-4 col-12">
+                            <div class="feature-flex-square">
+                                <div class="clearfix">
+                                    <div class="feature-flex-square-icon">
+                                        <img src="{{ $item->url }}" alt="icon">
+                                    </div>
+                                    <div class="feature-flex-square-content">
+                                        <h4><a href="#">{{ $item->title }}</a></h4>
+                                        <p>{{ $item->text }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="feature-flex-square">
-                            <div class="clearfix">
-                                <div class="feature-flex-square-icon">
-                                    {{-- <i class="icon-clock"></i>
-                                    --}}
-                                    <i class="fa fa-bullseye"></i>
-                                </div>
-                                <div class="feature-flex-square-content">
-                                    <h4><a href="#">@lang('about.Our_Message')</a></h4>
-                                    <p>@lang('about.Our_Message_Text')</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <!-- Feature Boxes END -->
             </div>
@@ -131,19 +105,19 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-12">
                                 <div class="counter-box white-color">
-                                    <h4 class="countup">350164</h4>
+                                    <h4 class="countup">{{ $settings->where('key', 'trainers_count')->pluck('value')->first() ?? 0 }}</h4>
                                     <p>@lang('about.Trainees_Count')</p>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-12">
                                 <div class="counter-box white-color">
-                                    <h4 class="countup">12040</h4>
+                                    <h4 class="countup">{{ $settings->where('key', 'courses_count')->pluck('value')->first() ?? 0 }}</h4>
                                     <p>@lang('about.Held_Courses_Count')</p>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-12">
                                 <div class="counter-box white-color">
-                                    <h4 class="countup">1386</h4>
+                                    <h4 class="countup">{{ $settings->where('key', 'contracts_count')->pluck('value')->first() ?? 0 }}</h4>
                                     <p>@lang('about.Contracted_Comp_Count')</p>
                                 </div>
                             </div>
@@ -165,67 +139,28 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <p>@lang('welcome.Team_Description')</p>
                 </div>
                 <div class="row mt-50">
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="team-member">
-                            <div class="team-member-img">
-                                <img loading="lazy" src="{{ asset('web/img/trainers/dr-yahya.bmp') }}">
-                            </div>
-                            <div class="team-member-text">
-                                <h4>د . يحيي زكريا قناوي</h4>
-                                <span>المجال المالي والإداري</span>
-                                <p style="font-size: 15px;">دكتوراه إدارة الأعمال – التخصص "حوكمة الشركات" رسالة بعنوان "دور
-                                    الاليات الخمس في الحوكمة
-                                    لدعم التخطيط
-                                    الاستراتيجي في معالجة مشكلات انفصال الملكية عن الإدارة للشركات العائلية" دراسة تطبيقية
-                                    علي
-                                    الشركات العائلية في المملكة
-                                    العربية السعودية.</p>
+                    @foreach ($team as $item)
+                        <div class="col-md-4 col-sm-4 col-12">
+                            <div class="team-member h-100">
+                                <div class="team-member-img">
+                                    <img loading="lazy" src="{{ $item->url }}">
+                                </div>
+                                <div class="team-member-text">
+                                    <h4>{{ $item->name }}</h4>
+                                    <span>{{ $item->title }}</span>
+                                    <p style="font-size: 15px;">{{ Str::words($item->bio, 35, '') }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="team-member">
-                            <div class="team-member-img">
-                                <img loading="lazy" src="{{ asset('web/img/trainers/dr-bandar.jpg') }}">
-                            </div>
-                            <div class="team-member-text">
-                                <h4>د. بندر عبد الله بارحيم</h4>
-                                <span>مدرب الصحة والسلامة المهنية وخبير إدارة الكوارث والأزمات</span>
-                                <p style="font-size: 13px;">مدرب معتمد في كلاً من: وزارة التربية والتعليم، هيئة الهلال
-                                    الأحمر
-                                    السعودي، برنامج إسفير لإدارة الكوارث، الصحة العامة في الطوارئ والكوارث معتمد من المنظمة
-                                    العالمية للصليب والهلال الاحمر الدولي. متخصص طب الطوارئ وإدارة الكوارث، الإسعاف الجوي،
-                                    دعم
-                                    الحياة المتقدم الجوي والعناية القلبية المتقدمة في الطوارئ.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="team-member">
-                            <div class="team-member-img">
-                                <img loading="lazy" src="{{ asset('web/img/trainers/refaat.jpg') }}">
-                            </div>
-                            <div class="team-member-text">
-                                <h4>م. رفعت بن عبد الله بن عبد الشك ور باسروان</h4>
-                                <span>خبير في السلامة والامن وإدارة الكوارث وإدارة التغيير</span>
-                                <p style="font-size: 13px;">أكثر من 28 سنة خبرة عملية في قطاعات حكومية وشركات ومؤسسات
-                                    ومجموعة
-                                    منوعة من الخبرات والقدرات التخطيطية والتطبيقية والاستشارية في عدة
-                                    مجالات مثل: إدارة الكوارث والأزمات، السلامة والصحة المهنية، استشارات التدريب والتطوير،
-                                    إدارة التغيير في المنظمات.</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforeach
+                    
                 </div>
             </div>
         </div>
         <!-- Team Members END -->
 
         <!-- Testmonials START -->
-        {{-- <div class="section-block">
+        {{--  <div class="section-block">
             <div class="container">
                 <div class="section-heading center-holder">
                     <span>@lang('about.ATI_Cust_Loyalty_Prog')</span>
@@ -298,7 +233,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>  --}}
         <!-- Testmonials END -->
 
     </div>

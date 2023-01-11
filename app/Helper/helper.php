@@ -132,4 +132,18 @@ if (!function_exists('_splite_by_items')) {
     }
 }
 
+if (!function_exists('_random_chunks')) {
+    function _random_chunks($objects, $chuncks = 8)
+    {
+        if(!$objects) return [];
+        $len = $objects->count();
+        if($chuncks < 1) return $objects;
+        if($len <= $chuncks) return $objects;
+        $items = $objects->shuffle();
+        $chunks = $items->chunk($chuncks);
+        return $chunks[0];
+
+    }
+}
+
 ?>

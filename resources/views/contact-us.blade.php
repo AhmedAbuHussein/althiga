@@ -17,8 +17,8 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="container">
             <h1>@lang('app.ContactUs')</h1>
             <ul class="fa">
-                <li><a href="{{ route('routeName', ['id' => '']) }}">@lang('app.Home')</a></li>
-                <li><a href="{{ route('routeName', ['id' => 'contact-us']) }}">@lang('app.ContactUs')</a></li>
+                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
+                <li><a href="#">@lang('app.ContactUs')</a></li>
             </ul>
         </div>
     </div>
@@ -28,40 +28,85 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <div class="section-block-grey">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="contact-box">
-                        <i class="fa fa-phone-square"></i>
-                        <h4>يسعدنا تواصلك</h4>
-                        <span dir="ltr">(+966) 9200 26 1 26</span>
+                
+                <div class="col-md-6">
+                    <img src="{{ $settings->first()->website_wide_logo() }}" alt="">
+                    <div class="contact-information mt-3">
+                        @if ($settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first())     
+                        <p>
+                            <span>@lang('app.address') :</span>
+                            {{ $settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first() }}
+                        </p>
+                        @endif
+                        @if ($settings->where('key', 'phone')->pluck('value')->first()) 
+                        <p>
+                            <span>@lang('app.phone') :</span>
+                            {{ $settings->where('key', 'phone')->pluck('value')->first() }}
+                        </p>
+                        @endif
+                        @if ($settings->where('key', 'contact_email')->pluck('value')->first())    
+                        <p>
+                            <span>@lang('app.email') :</span>
+                            {{ $settings->where('key', 'contact_email')->pluck('value')->first() }}
+                        </p>
+                        @endif
+
+                    </div>
+                    <div class="footer-social-icons mt-2">
+                        <ul>
+                            @if (!is_null($fcb = $settings->where('key', 'facebook_link')->pluck('value')->first()))<li><a href="{{ $fcb }}"><i class="fa fa-facebook-f"></i></a></li> @endif
+                            @if (!is_null($twit = $settings->where('key', 'twitter_link')->pluck('value')->first()))<li><a href="{{ $twit }}"><i class="fa fa-twitter"></i></a></li> @endif
+                            @if (!is_null($inst = $settings->where('key', 'instagram_link')->pluck('value')->first()))<li><a href="{{ $inst }}"><i class="fa fa-instagram"></i></a></li> @endif
+                            @if (!is_null($yout = $settings->where('key', 'youtube_link')->pluck('value')->first()))<li><a href="{{ $yout }}"><i class="fa fa-youtube"></i></a></li> @endif
+                            @if (!is_null($yout = $settings->where('key', 'github_link')->pluck('value')->first()))<li><a href="{{ $yout }}"><i class="fa fa-github"></i></a></li> @endif
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="contact-box">
-                        <i class="fa fa-map"></i>
-                        <h4><a target="_blank"
-                                href="https://www.google.com/maps/place/Al+Thiga+Training+Institute/@21.6014207,39.1506358,15z/data=!4m5!3m4!1s0x0:0xa5d3b3c924aa53c1!8m2!3d21.6014207!4d39.1506358">
-                                @lang('contacts.Locate_us')
-                            </a>
-                        </h4>
-                        <span>جدة-حي السلامة2-قرية الراجحي النموذجية</span>
-                    </div>
+
+                <div class="col-md-6">
+                    <form action="{{ route('contact') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="@lang('app.name')" autocomplete="off" value="{{ old('name') }}" required class="form-control">
+                                    @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="email" placeholder="@lang('app.email')" name="email" autocomplete="off" value="{{ old('email') }}" required class="form-control">
+                                    @error('email')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="@lang('app.title')" name="title" autocomplete="off" value="{{ old('title') }}" required class="form-control">
+                            @error('title')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="8" name="message" placeholder="@lang('app.message')" autocomplete="off" required class="form-control">{{ old('message') }}</textarea>
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success w-25">@lang('app.send')</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="contact-box">
-                        <i class="fa fa-envelope"></i>
-                        <h4>@lang('contacts.Have_Any_Inquiries')</h4>
-                        <span><a style="text-decoration: underline" href="mailto:info@althiga.net?subject=Wesbite%20Contact">info@althiga.net</a></span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="contact-box">
-                        <i class="fa fa-chalkboard-teacher"></i>
-                        <h4>للتسجيل في الدورات</h4>
-                        <span dir="ltr">(+966) 56 475 8140</span>
-                    </div>
-                </div>
+                
             </div>
         </div>
+    </div>
+    <div class="map" style="line-height: 0">
+        {!! $settings->where('key','map')->pluck('value')->first() !!}
     </div>
     <!-- Contact Boxes END -->
 
@@ -70,3 +115,20 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('footer')
     @parent
 @endsection
+@push('css')
+    <style>
+        .map iframe{
+            width: 100%;
+            height: 500px;
+            border: 0;
+        }
+        .contact-information p {
+            line-height: 1.3;
+            color: #707070;
+            margin-bottom: 13px;
+        }
+        .contact-information p span {
+            color: #303030;
+        }
+    </style>
+@endpush

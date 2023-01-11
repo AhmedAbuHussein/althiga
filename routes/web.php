@@ -38,6 +38,8 @@ Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('
 Route::get('/about', [\App\Http\Controllers\IndexController::class, 'about'])->name('about');
 Route::get('/gallery', [\App\Http\Controllers\IndexController::class, 'gallery'])->name('gallery');
 Route::get('/contact-us', [\App\Http\Controllers\IndexController::class, 'contact'])->name('contact');
+Route::post('/contact-us', [\App\Http\Controllers\IndexController::class, 'contact_post']);
+
 Route::get('/virtual-tour', [\App\Http\Controllers\IndexController::class, 'tours'])->name('tours');
 Route::get('/valuable-customers', [\App\Http\Controllers\IndexController::class, 'partners'])->name('partners');
 Route::get('/accreditations-partnerships', [\App\Http\Controllers\IndexController::class, 'accreditations'])->name('accreditations');

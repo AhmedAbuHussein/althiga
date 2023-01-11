@@ -66,17 +66,9 @@
             <div class="col-md-2 col-sm-6 col-12">
                 <h3>@lang('app.Services')</h3>
                 <div class="footer-tags mt-25">
-                    <a
-                        href="{{ route('routeName', ['id' => 'services']) }}">@lang('services.Training_Needs_Analysis')</a>
-                    <a href="{{ route('routeName', ['id' => 'services']) }}">@lang('services.Job_Risk_Analysis')</a>
-                    <a
-                        href="{{ route('routeName', ['id' => 'services']) }}">@lang('services.Training_Solutions')</a>
-                    <a
-                        href="{{ route('routeName', ['id' => 'services']) }}">@lang('services.After_Training_Services')</a>
-                    <a
-                        href="{{ route('routeName', ['id' => 'services']) }}">@lang('services.Measure_the_Return_on_Training')</a>
-                    <a
-                        href="{{ route('routeName', ['id' => 'services']) }}">@lang('services.Consultation_Services')</a>
+                    @foreach (_random_chunks($_categories, 7) as $item)
+                        <a href="{{ route('services.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
+                    @endforeach
                 </div>
             </div>
             <!-- Column 4 End -->

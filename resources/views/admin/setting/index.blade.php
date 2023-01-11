@@ -174,6 +174,40 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.trainers count')
+                                        </label>
+                                        <input type="number" name="settings[trainers_count]" class="form-control" 
+                                            value="{{ $settings->where('key', 'trainers_count')->pluck('value')->first() }}"
+                                            min="0">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.courses count')
+                                        </label>
+                                        <input type="number" name="settings[courses_count]" class="form-control" 
+                                            value="{{ $settings->where('key', 'courses_count')->pluck('value')->first() }}"
+                                            min="0">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('site.contracts count')
+                                        </label>
+                                        <input type="number" name="settings[contracts_count]" class="form-control" 
+                                            value="{{ $settings->where('key', 'contracts_count')->pluck('value')->first() }}"
+                                            min="0">
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <div class="col-12 row p-0 taber" id="images-tab">
@@ -324,6 +358,14 @@
                                     </label>
                                     <textarea name="settings[robots_txt]" class="form-control"
                                         style="min-height: 200px;text-align: left;direction: ltr;">{{ $settings->where('key', 'robots_txt')->pluck('value')->first() }}</textarea>
+                                </div>
+
+                                <div class="form-group pb-3">
+                                    <label>
+                                       @lang('site.map')
+                                    </label>
+                                    <textarea name="settings[map]" class="form-control"
+                                        style="min-height: 200px;text-align: left;direction: ltr;">{{ $settings->where('key', 'map')->pluck('value')->first() }}</textarea>
                                 </div>
                             </div>
                         </div>

@@ -56,14 +56,6 @@
                     @if (optional($settings->where("key", 'linkedin_link')->first())->value) 
                         <li><a href="{{ $settings->where("key", 'linkedin_link')->first()->value }}"><i class="fa fa-linkedin"></i></a></li>
                     @endif
-                    @php
-                        $invers = app()->isLocale('en') ? 'ar' : 'en';
-                    @endphp
-                    <li>
-                        <a href="{{ url('locale/'.$invers) }}">
-                            <img loading="lazy" src="{{ asset('web/img/logos/'.$invers.'.png') }}" alt="ar">
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -168,6 +160,15 @@
                 <li><a href="{{ route('courses.index') }}">@lang('app.Courses_Schedule')</a> </li>
 
                 <li><a href="{{ route('contact') }}">@lang('app.ContactUs')</a></li>
+
+                @php
+                    $invers = app()->isLocale('en') ? 'ar' : 'en';
+                @endphp
+                <li>
+                    <a href="{{ url('locale/'.$invers) }}">
+                        <img loading="lazy" src="{{ asset('web/img/logos/'.$invers.'.png') }}" alt="ar">
+                    </a>
+                </li>
                
             </ul>
         </div>
