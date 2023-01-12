@@ -149,7 +149,7 @@ class CourseController extends Controller
             $data['image'] = uploadImage($request->file('image'), null, 'course-', true, 1024, 256);
         }
         if($request->hasFile('file')){
-            $data['register_form_file'] = uploadFile($request->file('image'), null, 'course-');
+            $data['register_form_file'] = uploadFile($request->file('file'), null, 'course-');
         }
         $course->tags()->sync($request->tags);
         $course->update($data);

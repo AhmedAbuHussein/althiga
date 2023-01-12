@@ -24,7 +24,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <div class="row">
                         <!-- Left Side Start -->
                         <div class="col-md-7 col-sm-7 col-12">
-                            <h4>Purpose according to Saudi Aramco's GI</h4>
+                            <h4>Purpose according to Saudi Aramcos GI</h4>
                             <p style="text-align: justify">Work permit receivers and designated representatives shall have
                                 sufficient knowledge and
                                 experience, be capable of recognizing hazards and be competent in the requirements of this

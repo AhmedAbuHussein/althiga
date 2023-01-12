@@ -16,4 +16,10 @@ class CourseController extends Controller
         })->paginate(12);
         return view('courses',compact('items'));
     }
+
+    public function show($slug)
+    {
+        $course = Course::whereSlug($slug)->with(["category", "targets", "contents"])->firstOrFail();
+        return view('course_single', compact('course'));
+    }
 }
