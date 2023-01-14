@@ -145,9 +145,11 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 
                     @if ($course->requirements)
                         <div class="row">
-                            <div class="col-md-12 col-sm-12 col-12">
-                                <h4>@lang('app.Registration requirements')</h4>
-                                {!! addIcon($course->requirements) !!}
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class="ul-container">
+                                    <h4>@lang('app.Registration requirements')</h4>
+                                    {!! $course->requirements !!}
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -166,6 +168,20 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <style>
         .download-file-button-aramco i{
             float: left;
+        }
+        .ul-container ul li{
+            padding: 0;
+            list-style-type: none;
+            padding-right: 20px;
+            position: relative;
+            text-align: justify;
+        }
+        .ul-container > ul > li:before{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            top: 5px;
         }
     </style>
 @endpush

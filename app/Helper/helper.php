@@ -17,28 +17,6 @@ if(!function_exists('detectURL')){
     }
 }
 
-if(!function_exists("addIcon")){
-    function addIcon($content, $tag='<i class="fa fa-check-square-o"></i>')
-    {
-        $dom = new \DomDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHtml('<?xml encoding="UTF-8">'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $listItem = $dom->getElementsByTagName('li');
-        $element = $dom->createElement("i");
-        $element->setAttribute('class', "fa fa-check-square-o");
-        if(count($listItem)) {
-            foreach($listItem as $index => $item){
-                dd($item->childs());
-                $item->insertBefore($element);
-            }
-            return \Illuminate\Support\Str::replaceFirst('<?xml encoding="UTF-8">', '', $dom->saveHTML());
-        }
-        return $content;
-    }
-}
-
-
-
 if (!function_exists("uploadImage")) {
 
     function uploadImage(UploadedFile $file, $oldFileName = null, $prefix="", $resize = false, $width = 200, $height = 200, $folder = 'images')
