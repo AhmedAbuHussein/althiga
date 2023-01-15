@@ -15,10 +15,10 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <!-- Page Title START -->
     <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
         <div class="container">
-            <h1>@lang('app.About')</h1>
+            <h1>@lang('About')</h1>
             <ul class="fa">
-                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
-                <li><a href="#">@lang('app.AboutUs')</a></li>
+                <li><a href="{{ route('index') }}">@lang('Home')</a></li>
+                <li><a href="#">@lang('AboutUs')</a></li>
             </ul>
         </div>
     </div>
@@ -96,8 +96,8 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                 <div class="row">
                     <div class="col-md-5 col-sm-5 col-12">
                         <div class="section-heading white-color mt-15">
-                            <span>@lang('about.ATI_Succuess')</span>
-                            <h3>@lang('about.Achieve_Your_Successes_With_Us')</h3>
+                            <span>@lang('ATI_Succuess')</span>
+                            <h3>@lang('Achieve_Your_Successes_With_Us')</h3>
                             <div class="section-heading-line-right"></div>
                         </div>
                     </div>
@@ -106,19 +106,19 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             <div class="col-md-4 col-sm-4 col-12">
                                 <div class="counter-box white-color">
                                     <h4 class="countup">{{ $settings->where('key', 'trainers_count')->pluck('value')->first() ?? 0 }}</h4>
-                                    <p>@lang('about.Trainees_Count')</p>
+                                    <p>@lang('Trainees_Count')</p>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-12">
                                 <div class="counter-box white-color">
                                     <h4 class="countup">{{ $settings->where('key', 'courses_count')->pluck('value')->first() ?? 0 }}</h4>
-                                    <p>@lang('about.Held_Courses_Count')</p>
+                                    <p>@lang('Held_Courses_Count')</p>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-12">
                                 <div class="counter-box white-color">
                                     <h4 class="countup">{{ $settings->where('key', 'contracts_count')->pluck('value')->first() ?? 0 }}</h4>
-                                    <p>@lang('about.Contracted_Comp_Count')</p>
+                                    <p>@lang('Contracted_Comp_Count')</p>
                                 </div>
                             </div>
                         </div>
@@ -133,10 +133,10 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="section-block-grey">
             <div class="container">
                 <div class="section-heading center-holder">
-                    <span>@lang('welcome.Meet_Our_Team')</span>
-                    <h3>@lang('welcome.We_Are_Team_Of_Professionals')</h3>
+                    <span>@lang('Meet_Our_Team')</span>
+                    <h3>@lang('We_Are_Team_Of_Professionals')</h3>
                     <div class="section-heading-line"></div>
-                    <p>@lang('welcome.Team_Description')</p>
+                    <p>@lang('Team_Description')</p>
                 </div>
                 <div class="row mt-50">
                     @foreach ($team as $item)
@@ -157,85 +157,6 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                 </div>
             </div>
         </div>
-        <!-- Team Members END -->
-
-        <!-- Testmonials START -->
-        {{--  <div class="section-block">
-            <div class="container">
-                <div class="section-heading center-holder">
-                    <span>@lang('about.ATI_Cust_Loyalty_Prog')</span>
-                    <h4>@lang('about.What_Our_Clients_Say')</h4>
-                    <div class="section-heading-line"></div>
-                </div>
-                <div class="row mt-50">
-                    <div class="col-md-6 col-sm-6 col-12">
-                        <div class="testmonial-box">
-                            <div class="row">
-                                <div class="col-2 pr-0">
-                                    <i class="fa fa-user-circle fa-4x"></i>
-                                </div>
-                                <div class="col-10">
-                                    <h5>سعيد الغامدي</h5>
-                                    <span>مسؤول أمن وسلامة</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-12">
-                        <div class="testmonial-box">
-                            <div class="row">
-                                <div class="col-2 pr-0">
-                                    <i class="fa fa-user-circle fa-4x"></i>
-                                </div>
-                                <div class="col-10">
-                                    <h5>محمد عيد</h5>
-                                    <span>مدير السلامة والصحة المهنية</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-12">
-                        <div class="testmonial-box">
-                            <div class="row">
-                                <div class="col-2 pr-0">
-                                    <i class="fa fa-user-circle fa-4x"></i>
-                                </div>
-                                <div class="col-10">
-                                    <h5>سعيد صالح</h5>
-                                    <span>رئيس إدارة الجودة والبيئة والسلامة</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-12">
-                        <div class="testmonial-box">
-                            <div class="row">
-                                <div class="col-2 pr-0">
-                                    <i class="fa fa-user-circle fa-4x"></i>
-                                </div>
-                                <div class="col-10">
-                                    <h5>أنس العتيبي</h5>
-                                    <span>إستشاري أول بيئة وسلامة غذاء</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  --}}
-        <!-- Testmonials END -->
-
     </div>
 @endsection
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Seen;
 use Closure;
@@ -37,12 +38,18 @@ class SeenMiddleware
             $prev_domain = $parsex['host'];
         } catch (\Exception $e) {
         }
-        $slug = request()->route("slug");
-        $id = null;
-        if($slug){
+        $type = NULL;
+        $id = NULL;
+        if(request()->routeIs('courses.show')){
+            $slug = request()->route("slug");
             $id = optional(Course::whereSlug($slug)->first())->id;
+            $type = Course::class;
+        }else if(request()->routeIs('services.show')){
+            $slug = request()->route("slug");
+            $id = optional(Category::whereSlug($slug)->first())->id;
+            $type = Category::class;
         }
-
+       
         $country = get_country_from_ip($ip);
         $data = [
             "ip" => $ip,
@@ -57,7 +64,7 @@ class SeenMiddleware
             "os_type" => Browser::platformFamily(),
             'country_code' => $country['country_code'],
             'country_name' => $country['country'],
-            "seenable_type"=> $id ? Course::class : NULL,
+            "seenable_type"=> $type,
             "seenable_id"   => $id,
         ];
 

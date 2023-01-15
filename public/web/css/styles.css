@@ -70,7 +70,7 @@ TABLE OF CONTENT
 0. Imports
 -------------------------------------------*/
 @import url("navigation.css");
-
+@import url(https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
 
 /*-----------------------------------------
 1. Sections
@@ -3807,7 +3807,7 @@ Blog Grid (Style 2)
     margin-bottom: 15px;
 }
 
-.blog-grid-simple h4 a:before {
+.blog-grid-simple h4 a i.fa:before {
     content: '\f0c1';
     font-family: "Font Awesome 5 Free";
     color: #f2a43a;

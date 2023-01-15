@@ -4,7 +4,7 @@
         <div class="row">
             <!-- Column 1 Start -->
             <div class="col-12 col-sm-6 col-md-4">
-                <h3>@lang('app.About')</h3>
+                <h3>@lang('About')</h3>
                 <div class="mt-25">
                     <img loading="lazy" src="{{ optional($settings->first())->website_wide_logo() }}" alt="footer-logo">
                     <p class="mt-25" style="text-align: justify">
@@ -16,18 +16,18 @@
 
             <!-- Column 2 Start -->
             <div class="col-12 col-sm-6 col-md-3">
-                <h3>@lang('app.Quick_Links')</h3>
+                <h3>@lang('Quick_Links')</h3>
                 <ul class="footer-list">
                     @foreach ($_courses as $item)
                         <li><a href="{{ route('courses.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a></li>
                     @endforeach
-                    <li><a href="{{ route('courses.index') }}">@lang('app.Courses_Schedule')</a></li>
-                    <li><a href="{{ route('tours') }}">@lang('app.Virtual_Tour')</a></li>
-                    <li><a href="{{ route('gallery') }}">@lang('app.Pictures_for_Courses')</a></li>
-                    <li><a href="{{ route('services') }}">@lang('app.Services')</a></li>
-                    <li><a href="{{ route('partners') }}">@lang('app.Valuable_Customers')</a></li>
-                    <li><a href="{{ route('about') }}">@lang('app.About')</a></li>
-                    <li><a href="{{ route('contact') }}">@lang('app.ContactUs')</a></li>
+                    <li><a href="{{ route('courses.index') }}">@lang('Courses_Schedule')</a></li>
+                    <li><a href="{{ route('tours') }}">@lang('Virtual_Tour')</a></li>
+                    <li><a href="{{ route('gallery') }}">@lang('Pictures_for_Courses')</a></li>
+                    <li><a href="{{ route('services') }}">@lang('Services')</a></li>
+                    <li><a href="{{ route('partners') }}">@lang('Valuable_Customers')</a></li>
+                    <li><a href="{{ route('about') }}">@lang('About')</a></li>
+                    <li><a href="{{ route('contact') }}">@lang('ContactUs')</a></li>
                    
                 </ul>
             </div>
@@ -35,7 +35,7 @@
 
             <!-- Column 3 Start -->
             <div class="col-12 col-sm-6 col-md-3">
-                <h3>@lang('welcome.Popular_Courses')</h3>
+                <h3>@lang('Popular_Courses')</h3>
                 <div class="mt-25">
                     @foreach ($_popular as $item)
                         <!-- Post Start -->
@@ -47,9 +47,9 @@
                             <div class="footer-recent-post-content">
                                 <span>
                                     @foreach ($item->days ?? [] as $day)
-                                        @lang('app.'.$day)
+                                        @lang(''.$day)
                                     @endforeach
-                                    @lang('app.every week')
+                                    @lang('every week')
                                 </span>
                                 <a
                                     href="{{ route('courses.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
@@ -64,7 +64,7 @@
 
             <!-- Column 4 Start -->
             <div class="col-md-2 col-sm-6 col-12">
-                <h3>@lang('app.Services')</h3>
+                <h3>@lang('Services')</h3>
                 <div class="footer-tags mt-25">
                     @foreach (_random_chunks($_categories, 7) as $item)
                         <a href="{{ route('services.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
@@ -79,12 +79,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <p>
-                        {{ now()->year }} &copy; @lang('app.All_Rights_Reserved')&nbsp;
-                        <span class="primary-color">@lang('app.ATI')</span>
+                        {{ now()->year }} &copy; @lang('All_Rights_Reserved')&nbsp;
+                        <span class="primary-color">{{ $settings->where('key', "website_name_".app()->getLocale('en'))->pluck('value')->first() ?? __('ATI') }}</span>
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <div class="footer-social-icons">
+                    <div class="footer-social-icons d-flex justify-content-end">
                         <ul>
                             @if (!is_null($fcb = $settings->where('key', 'facebook_link')->pluck('value')->first()))<li><a href="{{ $fcb }}"><i class="fa fa-facebook-f"></i></a></li> @endif
                             @if (!is_null($twit = $settings->where('key', 'twitter_link')->pluck('value')->first()))<li><a href="{{ $twit }}"><i class="fa fa-twitter"></i></a></li> @endif

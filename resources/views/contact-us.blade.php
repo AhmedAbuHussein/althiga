@@ -15,10 +15,10 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <!-- Page Title START -->
     <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
         <div class="container">
-            <h1>@lang('app.ContactUs')</h1>
+            <h1>@lang('ContactUs')</h1>
             <ul class="fa">
-                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
-                <li><a href="#">@lang('app.ContactUs')</a></li>
+                <li><a href="{{ route('index') }}">@lang('Home')</a></li>
+                <li><a href="#">@lang('ContactUs')</a></li>
             </ul>
         </div>
     </div>
@@ -34,19 +34,19 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <div class="contact-information mt-3">
                         @if ($settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first())     
                         <p>
-                            <span>@lang('app.address') :</span>
+                            <span>@lang('address') :</span>
                             {{ $settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first() }}
                         </p>
                         @endif
                         @if ($settings->where('key', 'phone')->pluck('value')->first()) 
                         <p>
-                            <span>@lang('app.phone') :</span>
+                            <span>@lang('phone') :</span>
                             {{ $settings->where('key', 'phone')->pluck('value')->first() }}
                         </p>
                         @endif
                         @if ($settings->where('key', 'contact_email')->pluck('value')->first())    
                         <p>
-                            <span>@lang('app.email') :</span>
+                            <span>@lang('email') :</span>
                             {{ $settings->where('key', 'contact_email')->pluck('value')->first() }}
                         </p>
                         @endif
@@ -69,7 +69,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="name" placeholder="@lang('app.name')" autocomplete="off" value="{{ old('name') }}" required class="form-control">
+                                    <input type="text" name="name" placeholder="@lang('name')" autocomplete="off" value="{{ old('name') }}" required class="form-control">
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -77,7 +77,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="email" placeholder="@lang('app.email')" name="email" autocomplete="off" value="{{ old('email') }}" required class="form-control">
+                                    <input type="email" placeholder="@lang('email')" name="email" autocomplete="off" value="{{ old('email') }}" required class="form-control">
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -85,19 +85,19 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="@lang('app.title')" name="title" autocomplete="off" value="{{ old('title') }}" required class="form-control">
+                            <input type="text" placeholder="@lang('title')" name="title" autocomplete="off" value="{{ old('title') }}" required class="form-control">
                             @error('title')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <textarea rows="8" name="message" placeholder="@lang('app.message')" autocomplete="off" required class="form-control">{{ old('message') }}</textarea>
+                            <textarea rows="8" name="message" placeholder="@lang('message')" autocomplete="off" required class="form-control">{{ old('message') }}</textarea>
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success w-25">@lang('app.send')</button>
+                            <button type="submit" class="btn btn-success w-25">@lang('send')</button>
                         </div>
                     </form>
                 </div>

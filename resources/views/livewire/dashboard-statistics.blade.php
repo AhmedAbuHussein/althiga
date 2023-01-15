@@ -54,7 +54,7 @@
                                 </span>
                             </div>
                             <div class="col-8 text-truncate p-0" style="direction:ltr;font-size: 12px;">
-                                <a href="{{ route('routeName') }}" target="_blank" style="color:inherit">
+                                <a href="{{ route('courses.show', ['slug'=> $course->slug]) }}" target="_blank" style="color:inherit">
                                     <span class="badge badge-warning">{{ $course->title }}</span>
                                 </a>
                             </div>

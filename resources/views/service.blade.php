@@ -17,7 +17,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         <div class="container">
             <h1>{{ $category->title }}</h1>
             <ul class="fa">
-                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
+                <li><a href="{{ route('index') }}">@lang('Home')</a></li>
                 <li><a href="#">{{ $category->title }}</a></li>
             </ul>
         </div>
@@ -39,9 +39,9 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <div class="col-12 col-sm-7 col-md-4">
                         <div class="service-block">
                             <div class="clearfix">
-                                <div class="service-block-number-1">
-                                    <h5>@lang('no.'.($i+1)) </h5> 
-                                </div>
+                                {{--  <div class="service-block-number-1">
+                                    <h5>@lang(''.($i+1)) </h5> 
+                                </div>  --}}
                                 <div class="service-block-title">
                                     <h4>
                                         <a  href="{{ route('courses.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
@@ -51,7 +51,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             <p>{{ Str::words($item->details, 45) }}</p>
                             <div class="service-simple-button">
                                 <a
-                                    href="{{ route('courses.show', ['slug' => $item->slug]) }}">@lang('course-det.Course_Details')</a>
+                                    href="{{ route('courses.show', ['slug' => $item->slug]) }}">@lang('Course_Details')</a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
             overflow: hidden;
         }
         .service-block-number-1{
-            width: 5%;
+            width: 6%;
         }
     </style>
 @endpush

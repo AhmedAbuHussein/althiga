@@ -15,10 +15,10 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <!-- Page Title START -->
     <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
         <div class="container">
-            <h1>@lang('app.About')</h1>
+            <h1>@lang('About')</h1>
             <ul class="fa">
-                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
-                <li><a href="#">@lang('app.Services')</a></li>
+                <li><a href="{{ route('index') }}">@lang('Home')</a></li>
+                <li><a href="#">@lang('Services')</a></li>
             </ul>
         </div>
     </div>
@@ -35,7 +35,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 
                         <!-- Vertical Menu START -->
                         <div class="services-single-left-heading">
-                            <h5>@lang('app.Domains_Courses')</h5>
+                            <h5>@lang('Domains_Courses')</h5>
                         </div>
                         <div class="services-single-menu mt-10">
                             <ul>
@@ -63,7 +63,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 <div class="col-md-6 col-sm-6 col-12">
                                     <div class="pr-15-md">
                                         <div class="section-single-heading">
-                                            <h4>@lang('services.Training_Services')</h4>
+                                            <h4>@lang('Training_Services')</h4>
                                         </div>
                                         <ul class="primary-list mt-35">
                                             @foreach ($item->targets_training as $training)
@@ -79,7 +79,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             @if ($item->targets_advisory->count())
                                 <div class="col-md-6 col-sm-6 col-12">
                                     <div class="section-single-heading">
-                                        <h4>@lang('services.Consultation_Services')</h4>
+                                        <h4>@lang('Consultation_Services')</h4>
                                     </div>
                                     <ul class="primary-list mt-35">
                                         @foreach ($item->targets_advisory as $training)

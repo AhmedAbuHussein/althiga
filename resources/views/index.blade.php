@@ -32,7 +32,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             @if ($item->link)    
                             <div class="animated fadeInUp mt-25">
                                 <a href="{{ $item->link }}" class="primary-button button-md">
-                                    <i class="fa fa-cloud-download"></i> @lang('app.show')
+                                    <i class="fa fa-cloud-download"></i> @lang('show')
                                 </a>
                             </div>
                             @endif
@@ -55,8 +55,8 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <div class="section-block">
         <div class="container">
             <div class="section-heading center-holder">
-                <span>@lang('app.ATI')</span>
-                <h3>@lang('welcome.Explore_Our_Training_Domains')</h3>
+                <span>@lang('ATI')</span>
+                <h3>@lang('Explore_Our_Training_Domains')</h3>
                 <div class="section-heading-line"></div>
             </div>
             <div class="row mt-60">
@@ -73,7 +73,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                     </h4>
                                     <p>{{ Str::words($item->text, 8) }}</p>
                                     <a href="{{ route('services.show', ['slug' => $item->slug]) }}"
-                                        class="feature-flex-square-content-button fa">@lang('app.Learn_More')</a>
+                                        class="feature-flex-square-content-button fa">@lang('Learn_More')</a>
                                 </div>
                             </div>
                         </div>
@@ -133,10 +133,10 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <div class="section-block">
         <div class="container">
             <div class="section-heading center-holder">
-                <span>@lang('welcome.Meet_Our_Team')</span>
-                <h3>@lang('welcome.We_Are_Team_Of_Professionals')</h3>
+                <span>@lang('Meet_Our_Team')</span>
+                <h3>@lang('We_Are_Team_Of_Professionals')</h3>
                 <div class="section-heading-line"></div>
-                <p>@lang('welcome.Team_Description')</p>
+                <p>@lang('Team_Description')</p>
             </div>
             <div class="row mt-50">
                 @foreach ($team as $item)
@@ -168,9 +168,9 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
             <div class="video-overlay">
                 <div class="video-content">
                     <div class="section-heading center-holder white-color">
-                        <h2><strong>@lang('welcome.Our_Values')</strong></h2>
+                        <h2><strong>@lang('Our_Values')</strong></h2>
                         <h4>{{ optional($settings->where('key', "our_values_".app()->getLocale('en'))->first())->value }}</h4>
-                        <a href="#" class="primary-button button-md mt-10">@lang('welcome.Register_Today')</a>
+                        <a href="{{ route('contact') }}" class="primary-button button-md mt-10">@lang('Register_Today')</a>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <div class="section-block-grey">
         <div class="container">
             <div class="section-heading">
-                <h4>@lang('welcome.Popular_Courses')</h4>
+                <h4>@lang('Popular_Courses')</h4>
                 <div class="section-heading-line-right"></div>
             </div>
             <div class="row mt-40">
@@ -206,14 +206,14 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                         @if(count($item->days ?? []))
                                         <h5 style="font-size: 12px;">
                                             @foreach ($item->days ?? [] as $day)
-                                                @lang('app.'.$day)
+                                                @lang(''.$day)
                                             @endforeach
-                                            @lang('app.every week')
+                                            @lang('every week')
                                         </h5>
                                         @endif
                                     </div>
                                     <div class="col-5 left-holder">
-                                        <a href="{{ route('courses.show', ['slug' => $item->slug]) }}" style="font-size: 12px;">@lang('app.Learn_More')</a>
+                                        <a href="{{ route('courses.show', ['slug' => $item->slug]) }}" style="font-size: 12px;">@lang('Learn_More')</a>
                                     </div>
                                 </div>
                             </div>
@@ -229,7 +229,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <div class="section-clients border-top">
         <div class="container">
             <div class="section-heading center-holder">
-                <h3>@lang('app.Valuable_Customers')</h3>
+                <h3>@lang('Valuable_Customers')</h3>
                 <div class="section-heading-line"></div>
             </div>
             <div class="owl-carousel owl-theme clients" id="clients">
@@ -253,3 +253,8 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('footer')
     @parent
 @endsection
+
+@push('js')
+<!-- Yotube Video Player -->
+<script src="{{ asset('web/js/jquery.mb.YTPlayer.min.js') }}"></script>
+@endpush

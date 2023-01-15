@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('web/css/bootstrap' . $lang . '.min.css') }}">
 
     <!-- Font-Awesome -->
-    <link rel="stylesheet" href="{{ asset('web/css/font-awesome' . $lang . '.css') }}">
+    
 
     <!-- Icomoon -->
     <link rel="stylesheet" href="{{ asset('web/css/icomoon' . $lang . '.css') }}">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('web/css/slider' . $lang . '.css') }}">
 
     <!-- Animate.css -->
-    <link rel="stylesheet" href="{{ asset('web/css/animate' . $lang . '.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/css/animate.css') }}">
 
     <!-- Color Switcher -->
     <link rel="stylesheet" href="{{ asset('web/css/switcher' . $lang . '.css') }}">

@@ -17,10 +17,10 @@
       <!-- Page Title START -->
       <div class="page-title-section" style="background-image: url({{ asset('web/img/accreditations.jpg') }});">
           <div class="container">
-              <h1>@lang('app.Local_International_Accreditations_Partnerships')</h1>
+              <h1>@lang('Local_International_Accreditations_Partnerships')</h1>
               <ul class="fa">
-                  <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
-                  <li><a href="#">@lang('app.Local_International_Accreditations_Partnerships')</a>
+                  <li><a href="{{ route('index') }}">@lang('Home')</a></li>
+                  <li><a href="#">@lang('Local_International_Accreditations_Partnerships')</a>
                   </li>
               </ul>
           </div>
@@ -31,7 +31,7 @@
       <div class="section-block-grey">
           <div class="container">
               <div class="section-heading">
-                  <h5>@lang('app.Local_Accreditations')</h5>
+                  <h5>@lang('Local_Accreditations')</h5>
                   <div class="section-heading-line-left"></div>
               </div>
               <div class="row mt-40">
@@ -65,7 +65,7 @@
       <div class="section-block">
           <div class="container">
               <div class="section-heading">
-                  <h5>@lang('app.International_Partnerships')</h5>
+                  <h5>@lang('International_Partnerships')</h5>
                   <div class="section-heading-line-left"></div>
               </div>
               <div class="row mt-40">

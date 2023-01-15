@@ -244,12 +244,4 @@
     }
 }
 </script>
-{{--  <script type="text/javascript">
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/serviceworker.js', {
-            scope: '.'
-        }).then(function(registration) {}, function(err) {
-            console.error('Service Worker registration failed: ', err);
-        });
-    }
-</script>  --}}
+

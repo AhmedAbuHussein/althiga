@@ -75,7 +75,7 @@ class IndexController extends Controller
             "message"=> "required|string",
         ]);
         Contact::create($request->except("_token"));
-        Toastr::success(__('app.message_saved_success'), __('app.alert'));
+        Toastr::success(__('message_saved_success'), __('alert'));
         return redirect()->route("contact");
     }
 }

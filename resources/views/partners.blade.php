@@ -17,10 +17,10 @@
       <!-- Page Title START -->
       <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
           <div class="container">
-              <h1>@lang('app.Valuable_Customers')</h1>
+              <h1>@lang('Valuable_Customers')</h1>
               <ul class="fa">
-                  <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
-                  <li><a href="">@lang('app.Valuable_Customers')</a>
+                  <li><a href="{{ route('index') }}">@lang('Home')</a></li>
+                  <li><a href="">@lang('Valuable_Customers')</a>
                   </li>
               </ul>
           </div>

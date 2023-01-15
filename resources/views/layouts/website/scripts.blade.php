@@ -1,5 +1,5 @@
 @php
-    $lang = app()->isLocale('en') ? '' : 'rtl';
+    $lang = app()->isLocale('en') ? '' : '.rtl';
 @endphp
 <!-- Jquery -->
 <script src="{{ asset('web/js/jquery.min.js') }}"></script>
@@ -11,10 +11,11 @@
 <script src="{{ asset('web/js/bootstrap.min.js') }}"></script>
 
 <!-- Owl Carousel-->
-<script src="{{ asset('web/js/owl.carousel.' . $lang . '.js') }}"></script>
+<script src="{{ asset('web/js/owl.carousel' . $lang . '.js') }}"></script>
 
 <!-- Navbar JS -->
 <script src="{{ asset('web/js/navigation.js') }}"></script>
+
 <script src="{{ asset('web/js/navigation.fixed.js') }}"></script>
 
 <!-- Wow JS -->
@@ -26,9 +27,6 @@
 
 <!-- Tabs -->
 <script src="{{ asset('web/js/tabs.min.js') }}"></script>
-
-<!-- Yotube Video Player -->
-<script src="{{ asset('web/js/jquery.mb.YTPlayer.min.js') }}"></script>
 
 <!-- Swiper Slider -->
 <script src="{{ asset('web/js/swiper.min.js') }}"></script>

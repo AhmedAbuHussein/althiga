@@ -82,21 +82,21 @@
         </div>
         <div class="nav-menus-wrapper">
             <ul class="nav-menu align-to-left">
-                <li><a href="{{ route('index') }}">@lang('app.Home')</a></li>
+                <li><a href="{{ route('index') }}">@lang('Home')</a></li>
                 <li>
-                    <a href="#">@lang('app.About')</a>
+                    <a href="#">@lang('About')</a>
                     <ul class="nav-dropdown">
-                        <li><a href="{{ route('about') }}">@lang('app.AboutUs')</a></li>
-                        <li><a href="{{ route('tours') }}">@lang('app.Virtual_Tour')</a></li>
-                        <li><a href="{{ route('services') }}">@lang('app.Services')</a></li>
-                        <li><a href="{{ route('accreditations') }}">@lang('app.Local_International_Accreditations_Partnerships')</a></li>
-                        <li><a href="{{ route('partners') }}">@lang('app.Valuable_Customers')</a></li>
-                        <li><a href="{{ route('gallery') }}">@lang('app.Pictures_for_Courses')</a></li>
+                        <li><a href="{{ route('about') }}">@lang('AboutUs')</a></li>
+                        <li><a href="{{ route('tours') }}">@lang('Virtual_Tour')</a></li>
+                        <li><a href="{{ route('services') }}">@lang('Services')</a></li>
+                        <li><a href="{{ route('accreditations') }}">@lang('Local_International_Accreditations_Partnerships')</a></li>
+                        <li><a href="{{ route('partners') }}">@lang('Valuable_Customers')</a></li>
+                        <li><a href="{{ route('gallery') }}">@lang('Pictures_for_Courses')</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#">@lang('app.Domains_Courses')</a>
+                    <a href="#">@lang('Domains_Courses')</a>
                     <div class="megamenu-panel">
                         <div class="megamenu-lists">
                             @php
@@ -136,7 +136,7 @@
                                     <li class="megamenu-list-title">
                                         <h6>
                                             <a href="{{ route('services') }}">
-                                                @lang('app.other services')
+                                                @lang('other services')
                                             </a>
                                         </h6>
                                     </li>
@@ -157,15 +157,15 @@
                     <li><a href="{{ route('courses.show', ['slug' => $course->slug]) }}">{{ $course->title }}</a></li>
                 @endforeach
 
-                <li><a href="{{ route('courses.index') }}">@lang('app.Courses_Schedule')</a> </li>
+                <li><a href="{{ route('courses.index') }}">@lang('Courses_Schedule')</a> </li>
 
-                <li><a href="{{ route('contact') }}">@lang('app.ContactUs')</a></li>
+                <li><a href="{{ route('contact') }}">@lang('ContactUs')</a></li>
 
                 @php
                     $invers = app()->isLocale('en') ? 'ar' : 'en';
                 @endphp
                 <li>
-                    <a href="{{ url('locale/'.$invers) }}">
+                    <a href="{{ route('change.lang', ['lang'=> $invers]) }}">
                         <img loading="lazy" src="{{ asset('web/img/logos/'.$invers.'.png') }}" alt="ar">
                     </a>
                 </li>
