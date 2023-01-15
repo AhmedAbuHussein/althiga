@@ -77,6 +77,8 @@
 @endphp
 <title>{{ $page_title }} | @yield('title')</title>
 <meta name="title" content="{{ $page_title }}">
+<meta name="developer-name" content="Ahmed Shaker">
+<meta name="developer-whatsapp" content="+201203569068">
 
 <link rel="icon" type="image/png"
     href="{{ $website_settings['website_icon'] != null ? $website_settings['website_icon'] : $website_settings['website_icon_url'] }}" />
@@ -85,7 +87,6 @@
 <link rel="manifest" href="{{ url('mix-manifest.json') }}">
 <meta name="mobile-web-app-capable" content="no">
 <meta name="application-name" content="{{ $website_settings['website_name_en'] }}">
-
 <link rel="shortcut icon" href="{{ $website_settings['website_icon'] }}" />
 
 
