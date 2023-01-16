@@ -114,7 +114,7 @@ class Course extends Model
 
     public function seens()
     {
-        return $this->morphMany(Seen::class, 'seenable');
+        return $this->morphMany(Seen::class, 'seenable', 'seenable_type', 'seenable_id', 'slug');
     }
 
     public function tags()

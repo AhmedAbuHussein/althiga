@@ -125,7 +125,10 @@
                                     </div>
                                     <div class="col-8 text-truncate p-0" style="direction:ltr;font-size: 12px;">
                                         <a href="{{ $page['url'] }}" target="_blank" style="color:inherit">
-                                            <span class="badge badge-info">{{ urldecode(str_replace(env('APP_URL'),'',$page['url']) ?? '/' ) }}</span>
+                                            @php
+                                                $url = preg_replace('/(http(s)?:\/\/(www\.)?)(\w+)(\.[a-zA-Z0-9]{1,5})/','', $page['url']);
+                                            @endphp
+                                            <span class="badge badge-info">{{ $url ? $url : 'index' }}</span>
                                         </a>
                                     </div>
                                 </div>

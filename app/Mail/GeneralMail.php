@@ -31,7 +31,7 @@ class GeneralMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS'))
+        return $this->from(env('MAIL_FROM_ADDRESS'), env('# MAIL_FROM_NAME'))
                 ->subject($this->title)
                 ->markdown('admin.mail.index', ['body'=> $this->body, 'title'=> $this->title]);
     }

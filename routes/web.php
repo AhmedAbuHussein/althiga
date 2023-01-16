@@ -38,7 +38,7 @@ Route::group(['middleware'=> 'seen'], function() {
     Route::get('/valuable-customers', [\App\Http\Controllers\IndexController::class, 'partners'])->name('partners');
     Route::get('/accreditations-partnerships', [\App\Http\Controllers\IndexController::class, 'accreditations'])->name('accreditations');
     
-    Route::get('courses', [\App\Http\Controllers\CourseController::class, 'index'])->name('courses.index');
+    Route::get('courses-schedule', [\App\Http\Controllers\CourseController::class, 'index'])->name('courses.index');
     Route::get('courses/{slug}', [\App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
     
     Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services');

@@ -12,6 +12,6 @@ class Seen extends Model
 
     public function seenable()
     {
-        return $this->morphTo();
+        return $this->morphTo('seenable', 'seenable_type', 'seenable_id', 'slug');
     }
 }
