@@ -204,7 +204,9 @@ return [
     "trainers count"=>"عدد المتدربين",
     "courses count"=>"دورات منعقده",
     "contracts count"=>"شركات متعاقده",
-    ""=>"",
+    "map"=>"الخريطه",
+    "english font"=>"نوع الخط الانجليزي",
+    "arabic font"=>"نوع الخط العربي",
     ""=>"",
     ""=>"",
 ];

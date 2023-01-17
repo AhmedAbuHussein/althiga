@@ -45,6 +45,14 @@ Route::group(['middleware'=> 'seen'], function() {
     Route::get('services/{slug}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
 });
 
+Route::post('/subscribe', [\App\Http\Controllers\IndexController::class, 'subscribe'])->name('subscribe');
+
+Route::get('chat', [\App\Http\Controllers\ConversationController::class, 'index'])->name('chat');
+Route::post('chat', [\App\Http\Controllers\ConversationController::class, 'chat'])->name('chat');
+Route::get('conversation/{ticket}', [\App\Http\Controllers\ConversationController::class, 'show'])->name('conversation');
+Route::post('conversation/{ticket}', [\App\Http\Controllers\ConversationController::class, 'store']);
+
+
 
 Route::get('/language/{lang}', function($lang){
     if(in_array($lang, ['en', 'ar'])){

@@ -84,5 +84,16 @@
     "Our_Values" : "قيمنا",
     "Register_Today" : "تواصل معنا",
     "Popular_Courses" : "الدورات الأكثر طلباً",
+    "subscribe all": "كل الاخبار",
+    "already subscribe": "انت مشترك في خدمة الاخبار بالفعل",
+    "subscribe":"اشترك الان",
+    "invalid ticket or expired": "تذكرة غير صالحة أو منتهية الصلاحية",
+    "conversation":"المحادثة",
+    "This conversation has been closed":"تم اغلاق هذه المحادثة",
+    "ticket id":"يمكنكم التواصل من خلال هذه التذكرة:<br> :id",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
     "":""
 }

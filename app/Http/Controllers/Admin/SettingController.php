@@ -16,7 +16,63 @@ class SettingController extends Controller
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        return view('admin.setting.index');
+        $ar_fonts = [
+            "Cairo",
+            "Lateef",
+            "Droid Arabic Naskh",
+            "Droid Arabic Kufi",
+            "Amiri",
+        ];
+        $en_fonts = [
+            "Nunito",
+            "Arial",
+            "Helvetica",
+            "Verdana",
+            "Calibri",
+            "Noto",
+            "Lucida Sans",
+            "Gill Sans",
+            "Century Gothic",
+            "Candara",
+            "Futara",
+            "Franklin Gothic Medium",
+            "Trebuchet MS",
+            "Geneva",
+            "Segoe UI",
+            "Optima",
+            "Avanta Garde",
+            "Times New Roman",
+            "Big Caslon",
+            "Bodoni MT",
+            "Book Antiqua",
+            "Bookman",
+            "New Century Schoolbook",
+            "Calisto MT",
+            "Cambria",
+            "Didot",
+            "Garamond",
+            "Georgia",
+            "Goudy Old Style",
+            "Hoefler Text",
+            "Lucida Bright",
+            "Palatino",
+            "Consolas",
+            "Courier",
+            "Lucida Console",
+            "Lucidatypewriter",
+            "Comic Sans",
+            "Comic Sans MS",
+            "Apple Chancery",
+            "Impact",
+            "Brushstroke",
+            "Luminari",
+            "Blippo",
+            "Trattatello",
+            "Bookman",
+            "Bradley Hand",
+            "Browallia New",
+        ];
+        return view('admin.setting.index', compact('en_fonts', 'ar_fonts'));
     }
 
     public function update(Request $request, Setting $setting)

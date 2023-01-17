@@ -12,6 +12,20 @@
             font-size: 15pt
         }
     </style>
+
+    @if (app()->isLocale('en') && $settings->where('key', 'font_en')->pluck('value')->first())
+        <style>
+            *:not(i) {
+                font-family: "{{ $settings->where('key', 'font_en')->pluck('value')->first() }}", sans-serif;
+            }
+        </style>
+    @elseif(app()->isLocale('ar') && $settings->where('key', 'font_ar')->pluck('value')->first())
+        <style>
+            *:not(i) {
+                font-family: "{{ $settings->where('key', 'font_ar')->pluck('value')->first() }}", sans-serif;
+            }
+        </style>
+    @endif
 </head>
 
 <body dir="{{ app()->isLocale('en') ? 'ltr' : 'rtl' }}">

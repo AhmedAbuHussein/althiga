@@ -352,6 +352,28 @@
                             </div>
 
                             <div class="col-12 row p-0 taber" id="codes-tab">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="font_ar">@lang('site.arabic font')</label>
+                                        <select class="form-control" name="settings[font_ar]" id="font_ar">
+                                            <option value="">@lang('site.select')</option>
+                                            @foreach ($ar_fonts as $item)
+                                                <option value="{{ $item }}" {{ $settings->where('key', 'font_ar')->pluck('value')->first() == $item ? 'selected': '' }}>{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="font_en">@lang('site.english font')</label>
+                                        <select class="form-control" name="settings[font_en]" id="font_en">
+                                            <option value="">@lang('site.select')</option>
+                                            @foreach ($en_fonts as $item)
+                                                <option value="{{ $item }}" {{ $settings->where('key', 'font_en')->pluck('value')->first() == $item ? 'selected': '' }}>{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group pb-3">
                                     <label>
                                         ملف robots

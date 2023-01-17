@@ -81,5 +81,17 @@
     "Our_Values" : "Our Values",
     "Register_Today" : "Register Now",
     "Popular_Courses" : "Popular Courses",
+    "subscribe all": "Subscribe All",
+    "already subscribe": "You are already subscribed",
+    "subscribe": "Subscribe now",
+    "invalid ticket or expired": "Invalid or expired ticket",
+    "conversation":"Conversation",
+    "This conversation has been closed":"This conversation has been closed",
+    "ticket id":"You can communicate through this ticket:<br> :id",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
     "":""
 }

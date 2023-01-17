@@ -1,20 +1,21 @@
-<meta charset="utf-8" />
-<meta name="csrf-token" content="{{ csrf_token() }}">
-@include('SEO.index')
+    <meta charset="utf-8" />
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @include('SEO.index')
 
     <?php $lang = app()->isLocale('en') ? '' : '_rtl'; ?>
 
-    <link rel="stylesheet" href="{{ asset('web/css/bootstrap' . $lang . '.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/css/bootstrap' . $lang . '.min.css') }}">    
 
-    <!-- Font-Awesome -->
-    
+    <link rel="stylesheet" href="{{ asset('fonts/custom/fonts.css') }}">    
 
     <!-- Icomoon -->
     <link rel="stylesheet" href="{{ asset('web/css/icomoon' . $lang . '.css') }}">
 
     <!-- Slider -->
     <link rel="stylesheet" href="{{ asset('web/css/swiper' . $lang . '.min.css') }}">
+    
     <link rel="stylesheet" href="{{ asset('web/css/slider' . $lang . '.css') }}">
 
     <!-- Animate.css -->
@@ -39,6 +40,5 @@
     <script src="https://kit.fontawesome.com/c013fd8535.js" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
 
     @stack('css')

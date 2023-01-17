@@ -28,6 +28,14 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     <div class="section-block-grey">
         <div class="container">
             <div class="row">
+
+                @if ($ticket)
+                    <div class="col-md-12 mb-3">
+                        <div class="alert alert-info text-center">
+                            {!! __('ticket id', ['id'=> $ticket]) !!}
+                        </div>
+                    </div>
+                @endif
                 
                 <div class="col-md-6">
                     <img src="{{ $settings->first()->website_wide_logo() }}" alt="">
@@ -64,7 +72,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                 </div>
 
                 <div class="col-md-6">
-                    <form action="{{ route('contact') }}" method="post">
+                    <form action="{{ route('contact') }}" id="contact_form" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -96,8 +104,18 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="form-group d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success w-25">@lang('send')</button>
+                        <div class="form-group d-flex justify-content-between">
+                            <div>
+                                <button 
+                                    class="g-recaptcha btn btn-success"
+                                    style="width: 150px;" 
+                                    data-sitekey="reCAPTCHA_site_key" 
+                                    data-callback='onSubmit' 
+                                    data-action='submit'
+                                >@lang('send')</button>
+                            </div>
+
+                            <a class="btn btn-primary" href="{{ route('chat') }}">@lang('conversation')</a>
                         </div>
                     </form>
                 </div>
@@ -115,8 +133,23 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('footer')
     @parent
 @endsection
+@push('js')
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+    <script>
+        function onSubmit(token) {
+            document.getElementById("contact_form").submit();
+        }
+    </script>
+
+@endpush
+
+
 @push('css')
     <style>
+        .grecaptcha-badge{
+            z-index: 1;
+        }
         .map iframe{
             width: 100%;
             height: 500px;

@@ -7,38 +7,38 @@
 @endsection
 
 @php
-$dir = app()->isLocale('en') ? 'left' : 'right';
+    $dir = app()->isLocale('en') ? 'left' : 'right';
 @endphp
 
 @section('content')
     <!-- Slider START -->
     <div class="swiper-main-slider swiper-container">
         <div class="swiper-wrapper">
-            @foreach ($slider as $i=>$item)
+            @foreach ($slider as $i => $item)
                 <!-- Slide {{ $i }} Start -->
                 <div class="swiper-slide" style="background-image:url({{ $item->url }})">
-                   @if ($item->title)
-                    <div class="medium-overlay"></div>
-                    <div class="container">
-                        <div class="slider-content {{ $dir }}-holder">
-                            <h2 class="animated fadeInDown">
-                                {{ $item->title }}
-                            </h2>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-12">
-                                    <p class="animated fadeInDown">{!! $item->text !!}</p>
+                    @if ($item->title)
+                        <div class="medium-overlay"></div>
+                        <div class="container">
+                            <div class="slider-content {{ $dir }}-holder">
+                                <h2 class="animated fadeInDown">
+                                    {{ $item->title }}
+                                </h2>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-12">
+                                        <p class="animated fadeInDown">{!! $item->text !!}</p>
+                                    </div>
                                 </div>
+                                @if ($item->link)
+                                    <div class="animated fadeInUp mt-25">
+                                        <a href="{{ $item->link }}" class="primary-button button-md">
+                                            <i class="fa fa-cloud-download"></i> @lang('show')
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($item->link)    
-                            <div class="animated fadeInUp mt-25">
-                                <a href="{{ $item->link }}" class="primary-button button-md">
-                                    <i class="fa fa-cloud-download"></i> @lang('show')
-                                </a>
-                            </div>
-                            @endif
                         </div>
-                    </div>
-                   @endif
+                    @endif
                 </div>
                 <!-- Slide {{ $i }} End -->
             @endforeach
@@ -69,7 +69,8 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 </div>
                                 <div class="feature-flex-square-content">
                                     <h4>
-                                        <a href="{{ route('services.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
+                                        <a
+                                            href="{{ route('services.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <p>{{ Str::words($item->text, 8) }}</p>
                                     <a href="{{ route('services.show', ['slug' => $item->slug]) }}"
@@ -153,7 +154,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                         </div>
                     </div>
                 @endforeach
-                
+
             </div>
         </div>
     </div>
@@ -169,14 +170,59 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                 <div class="video-content">
                     <div class="section-heading center-holder white-color">
                         <h2><strong>@lang('Our_Values')</strong></h2>
-                        <h4>{{ optional($settings->where('key', "our_values_".app()->getLocale('en'))->first())->value }}</h4>
-                        <a href="{{ route('contact') }}" class="primary-button button-md mt-10">@lang('Register_Today')</a>
+                        <h4>{{ optional($settings->where('key', 'our_values_' . app()->getLocale('en'))->first())->value }}
+                        </h4>
+
+                        <button data-toggle="modal" data-target="#subscribeModal"
+                            class="primary-button button-md mt-10">@lang('subscribe')</button>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog"
+                            aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" style="width: 500px;" role="document">
+                                <div class="modal-content"
+                                    style="background: url('{{ asset('web/img/bg.jpg') }}') center; border-radius: 30px;">
+                                    <div class="modal-body">
+                                        <form action="{{ route('subscribe') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group pt-2">
+                                                <input type="email" name="email" required placeholder="@lang('email')" class="form-control"
+                                                    style="border-radius: 20px; padding:5px 10px;">
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="course_id" required class="form-control"
+                                                    style="border-radius: 20px; padding:5px 10px;">
+                                                    <option value="0">@lang('subscribe all')</option>
+                                                    @foreach ($subscribtes as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-warning btn-icon ml-2"
+                                                    data-dismiss="modal"><i class="fa fa-times"></i>
+                                                </button>
+                                                <button type="submit" class="btn btn-success btn-icon">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
     <!-- Video Section END -->
+
+
 
     <!-- Latest News Section START -->
     <div class="section-block-grey">
@@ -187,7 +233,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
             </div>
             <div class="row mt-40">
                 <div class="owl-carousel owl-theme" id="blog-grid">
-                    @foreach ($courses as $item)    
+                    @foreach ($courses as $item)
                         <div class="blog-grid-simple h-100">
                             <h4>
                                 <a href="{{ route('courses.show', ['slug' => $item->slug]) }}">
@@ -203,17 +249,18 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     <div class="col-5 pl-0">
-                                        @if(count($item->days ?? []))
-                                        <h5 style="font-size: 12px;">
-                                            @foreach ($item->days ?? [] as $day)
-                                                @lang(''.$day)
-                                            @endforeach
-                                            @lang('every week')
-                                        </h5>
+                                        @if (count($item->days ?? []))
+                                            <h5 style="font-size: 12px;">
+                                                @foreach ($item->days ?? [] as $day)
+                                                    @lang('' . $day)
+                                                @endforeach
+                                                @lang('every week')
+                                            </h5>
                                         @endif
                                     </div>
                                     <div class="col-5 left-holder">
-                                        <a href="{{ route('courses.show', ['slug' => $item->slug]) }}" style="font-size: 12px;">@lang('Learn_More')</a>
+                                        <a href="{{ route('courses.show', ['slug' => $item->slug]) }}"
+                                            style="font-size: 12px;">@lang('Learn_More')</a>
                                     </div>
                                 </div>
                             </div>
@@ -238,9 +285,10 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                         @if ($item->link)
                             <a href="{{ $item->link }}">
                         @endif
-                            <img alt="{{ $item->title }}" title="{{ $item->title }}" loading="lazy" src="{{ $item->url }}">
-                        @if ($item->link)        
-                        </a>
+                        <img alt="{{ $item->title }}" title="{{ $item->title }}" loading="lazy"
+                            src="{{ $item->url }}">
+                        @if ($item->link)
+                            </a>
                         @endif
                     </div>
                 @endforeach
@@ -255,6 +303,6 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @endsection
 
 @push('js')
-<!-- Yotube Video Player -->
-<script src="{{ asset('web/js/jquery.mb.YTPlayer.min.js') }}"></script>
+    <!-- Yotube Video Player -->
+    <script src="{{ asset('web/js/jquery.mb.YTPlayer.min.js') }}"></script>
 @endpush

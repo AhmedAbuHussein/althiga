@@ -42,11 +42,9 @@ class SeenMiddleware
         $id = NULL;
         if(request()->routeIs('courses.show')){
             $id = request()->route("slug");
-           // $id = optional(Course::whereSlug($slug)->first())->id;
             $type = Course::class;
         }else if(request()->routeIs('services.show')){
             $id = request()->route("slug");
-           // $id = optional(Category::whereSlug($slug)->first())->id;
             $type = Category::class;
         }
        

@@ -12,9 +12,12 @@ use App\Models\Contact;
 use App\Models\Gallery;
 use App\Models\Partner;
 use App\Models\Category;
+use App\Models\Subscribe;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Accreditation;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Http;
 
 class IndexController extends Controller
 {
@@ -26,7 +29,8 @@ class IndexController extends Controller
         $team = Team::inRandomOrder()->limit(3)->get();
         $courses = Course::where('is_popular', 1)->get();
         $partners = Partner::_get();
-        return view('index', compact('slider', 'categories', 'about', 'team', 'courses', 'partners'));
+        $subscribtes = Course::_get();
+        return view('index', compact('slider', 'subscribtes', 'categories', 'about', 'team', 'courses', 'partners'));
     }
 
     public function about()
@@ -61,9 +65,10 @@ class IndexController extends Controller
         return view('gallary', compact('items'));
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
-        return view('contact-us');
+        $ticket = $request->ticket;
+        return view('contact-us', compact('ticket'));
     }
 
     public function contact_post(Request $request)
@@ -73,9 +78,42 @@ class IndexController extends Controller
             "email"=> "required|email",
             "title"=> "required|string",
             "message"=> "required|string",
+            "g-recaptcha-response"=> "required|string",
         ]);
-        Contact::create($request->except("_token"));
+        $response = Http::get("https://www.google.com/recaptcha/api/siteverify", [
+            "secret"=> env('RECAPTCHA_SECRET'),
+            "response"=> $request->get('g-recaptcha-response'),
+            "remoteip"=> request()->ip(),
+        ]);
+        if(!$response['success']){
+            $message = $response['error-codes'][0];
+            Toastr::error($message , __('alert'));
+            return redirect()->route('contacts');
+        }
+        $ticket = Str::uuid();
+        $data = $request->except("_token");
+        $data['ticket'] = $ticket;
+        Contact::create($data);
         Toastr::success(__('message_saved_success'), __('alert'));
-        return redirect()->route("contact");
+        return redirect()->route("contact", ['ticket'=> $ticket]);
+    }
+
+    public function subscribe(Request $request)
+    {
+        $request->validate([
+            "email"=> "required|email",
+            "course_id"=> "required|numeric",
+        ]);
+        $data = $request->only('email');
+        if($request->course_id == 0){
+            $data['is_all'] = 1;
+            $data['course_id'] = NULL;
+        }else{
+            $data['is_all'] = 0;
+            $data['course_id'] = $request->course_id;
+        }
+        Subscribe::updateOrcreate(['email'=> $request->email],$data);
+        Toastr::success(__('message_saved_success'), __('alert'));
+        return redirect()->route("index");
     }
 }

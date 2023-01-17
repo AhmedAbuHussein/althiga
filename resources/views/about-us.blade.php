@@ -163,3 +163,4 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('footer')
     @parent
 @endsection
+

@@ -92,6 +92,7 @@
                         <li><a href="{{ route('accreditations') }}">@lang('Local_International_Accreditations_Partnerships')</a></li>
                         <li><a href="{{ route('partners') }}">@lang('Valuable_Customers')</a></li>
                         <li><a href="{{ route('gallery') }}">@lang('Pictures_for_Courses')</a></li>
+                        <li><a href="{{ route('chat') }}">@lang('conversation')</a></li>
                     </ul>
                 </li>
 
