@@ -19,10 +19,11 @@ class ContactsDataTable extends DataTable
         ->addColumn('action', function($item){
             $action = '';
             if (auth()->user()->can("contact_show")){
-                $action .= '<a class="btn btn-success py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.show', [$item->id]).'" title="'.__('site.show').'"><i class="fa fa-eye"></i></a>';
+                $action .= '<a class="btn btn-success py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.show', [$item->id]).'" title="'.__('site.email').'"><i class="fa fa-envelope"></i></a>';
+                $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.chat', [$item->id]).'" title="'.__('site.message').'"><i class="fab fa-facebook-messenger"></i></a>';
             }
             if (auth()->user()->can("contact_delete")){
-            $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.contacts.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
+                $action .= '<button class="btn btn-danger py-1 ps-2 pe-2 ms-1" onclick="deleteItem(`'.route('admin.contacts.destroy', [$item->id]).'`)" title="'.__('site.delete').'"><i class="fa fa-trash"></i></button>';
             }
             return $action;
         })

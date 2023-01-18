@@ -109,7 +109,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 <button 
                                     class="g-recaptcha btn btn-success"
                                     style="width: 150px;" 
-                                    data-sitekey="reCAPTCHA_site_key" 
+                                    data-sitekey="{{ env('RECAPTHA_KEY') }}" 
                                     data-callback='onSubmit' 
                                     data-action='submit'
                                 >@lang('send')</button>

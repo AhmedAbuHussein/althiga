@@ -207,6 +207,7 @@ return [
     "map"=>"الخريطه",
     "english font"=>"نوع الخط الانجليزي",
     "arabic font"=>"نوع الخط العربي",
-    ""=>"",
+    "mark as closed"=>"اغلاق المحادثة",
+    "reopen conversation"=>"اعاده فتح المحادثة",
     ""=>"",
 ];

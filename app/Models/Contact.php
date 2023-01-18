@@ -28,13 +28,11 @@ class Contact extends Model
                 "ar"=> "<strong>يرجي</strong> مراجعة طلبات التواصل تم استقبال طلب تواصل جديد"
             ];
             foreach ($users as $user) {
-                $user->notify(new GeneralNotify($title, $message, route('admin.contacts.index')));
+                try {
+                    $user->notify(new GeneralNotify($title, $message, route('admin.contacts.index')));
+                } catch (\Throwable $th) { }
             }
-
-            $ticket = $item->ticket;
-            try {
-                Mail::to($item->email)->send(new ContactTicketMail($ticket));
-            } catch (\Throwable $th) {}
+            
         });
     }
 

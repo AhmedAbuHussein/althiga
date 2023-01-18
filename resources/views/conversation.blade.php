@@ -40,7 +40,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 <div class="chat-content" style="height: 70vh; overflow-y: auto;">
                                     @foreach ($messages as $message)
                                         <div class="box @if($message['type'] == 'admin') admin @endif">
-                                            <p>{{ $message['message'] }}</p>
+                                            <p>{!! $message['message'] !!}</p>
                                         </div>
                                     @endforeach
                                 </div>

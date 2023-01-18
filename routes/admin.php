@@ -65,6 +65,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::group(['prefix'=> "contacts", 'as'=> "contacts."], function() {
         Route::get("/", [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');
         Route::get("{contact}/show", [\App\Http\Controllers\Admin\ContactController::class, 'show'])->name('show');
+        Route::get("{contact}/chat", [\App\Http\Controllers\Admin\ContactController::class, 'chat'])->name('chat');
+        Route::post("{contact}/chat", [\App\Http\Controllers\Admin\ContactController::class, 'chatstore']);
+        Route::post("{contact}/close", [\App\Http\Controllers\Admin\ContactController::class, 'closed'])->name('close');
+
         Route::post("mails/{contact}/send", [\App\Http\Controllers\Admin\ContactController::class, 'send'])->name('mail');
         Route::delete("{contact}/destroy", [\App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('destroy');
     });

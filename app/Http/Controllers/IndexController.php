@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactTicketMail;
 use App\Models\Team;
 use App\Models\Tour;
 use App\Models\About;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 use App\Models\Accreditation;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -80,22 +82,33 @@ class IndexController extends Controller
             "message"=> "required|string",
             "g-recaptcha-response"=> "required|string",
         ]);
-        $response = Http::get("https://www.google.com/recaptcha/api/siteverify", [
-            "secret"=> env('RECAPTCHA_SECRET'),
-            "response"=> $request->get('g-recaptcha-response'),
-            "remoteip"=> request()->ip(),
-        ]);
-        if(!$response['success']){
-            $message = $response['error-codes'][0];
-            Toastr::error($message , __('alert'));
-            return redirect()->route('contacts');
+        try {
+            $response = Http::get("https://www.google.com/recaptcha/api/siteverify", [
+                "secret"=> env("RECAPTCHA_SECRET", "6Le58wQkAAAAALIprKKUUIilXnF0LcBoBY4f8tLh"),
+                "response"=> $request->get('g-recaptcha-response'),
+                "remoteip"=> request()->ip(),
+            ]);
+            if(!$response['success']){
+                $message = $response['error-codes'][0];
+                Toastr::error($message , __('alert'));
+                return redirect()->route('contact');
+            }    
+            $ticket = Str::uuid();
+            $data = $request->except("_token");
+            $data['ticket'] = $ticket;
+            $contact = Contact::create($data);
+            try {
+                Mail::to($request->email)->send(new ContactTicketMail($ticket));
+            } catch (\Throwable $th) {
+                Toastr::warning($th->getMessage(), __('alert'));
+            }
+            Toastr::success(__('message_saved_success'), __('alert'));
+        } catch (\Throwable $th) {
+            Toastr::warning($th->getMessage(), __('alert'));
         }
-        $ticket = Str::uuid();
-        $data = $request->except("_token");
-        $data['ticket'] = $ticket;
-        Contact::create($data);
-        Toastr::success(__('message_saved_success'), __('alert'));
-        return redirect()->route("contact", ['ticket'=> $ticket]);
+        
+
+        return view('contact-us', compact('ticket')); //redirect()->route("contact", ['ticket'=> $ticket]);
     }
 
     public function subscribe(Request $request)

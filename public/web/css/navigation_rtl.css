@@ -85,7 +85,7 @@
 
 .nav-header {
     float: right;
-    padding-right: 22px !important;
+   /* padding-right: 22px !important; */
 
 }
 
@@ -110,7 +110,7 @@
 
 .nav-brand {
     line-height: 70px;
-    padding: 0px 15px 0px 0px;
+    padding: 0px 0px 0px 0px;
     color: #70798b;
     font-size: 24px;
     text-decoration: none !important;
