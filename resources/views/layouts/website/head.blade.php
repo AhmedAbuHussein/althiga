@@ -5,6 +5,7 @@
     @include('SEO.index')
 
     <?php $lang = app()->isLocale('en') ? '' : '_rtl'; ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ asset('web/css/bootstrap' . $lang . '.min.css') }}">    
 
@@ -39,6 +40,6 @@
 
     <script src="https://kit.fontawesome.com/c013fd8535.js" crossorigin="anonymous"></script>
     
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
     @stack('css')

@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/artisan', function(){
-    Artisan::call("storage:link");
-    Artisan::call("migrate");
+    //Artisan::call("storage:link");
     Artisan::call("optimize:clear");
+    //Artisan::call("migrate");
     return redirect()->route('index');
 });
 

@@ -38,7 +38,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                 @endif
                 
                 <div class="col-md-6">
-                    <img src="{{ $settings->first()->website_wide_logo() }}" alt="">
+                    <img class="img-res" src="{{ $settings->first()->website_wide_logo() }}" alt="">
                     <div class="contact-information mt-3">
                         @if ($settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first())     
                         <p>
