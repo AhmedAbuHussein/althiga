@@ -11,6 +11,14 @@
             color: #ddd;
             font-size: 15pt
         }
+        .whats-call a {
+            position: fixed;
+            bottom: 80px;
+            right: 13px;
+            color: #f0f0f0;
+            z-index: 99;
+            border-radius: 50%;
+        }
     </style>
 
     @if (app()->isLocale('en') && $settings->where('key', 'font_en')->pluck('value')->first())

@@ -209,5 +209,7 @@ return [
     "arabic font"=>"نوع الخط العربي",
     "mark as closed"=>"اغلاق المحادثة",
     "reopen conversation"=>"اعاده فتح المحادثة",
+    "arabic working time"=>"وقت الدوام باللغة العربية",
+    "english working time"=>"وقت الدوام باللغة الانجليزية",
     ""=>"",
 ];

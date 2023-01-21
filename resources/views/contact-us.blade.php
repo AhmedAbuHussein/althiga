@@ -40,22 +40,29 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                 <div class="col-md-6">
                     <img class="img-res" src="{{ $settings->first()->website_wide_logo() }}" alt="">
                     <div class="contact-information mt-3">
-                        @if ($settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first())     
+                        @if (!is_null($settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first()))     
                         <p>
                             <span>@lang('address') :</span>
                             {{ $settings->where('key', 'address_'.app()->getLocale('en'))->pluck('value')->first() }}
                         </p>
                         @endif
-                        @if ($settings->where('key', 'phone')->pluck('value')->first()) 
+                        @if (!is_null($settings->where('key', 'phone')->pluck('value')->first())) 
                         <p>
                             <span>@lang('phone') :</span>
                             {{ $settings->where('key', 'phone')->pluck('value')->first() }}
                         </p>
                         @endif
-                        @if ($settings->where('key', 'contact_email')->pluck('value')->first())    
+                        @if (!is_null($settings->where('key', 'contact_email')->pluck('value')->first()))    
                         <p>
                             <span>@lang('email') :</span>
                             {{ $settings->where('key', 'contact_email')->pluck('value')->first() }}
+                        </p>
+                        @endif
+
+                        @if (!is_null($settings->where('key', 'work_time_'.app()->getLocale())->pluck('value')->first()))    
+                        <p>
+                            <span>@lang('work hours') :</span>
+                            {{ $settings->where('key', 'work_time_'.app()->getLocale('en'))->pluck('value')->first() }}
                         </p>
                         @endif
 

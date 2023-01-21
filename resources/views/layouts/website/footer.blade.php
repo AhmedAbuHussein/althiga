@@ -104,5 +104,12 @@
         </div>
         <!-- Footer Bar End -->
     </div>
+    @if ($settings->where('key', 'whatsapp_phone')->pluck('value')->first())    
+    <div class="whats-call">
+        <a class="" href="https://api.whatsapp.com/send?phone={{ $settings->where('key', 'whatsapp_phone')->pluck('value')->first() }}" target="_blank">
+          <img src="{{ asset('web/img/whatsapp.png') }}" />
+        </a>
+      </div>
+    @endif
 </footer>
 <!-- Footer END -->

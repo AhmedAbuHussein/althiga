@@ -174,6 +174,22 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-12">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.arabic working time') </label>
+                                        <textarea name="settings[work_time_ar]" class="form-control">{{ $settings->where('key', 'work_time_ar')->pluck('value')->first() }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.english working time') </label>
+                                        <textarea name="settings[work_time_en]" class="form-control">{{ $settings->where('key', 'work_time_en')->pluck('value')->first() }}</textarea>
+                                    </div>
+                                </div>
+
+
+                                
                                 <div class="col-md-4">
                                     <div class="form-group pb-3">
                                         <label>
