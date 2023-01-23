@@ -38,6 +38,12 @@ class ContactController extends Controller
 
     public function closed(Contact $contact)
     {
+        if(auth()->user()->cannot('contact_chat')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
         $contact->update([
             "is_closed"=> !($contact->is_closed)
         ]);
@@ -49,18 +55,25 @@ class ContactController extends Controller
 
     public function chat(Contact $contact)
     {
-        if(auth()->user()->cannot('contact_show')){
+        if(auth()->user()->cannot('contact_chat')){
             return redirect()->route('admin.home')->with([
                 "notify-type"=> "error",
                 "notify-message"=> __('site.access denied')
             ]);
         }
-        $messages = $contact->messages;
+        $messages = $contact->messages()->with('user')->get();
         return view('admin.contacts.chat', compact('contact', 'messages'));
     }
   
     public function chatstore(Request $request, Contact $contact)
     {
+        if(auth()->user()->cannot('contact_chat')){
+            return redirect()->route('admin.home')->with([
+                "notify-type"=> "error",
+                "notify-message"=> __('site.access denied')
+            ]);
+        }
+        
         $request->validate([
             "message"=> "required|string",
         ]);
@@ -68,6 +81,7 @@ class ContactController extends Controller
             "message"=> $request->message,
             "contact_id"=> $contact->id,
             "type"=> "admin",
+            "user_id"=> auth()->id(),
         ];
         Conversation::create($data);
         $contact->update(['has_communicated'=> 1]);

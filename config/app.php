@@ -170,6 +170,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
 
 
+
         /*
          * Application Service Providers...
          */

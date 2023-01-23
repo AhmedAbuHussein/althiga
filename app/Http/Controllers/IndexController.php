@@ -28,7 +28,7 @@ class IndexController extends Controller
         $slider = Slider::_get();
         $categories = Category::where("show_in_menu", 1)->get();
         $about = About::first();
-        $team = Team::inRandomOrder()->limit(3)->get();
+        $team = Team::get();
         $courses = Course::where('is_popular', 1)->get();
         $partners = Partner::_get();
         $subscribtes = Course::_get();
@@ -39,7 +39,7 @@ class IndexController extends Controller
     {
         $about = About::first();
         $extra = Extra::_get();
-        $team = Team::inRandomOrder()->limit(3)->get();
+        $team = Team::get();
         return view('about-us', compact('about', 'extra', 'team'));
     }
 
@@ -92,8 +92,17 @@ class IndexController extends Controller
                 $message = $response['error-codes'][0];
                 Toastr::error($message , __('alert'));
                 return redirect()->route('contact');
-            }    
-            $ticket = Str::uuid();
+            }  
+            $ticket = "TCK-".Str::random(6);
+            if(Contact::where('ticket', $ticket)->count() > 0){
+                while (true) {
+                    $ticket = "TCK-".Str::random(6);
+                    if(Contact::where('ticket', $ticket)->count() == 0){
+                        break;
+                    }
+                }
+            }  
+            
             $data = $request->except("_token");
             $data['ticket'] = $ticket;
             $contact = Contact::create($data);

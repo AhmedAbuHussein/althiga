@@ -40,7 +40,17 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 <div class="chat-content" style="height: 70vh; overflow-y: auto;">
                                     @foreach ($messages as $message)
                                         <div class="box @if($message['type'] == 'admin') admin @endif">
+                                            @if ($message->user)
+                                                <div class="d-flex justify-content-start">
+                                                    <img style="width: 50px; height:50px;margin: 0 10px; " class="img-thumbnail" src="{{ Storage::url(App\Models\Setting::where('key', 'website_icon')->pluck('value')->first()) }}" alt="">
+                                                    <div class="w-100">
+                                                        <p style="border-bottom: 1px solid #ddd">{{ optional($message->user)->name }}</p>
+                                                        <p>{!! $message['message'] !!}</p>
+                                                    </div>
+                                                </div>
+                                            @else
                                             <p>{!! $message['message'] !!}</p>
+                                            @endif
                                         </div>
                                     @endforeach
                                 </div>

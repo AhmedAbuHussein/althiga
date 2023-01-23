@@ -107,7 +107,7 @@ class SeensDataTable extends DataTable
             Column::make('id')->title(__('site.id'))->addClass("text-center"),
             Column::make('ip')->title(__('site.ip'))->addClass("text-center"),
             Column::make('domain')->title(__('site.domain'))->addClass("text-center"),
-            Column::make('os_type')->title(__('site.os'))->addClass("text-center"),
+            Column::make('device_name')->title(__('site.device_name'))->addClass("text-center"),
             Column::computed('seenable.title')->title(__('site.courses'))->addClass("text-center"),
             Column::computed('created_at')->title(__('site.created_at'))->addClass("text-center"),
             Column::computed('action', __('site.action'))->exportable(false)

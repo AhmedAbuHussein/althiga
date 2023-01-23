@@ -142,7 +142,7 @@
                         </div>
                         <div class="separator my-2"></div>
                         <div class="menu-item px-5">
-                            <a href="{{ route('admin.admins.edit', ['admin'=> auth()->id()]) }}" class="menu-link px-5">@lang('site.profile')</a>
+                            <a href="{{ route('admin.profile.index') }}" class="menu-link px-5">@lang('site.profile')</a>
                         </div>
 
                         <div class="separator my-2"></div>

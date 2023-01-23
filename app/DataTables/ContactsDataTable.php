@@ -20,6 +20,8 @@ class ContactsDataTable extends DataTable
             $action = '';
             if (auth()->user()->can("contact_show")){
                 $action .= '<a class="btn btn-success py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.show', [$item->id]).'" title="'.__('site.email').'"><i class="fa fa-envelope"></i></a>';
+            }
+            if (auth()->user()->can("contact_chat")){
                 $action .= '<a class="btn btn-primary py-1 ps-2 pe-2 ms-1" href="'.route('admin.contacts.chat', [$item->id]).'" title="'.__('site.message').'"><i class="fab fa-facebook-messenger"></i></a>';
             }
             if (auth()->user()->can("contact_delete")){

@@ -52,6 +52,12 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                             {{ $settings->where('key', 'phone')->pluck('value')->first() }}
                         </p>
                         @endif
+                        @if (!is_null($settings->where('key', 'phone2')->pluck('value')->first())) 
+                        <p>
+                            <span>@lang('phone') :</span>
+                            {{ $settings->where('key', 'phone2')->pluck('value')->first() }}
+                        </p>
+                        @endif
                         @if (!is_null($settings->where('key', 'contact_email')->pluck('value')->first()))    
                         <p>
                             <span>@lang('email') :</span>

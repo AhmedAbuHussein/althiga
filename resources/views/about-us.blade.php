@@ -139,9 +139,9 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                     <p>@lang('Team_Description')</p>
                 </div>
                 <div class="row mt-50">
-                    @foreach ($team as $item)
-                        <div class="col-md-4 col-sm-4 col-12">
-                            <div class="team-member h-100">
+                    <div class="owl-carousel owl-theme" id="team-grid">
+                        @foreach ($team as $item)
+                            <div class="team-member p-0 m-3 min-h-625px">
                                 <div class="team-member-img">
                                     <img loading="lazy" src="{{ $item->url }}">
                                 </div>
@@ -149,10 +149,18 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                     <h4>{{ $item->name }}</h4>
                                     <span>{{ $item->title }}</span>
                                     <p style="font-size: 15px;">{{ Str::words($item->bio, 35, '') }}</p>
+                                    <div class="d-flex justify-content-center">
+                                        <ul>
+                                            @if (!is_null($item->facebook))<li><a href="{{ $item->facebook }}"><i class="fa fa-facebook-f"></i></a></li> @endif
+                                            @if (!is_null($item->twitter))<li><a href="{{ $item->twitter }}"><i class="fa fa-twitter"></i></a></li> @endif
+                                            @if (!is_null($item->instagram))<li><a href="{{ $item->instagram }}"><i class="fa fa-instagram"></i></a></li> @endif
+                                            @if (!is_null($item->youtube))<li><a href="{{ $item->youtube }}"><i class="fa fa-youtube"></i></a></li> @endif
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                     
                 </div>
             </div>
@@ -164,3 +172,13 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     @parent
 @endsection
 
+@push('css')
+    <style>
+        .min-h-625px{
+            min-height: 625px !important;
+        }
+        .team-member-text h4{
+            font-size: 13pt;
+        }
+    </style>
+@endpush

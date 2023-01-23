@@ -20,6 +20,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
     Route::post('/change-mode', [App\Http\Controllers\Admin\HomeController::class, 'change_mode'])->name('change.mode');
 
+    Route::group(["prefix"=> "profile", 'as'=> "profile."], function(){
+        Route::get("/", [\App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('index');
+        Route::post("update", [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');
+    });
+
+
     Route::resource("accreditations", \App\Http\Controllers\Admin\AccreditationController::class);
     Route::resource("statistics", \App\Http\Controllers\Admin\StatisticsController::class)->only(['index', 'show', 'destroy']);
     Route::resource("categories", \App\Http\Controllers\Admin\CategoryController::class);

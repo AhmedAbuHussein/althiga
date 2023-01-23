@@ -31,7 +31,7 @@ class ConversationController extends Controller
             Toastr::error(__('invalid ticket or expired'), __('alert'));
             return redirect()->route('index');
         }
-        $messages = $item->messages;
+        $messages = $item->messages()->with('user')->get();
         return view('conversation', compact('item', 'messages'));
     }
 

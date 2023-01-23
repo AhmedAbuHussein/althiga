@@ -57,11 +57,11 @@ $(document).ready(function () {
   -----------------------*/
   try {
     $('#testmonials-carousel').owlCarousel({
-      loop: false,
+      loop: true,
       smartSpeed: 850,
       responsiveClass: true,
       nav: true,
-      navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+      navText: ["<i class='fa fa-angle-right'></i>", "<i class='fa fa-angle-left'></i>"],
       responsive: {
         0: {
           items: 1,
@@ -280,6 +280,36 @@ $(document).ready(function () {
       autoplayTimeout: 2500,
       responsiveClass: true,
       autoplayHoverPause: false,
+      responsive: {
+        0: {
+          items: 1,
+          margin: 0,
+        },
+        600: {
+          items: 2,
+          margin: 0,
+        },
+        1000: {
+          items: 3,
+          margin: 0,
+        }
+      }
+    })
+  } catch (error) {
+    
+  }
+
+  try {
+    
+    $('#team-grid').owlCarousel({
+      loop: true,
+      dots: true,
+      nav: false,
+      smartSpeed: 850,
+      autoplay: true,
+      autoplayTimeout: 2500,
+      responsiveClass: true,
+      autoplayHoverPause: true,
       responsive: {
         0: {
           items: 1,
