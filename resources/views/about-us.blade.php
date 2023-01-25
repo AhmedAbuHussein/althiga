@@ -13,7 +13,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
+    <div class="page-title-section" style="background-image: url({{ $num_panner }});">
         <div class="container">
             <h1>@lang('About')</h1>
             <ul class="fa">
@@ -91,7 +91,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 
         <!-- Counters Section START -->
         <div class="section-block-parallax section-md"
-            style="background-image: url({{ asset('web/img/sub-pages-mid-background.jpg') }});">
+            style="background-image: url({{ $num_panner }});">
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 col-sm-5 col-12">

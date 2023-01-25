@@ -141,7 +141,7 @@
             return '<i class="fa fa-download"></i> ' + dt.i18n('buttons.export', 'Export') + '&nbsp;<span class="caret"/>';
         },
 
-        buttons: ['csv', 'excel', 'pdf']
+        buttons: ['csv', 'excel']
     };
 
     DataTable.ext.buttons.csv = {

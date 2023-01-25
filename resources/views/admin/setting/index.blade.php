@@ -39,6 +39,12 @@
                             data-opentab="images-tab">
                             <span class="la la-images me-2"></span> @lang('site.image')
                         </div>
+
+                        <div class="d-flex justify-content-center align-items-center p-0 settings-tab-opener"
+                            data-opentab="panners-tab">
+                            <span class="la la-images me-2"></span> @lang('site.panners')
+                        </div>
+
                         <div class="d-flex justify-content-center align-items-center p-0 settings-tab-opener"
                             data-opentab="links-tab">
                             <span class="la la-link me-2"></span> @lang('site.links')
@@ -264,6 +270,39 @@
                                         <img src="{{ $settings->first()->website_cover() }}">
                                     </label>
                                 </div>
+
+                            </div>
+
+                            <div class="col-12 row p-0 taber" id="panners-tab">
+                                <div class="form-group pb-3">
+                                    <label>@lang('site.number panner') </label>
+                                    <input type="file" name="settings[number_panner]" class="form-control">
+                                    <label for="" class="preview" style="max-width:500px;max-height: 300px;">
+                                        <img src="{{ Storage::url($settings->where('key', 'number_panner')->pluck('value')->first()) }}">
+                                    </label>
+                                </div>
+
+                                <div class="form-group pb-3">
+                                    <label>@lang('site.contact panner') </label>
+                                    <input type="file" name="settings[contact_panner]" class="form-control">
+                                    <label for="" class="preview" style="max-width:500px;max-height: 300px;">
+                                        <img src="{{ Storage::url($settings->where('key', 'contact_panner')->pluck('value')->first()) }}">
+                                    </label>
+                                </div>
+
+                                <div class="form-group pb-3">
+                                    <label>@lang('site.course panner') </label>
+                                    <input type="file" name="settings[course_panner]" class="form-control">
+                                    <label for="" class="preview" style="max-width:500px;max-height: 300px;">
+                                        <img src="{{ Storage::url($settings->where('key', 'course_panner')->pluck('value')->first()) }}">
+                                    </label>
+                                </div>
+
+                                <div class="form-group pb-3">
+                                    <label>@lang('site.youtube panner') </label>
+                                    <textarea name="settings[youtube_panner]" class="form-control">{{ $settings->where('key', 'youtube_panner')->pluck('value')->first() }}</textarea>
+                                </div>
+                                
 
                             </div>
 

@@ -73,7 +73,12 @@ class SeensDataTable extends DataTable
             Button::make([
                 "extend"=> 'reload',
                 "text"=> "function(dt, button, config){ return '<i class=\"fa fa-recycle\"></i> ".__('site.reload')."'}"
-            ])->addClass("btn btn-success")
+            ])->addClass("btn btn-success"),
+            Button::make([
+                "extend"=> 'link',
+                'url'=> route('admin.statistics.pdf'),
+                "text"=> "function(dt, button, config){ return '<i class=\"bi bi-file-pdf\"></i> ".__('PDF')."'}"
+            ])->addClass("btn btn-dark")
         ];
         if (auth()->user()->can("statistics_delete")){
             $it = Button::make([

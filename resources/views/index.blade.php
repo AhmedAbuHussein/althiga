@@ -149,7 +149,7 @@
                             <div class="team-member-text">
                                 <h4>{{ $item->name }}</h4>
                                 <span>{{ $item->title }}</span>
-                                <p style="font-size: 15px;">{{ Str::words($item->bio, 35, '') }}</p>
+                                <p style="font-size: 15px;">{{ Str::words($item->bio, 40, '') }}</p>
                                 <div class="d-flex justify-content-center">
                                     <ul>
                                         @if (!is_null($item->facebook))<li><a href="{{ $item->facebook }}"><i class="fa fa-facebook-f"></i></a></li> @endif
@@ -172,7 +172,7 @@
     <div class="video-section">
         <div class="video-area" id="video-area">
             <div class="player" id="video-play"
-                data-property="{videoURL:'https://www.youtube.com/watch?v=buBvqw6G3WU', containment:'#video-area', showControls:false, autoPlay:true, zoom:0, loop:true, mute:true, startAt:55, opacity:1, quality:'low',}">
+                data-property="{videoURL:'{{ $settings->where('key', 'youtube_panner')->pluck('value')->first() ?? 'https://www.youtube.com/watch?v=buBvqw6G3WU' }}', containment:'#video-area', showControls:false, autoPlay:true, zoom:0, loop:true, mute:true, startAt:0, opacity:1, quality:'low',}">
             </div>
             <div class="video-overlay">
                 <div class="video-content">

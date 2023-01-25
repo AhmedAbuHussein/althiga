@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::get('statistics/destroy/all', [\App\Http\Controllers\Admin\StatisticsController::class, 'delete'])->name('statistics.delete');
     Route::post('statistics/destroy/all', [\App\Http\Controllers\Admin\StatisticsController::class, 'delete_post']);
     
+    Route::get('statistics/generate/pdf', [\App\Http\Controllers\Admin\StatisticsController::class, 'generatepdf'])->name('statistics.pdf');
+    
+
     Route::group(["prefix"=> "courses/{course}"], function(){
         Route::resource("contents", \App\Http\Controllers\Admin\ContentController::class)->except('show');
         Route::resource("contents/{content}/items", \App\Http\Controllers\Admin\ItemController::class)->except('show');

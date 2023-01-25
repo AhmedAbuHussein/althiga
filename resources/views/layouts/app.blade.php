@@ -19,6 +19,13 @@
             z-index: 99;
             border-radius: 50%;
         }
+
+    @media (max-width: 991px){
+        .owl-carousel .owl-item .team-member-img img{
+            width: 100% !important;
+            max-width: max-content !important;
+        }
+    }
     </style>
 
     @if (app()->isLocale('en') && $settings->where('key', 'font_en')->pluck('value')->first())

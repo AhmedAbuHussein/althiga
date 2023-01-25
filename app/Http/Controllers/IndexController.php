@@ -17,9 +17,11 @@ use App\Models\Subscribe;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Accreditation;
+use App\Models\Setting;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
 {
@@ -37,10 +39,16 @@ class IndexController extends Controller
 
     public function about()
     {
+        $setting = Setting::where('key', "number_panner")->pluck('value')->first();
+        $num_panner = $setting ? Storage::url($setting) : asset('web/img/sub-pages-mid-background.jpg');
+
+        $setting = Setting::where('key', "number_panner")->pluck('value')->first();
+        $num_panner = $setting ? Storage::url($setting) : asset('web/img/sub-pages-mid-background.jpg');
+
         $about = About::first();
         $extra = Extra::_get();
         $team = Team::get();
-        return view('about-us', compact('about', 'extra', 'team'));
+        return view('about-us', compact('about', 'extra', 'team', 'num_panner'));
     }
 
     public function tours()
@@ -69,8 +77,11 @@ class IndexController extends Controller
 
     public function contact(Request $request)
     {
+        $setting = Setting::where('key', "contact_panner")->pluck('value')->first();
+        $panner = $setting ? Storage::url($setting) : asset('web/img/sub-pages-background.png');
+
         $ticket = $request->ticket;
-        return view('contact-us', compact('ticket'));
+        return view('contact-us', compact('ticket', 'panner'));
     }
 
     public function contact_post(Request $request)
@@ -117,7 +128,10 @@ class IndexController extends Controller
         }
         
 
-        return view('contact-us', compact('ticket')); //redirect()->route("contact", ['ticket'=> $ticket]);
+        $setting = Setting::where('key', "contact_panner")->pluck('value')->first();
+        $panner = $setting ? Storage::url($setting) : asset('web/img/sub-pages-background.png');
+        return view('contact-us', compact('ticket', 'panner'));
+
     }
 
     public function subscribe(Request $request)

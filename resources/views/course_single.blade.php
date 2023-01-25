@@ -13,7 +13,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.jpg') }});">
+    <div class="page-title-section" style="background-image: url({{ $panner }});">
         <div class="container">
             <h1>{{ $course->title }}</h1>
             <ul class="fa">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -19,7 +21,9 @@ class CourseController extends Controller
 
     public function show($slug)
     {
+        $setting = Setting::where('key', "course_panner")->pluck('value')->first();
+        $panner = $setting ? Storage::url($setting) : asset('web/img/sub-pages-background.jpg');
         $course = Course::whereSlug($slug)->with(["category", "targets", "contents"])->firstOrFail();
-        return view('course_single', compact('course'));
+        return view('course_single', compact('course', 'panner'));
     }
 }

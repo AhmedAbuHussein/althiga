@@ -6,7 +6,7 @@ use App\DataTables\SeensDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Seen;
 use Illuminate\Http\Request;
-
+use PDF;
 class StatisticsController extends Controller
 {
     public function index(SeensDataTable $dataTable)
@@ -56,5 +56,32 @@ class StatisticsController extends Controller
             "notify-type"=> "success",
             "notify-message"=> __('site.item deleted successfully')
         ]);
+    }
+
+    public function generatepdf()
+    {
+        $report_name = "ALthiga Statistic";
+        
+        ini_set('memory_limit', '-1');
+        
+        $items = Seen::get();
+        ini_set("pcre.backtrack_limit", "5000000");
+        $pdf = PDF::loadView('admin.statistics.report-pdf',[
+            'report_name'       => $report_name,
+            "items"             => $items,
+        ]);
+
+        $pdf->autoScriptToLang = true;
+        $pdf->baseScript = 1;
+        $pdf->allow_charset_conversion = false;
+
+        $pdf->useAdobeCJK = true;
+        $pdf->autoVietnamese = true;
+        $pdf->autoArabic = true;
+        $pdf->autoLangToFont = true;
+        $pdf->img_dpi = 96;
+        $pdf->showImageErrors = true;
+
+        return $pdf->stream('statistics-report-'.now().'.pdf');
     }
 }
