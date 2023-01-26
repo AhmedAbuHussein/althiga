@@ -13,7 +13,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ $panner }});">
+    <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'course_panner')->pluck('value')->first()) }})">
         <div class="container">
             <h1>{{ $course->title }}</h1>
             <ul class="fa">
@@ -254,6 +254,13 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     }
     .ul-container > ul li ul li:before{
         content: "\f192";
+    }
+
+    .page-title-section h1,
+    .page-title-section ul li:after,
+    .page-title-section ul li a
+    {
+        color: {{ $panners->where('key', 'course_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
     }
 
 </style>

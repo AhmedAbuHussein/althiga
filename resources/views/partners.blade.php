@@ -15,7 +15,7 @@
   @section('content')
 
       <!-- Page Title START -->
-      <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
+      <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'partner_panner')->pluck('value')->first()) }})">
           <div class="container">
               <h1>@lang('Valuable_Customers')</h1>
               <ul class="fa">
@@ -52,3 +52,15 @@
   @section('footer')
       @parent
   @endsection
+  @push('css')
+    <style>
+        .page-title-section h1,
+        .page-title-section ul li:after,
+        .page-title-section ul li a
+        {
+            color: {{ $panners->where('key', 'partner_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
+
+    </style>
+
+@endpush

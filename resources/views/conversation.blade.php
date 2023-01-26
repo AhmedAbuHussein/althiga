@@ -13,7 +13,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
+    <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'contact_panner')->pluck('value')->first()) }})">
         <div class="container">
             <h1>@lang('conversation')</h1>
             <ul class="fa">
@@ -120,5 +120,12 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         .box.admin p{
             color: #333;
         }
+        .page-title-section h1,
+        .page-title-section ul li:after,
+        .page-title-section ul li a
+        {
+            color: {{ $panners->where('key', 'contact_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
+    
     </style>
 @endpush

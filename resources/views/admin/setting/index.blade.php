@@ -274,29 +274,122 @@
                             </div>
 
                             <div class="col-12 row p-0 taber" id="panners-tab">
-                                <div class="form-group pb-3">
-                                    <label>@lang('site.number panner') </label>
-                                    <input type="file" name="settings[number_panner]" class="form-control">
-                                    <label for="" class="preview" style="max-width:500px;max-height: 300px;">
-                                        <img src="{{ Storage::url($settings->where('key', 'number_panner')->pluck('value')->first()) }}">
-                                    </label>
+
+                                <p class="text-danger text-center mx-4"><strong>@lang('site.perfect size')</strong></p>
+
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.about panner') </label>
+                                        <input type="file" name="settings[about_panner]" class="form-control">
+                                        <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                            <img src="{{ Storage::url($settings->where('key', 'about_panner')->pluck('value')->first()) }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[about_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'about_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
                                 </div>
 
-                                <div class="form-group pb-3">
-                                    <label>@lang('site.contact panner') </label>
-                                    <input type="file" name="settings[contact_panner]" class="form-control">
-                                    <label for="" class="preview" style="max-width:500px;max-height: 300px;">
-                                        <img src="{{ Storage::url($settings->where('key', 'contact_panner')->pluck('value')->first()) }}">
-                                    </label>
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                       <label>@lang('site.number panner') </label>
+                                       <input type="file" name="settings[number_panner]" class="form-control">
+                                       <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                           <img src="{{ Storage::url($settings->where('key', 'number_panner')->pluck('value')->first()) }}">
+                                       </label>
+                                   </div>
                                 </div>
 
-                                <div class="form-group pb-3">
-                                    <label>@lang('site.course panner') </label>
-                                    <input type="file" name="settings[course_panner]" class="form-control">
-                                    <label for="" class="preview" style="max-width:500px;max-height: 300px;">
-                                        <img src="{{ Storage::url($settings->where('key', 'course_panner')->pluck('value')->first()) }}">
-                                    </label>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[number_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'number_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
                                 </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.contact panner') </label>
+                                        <input type="file" name="settings[contact_panner]" class="form-control">
+                                        <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                            <img src="{{ Storage::url($settings->where('key', 'contact_panner')->pluck('value')->first()) }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[contact_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'contact_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.course panner') </label>
+                                        <input type="file" name="settings[course_panner]" class="form-control">
+                                        <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                            <img src="{{ Storage::url($settings->where('key', 'course_panner')->pluck('value')->first()) }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[course_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'course_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.service panner') </label>
+                                        <input type="file" name="settings[service_panner]" class="form-control">
+                                        <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                            <img src="{{ Storage::url($settings->where('key', 'service_panner')->pluck('value')->first()) }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[service_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'service_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.accreditation panner') </label>
+                                        <input type="file" name="settings[accreditation_panner]" class="form-control">
+                                        <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                            <img src="{{ Storage::url($settings->where('key', 'accreditation_panner')->pluck('value')->first()) }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[accreditation_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'accreditation_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.partner panner') </label>
+                                        <input type="file" name="settings[partner_panner]" class="form-control">
+                                        <label for="" class="preview" style="max-width:200px;max-height: 100px;">
+                                            <img src="{{ Storage::url($settings->where('key', 'partner_panner')->pluck('value')->first()) }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group pb-3">
+                                        <label>@lang('site.color') </label>
+                                        <input type="color" name="settings[partner_panner_color]" class="form-control h-45px" value="{{ $settings->where('key', 'partner_panner_color')->pluck('value')->first() ?? '#ffffff' }}">
+                                    </div>
+                                </div>
+
 
                                 <div class="form-group pb-3">
                                     <label>@lang('site.youtube panner') </label>

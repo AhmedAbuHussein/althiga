@@ -13,9 +13,9 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
+    <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'service_panner')->pluck('value')->first()) }})">
         <div class="container">
-            <h1>@lang('About')</h1>
+            <h1>@lang('Services')</h1>
             <ul class="fa">
                 <li><a href="{{ route('index') }}">@lang('Home')</a></li>
                 <li><a href="#">@lang('Services')</a></li>
@@ -108,15 +108,6 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('footer')
     @parent
 @endsection
-
-@push('css')
-    <style>
-        .taber.active{
-
-        }
-    </style>
-@endpush
-
 @push('js')
     <script>
         $('.services-single-menu').on('click', '.taber', function(event){
@@ -128,3 +119,19 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         })
     </script>
 @endpush
+
+@push('css')
+    <style>
+        .taber.active{
+
+        }
+        .page-title-section h1,
+        .page-title-section ul li:after,
+        .page-title-section ul li a
+        {
+            color: {{ $panners->where('key', 'service_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
+    
+    </style>
+@endpush
+

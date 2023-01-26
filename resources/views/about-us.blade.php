@@ -13,7 +13,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ $num_panner }});">
+    <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'about_panner')->pluck('value')->first()) }});">
         <div class="container">
             <h1>@lang('About')</h1>
             <ul class="fa">
@@ -91,7 +91,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
 
         <!-- Counters Section START -->
         <div class="section-block-parallax section-md"
-            style="background-image: url({{ $num_panner }});">
+            style="background-image: url({{ Storage::url($panners->where('key', 'number_panner')->pluck('value')->first()) }});">
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 col-sm-5 col-12">
@@ -180,5 +180,16 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         .team-member-text h4{
             font-size: 13pt;
         }
+        .page-title-section h1,
+        .page-title-section ul li:after,
+        .page-title-section ul li a
+        {
+            color: {{ $panners->where('key', 'about_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
+
+        .section-block-parallax .container * {
+            color: {{ $panners->where('key', 'number_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
     </style>
+
 @endpush

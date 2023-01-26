@@ -89,9 +89,13 @@ class SettingController extends Controller
                 'website_wide_logo',
                 'website_icon',
                 'website_cover',
+                "contact_panner",
                 "number_panner",
                 "course_panner",
-                "contact_panner",
+                "about_panner",
+                "service_panner",
+                "partner_panner",
+                "accreditation_panner",
             ]))
                 \App\Models\Setting::updateOrCreate(['key'=> $key],['value'=>$value]);
         }
@@ -117,6 +121,9 @@ class SettingController extends Controller
             \App\Models\Setting::updateOrCreate(['key'=> 'website_cover'], ['value'=>$file]);
         }
 
+        #-------------------------------------
+        # panners
+        #-----------------------------------
         if($request->hasFile('settings.contact_panner')){
             $old = optional(\App\Models\Setting::where('key','contact_panner')->first())->value;
             $file = uploadImage($request->file('settings.contact_panner'),  $old, "contact-panner-");   
@@ -134,6 +141,32 @@ class SettingController extends Controller
             $file = uploadImage($request->file('settings.course_panner'),  $old, "course-panner-");   
             \App\Models\Setting::updateOrCreate(['key'=> 'course_panner'], ['value'=>$file]);
         }
+
+        if($request->hasFile('settings.about_panner')){
+            $old = optional(\App\Models\Setting::where('key','about_panner')->first())->value;
+            $file = uploadImage($request->file('settings.about_panner'),  $old, "about-panner-");   
+            \App\Models\Setting::updateOrCreate(['key'=> 'about_panner'], ['value'=>$file]);
+        }
+
+        if($request->hasFile('settings.service_panner')){
+            $old = optional(\App\Models\Setting::where('key','service_panner')->first())->value;
+            $file = uploadImage($request->file('settings.service_panner'),  $old, "service-panner-");   
+            \App\Models\Setting::updateOrCreate(['key'=> 'service_panner'], ['value'=>$file]);
+        }
+
+        if($request->hasFile('settings.partner_panner')){
+            $old = optional(\App\Models\Setting::where('key','partner_panner')->first())->value;
+            $file = uploadImage($request->file('settings.partner_panner'),  $old, "partner-panner-");   
+            \App\Models\Setting::updateOrCreate(['key'=> 'partner_panner'], ['value'=>$file]);
+        }
+
+        if($request->hasFile('settings.accreditation_panner')){
+            $old = optional(\App\Models\Setting::where('key','accreditation_panner')->first())->value;
+            $file = uploadImage($request->file('settings.accreditation_panner'),  $old, "accreditation-panner-");   
+            \App\Models\Setting::updateOrCreate(['key'=> 'accreditation_panner'], ['value'=>$file]);
+        }
+
+
         
         return redirect()->route('admin.setting.index')->with([
             "notify-type"=> "success",

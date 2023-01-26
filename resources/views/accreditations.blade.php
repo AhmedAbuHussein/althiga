@@ -15,7 +15,7 @@
   @section('content')
 
       <!-- Page Title START -->
-      <div class="page-title-section" style="background-image: url({{ asset('web/img/accreditations.jpg') }});">
+      <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'accreditation_panner')->pluck('value')->first()) }})">
           <div class="container">
               <h1>@lang('Local_International_Accreditations_Partnerships')</h1>
               <ul class="fa">
@@ -101,3 +101,16 @@
   @section('footer')
       @parent
   @endsection
+
+  @push('css')
+    <style>
+        .page-title-section h1,
+        .page-title-section ul li:after,
+        .page-title-section ul li a
+        {
+            color: {{ $panners->where('key', 'accreditation_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
+
+    </style>
+
+@endpush

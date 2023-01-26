@@ -19,12 +19,15 @@ class Setting extends Model
         parent::boot();
         static::created(function(){
             Cache::forget("SETTING");
+            Cache::forget("PANNERS");
         });
         static::updated(function(){
             Cache::forget("SETTING");
+            Cache::forget("PANNERS");
         });
         static::deleted(function(){
             Cache::forget("SETTING");
+            Cache::forget("PANNERS");
         });
     }
 

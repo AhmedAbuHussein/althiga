@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer(['layouts.admin', 'layouts.app' , 'layouts.website.header', 'layouts.website.footer', 'about-us', 'contact-us', 'index', 'SEO.index', 'admin.setting.index', 'layouts.website'], function($view) {
-            $settings = Cache::remember("SETTING", Carbon::now()->addDays(6), function(){
+            $settings = Cache::remember("SETTING", Carbon::now()->addDays(30), function(){
                 return \App\Models\Setting::get();
             });
             $view->with(['settings'=> $settings]);
@@ -63,6 +63,13 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['_popular'=> $_popular, '_courses'=> $_courses, '_categories'=> $_categories]);
         });
         
+
+        view()->composer("*", function($view) {
+            $panners = Cache::remember("PANNERS", Carbon::now()->addDays(30), function(){
+                return \App\Models\Setting::where("key", "LIKE", "%panner%")->get();
+            });
+            $view->with(['panners'=> $panners]);
+        });
 
 
         // try{

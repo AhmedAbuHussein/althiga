@@ -13,7 +13,7 @@ $dir = app()->isLocale('en') ? 'ltr' : 'rtl';
 @section('content')
 
     <!-- Page Title START -->
-    <div class="page-title-section" style="background-image: url({{ asset('web/img/sub-pages-background.png') }});">
+    <div class="page-title-section" style="background-image: url({{ Storage::url($panners->where('key', 'course_panner')->pluck('value')->first()) }})">
         <div class="container">
             <h1>@lang('Courses_Schedule')</h1>
             <ul class="fa">
@@ -95,5 +95,12 @@ $dir = app()->isLocale('en') ? 'ltr' : 'rtl';
             border-bottom-left-radius: 3px;
             color: #fff;
         }
+        .page-title-section h1,
+        .page-title-section ul li:after,
+        .page-title-section ul li a
+        {
+            color: {{ $panners->where('key', 'course_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+        }
+    
     </style>
 @endpush
