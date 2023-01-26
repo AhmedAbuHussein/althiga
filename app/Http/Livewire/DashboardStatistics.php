@@ -48,17 +48,6 @@ class DashboardStatistics extends Component
         return view('livewire.dashboard-statistics', ["data"=>$data, 'flat_colors'=> $flat_colors]);
     }
 
-
-    public function get_to_pages()
-    {
-        $seens = Seen::whereNull("seenable_id")->groupBy(['current_link'])
-                    ->select(DB::raw("current_link as url, COUNT(current_link) as count"))
-                    ->orderBy('count', 'DESC')
-                    ->limit(10)
-                    ->get();
-        return $seens;
-    }
-
     public function get_traffic_label()
     {
         return [
@@ -81,6 +70,19 @@ class DashboardStatistics extends Component
             Seen::whereBetween('created_at', [Carbon::now()->format("Y-m-d")." 00:00:00", Carbon::now()->format("Y-m-d"). " 23:59:59"])->count(),
         ];
     }
+    
+
+    public function get_to_pages()
+    {
+        $seens = Seen::whereNull("seenable_id")->groupBy(['current_link'])
+                    ->select(DB::raw("current_link as url, COUNT(current_link) as count"))
+                    ->orderBy('count', 'DESC')
+                    ->limit(10)
+                    ->get();
+        return $seens;
+    }
+
+   
 
     public function top_os()
     {

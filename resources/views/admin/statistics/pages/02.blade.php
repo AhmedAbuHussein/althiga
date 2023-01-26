@@ -29,8 +29,12 @@ ol li{
         <hr style="width: 95%;margin-top: 0">
         <div id="content" style="padding: 30px">
             <ol class="main" style="direction: rtl">
-                <li> المعلومات العامة</li>
-                <li>احصائيات الموقع</li>
+                <li> الصفحات الاكثر زيارة</li>
+                <li> الاجهزه الاعلي استخدام</li>
+                <li> المتصفحات الاعلي استخدام</li>
+                <li> الدومين الاعلي استخدام</li>
+                <li> الدورات الاكثر زيارة</li>
+                <li> انظمة التشغيل الاعلي استخدام</li>
                 <li>عرض البيانات</li>
             </ol>
         </div>

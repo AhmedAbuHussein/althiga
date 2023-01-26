@@ -39,7 +39,7 @@
             <table id="customers" class=" w3-round-xlarge" style="direction: rtl">
                 <tr>
                     <td class="head" width="50%">عدد البرامج</td>
-                    <td>1500</td>
+                    <td>{{ $courses }}</td>
                 </tr>
                 <tr>
                     <td class="head">الاجهزه</td>

@@ -31,7 +31,7 @@
     <img src="{{config('report.url')}}/pdf/report/Page.png" alt=""  style="width: 110%;margin: 0;padding: 0">
     <div id="header">
         <div style="margin-top: -1115px"></div>
-        <h3 style="text-align: right;color:#2e8b9f;font-weight: bold;padding-top:10px;margin-right: 20px">كل البيانات
+        <h3 style="text-align: right;color:#2e8b9f;font-weight: bold;padding-top:10px;margin-right: 20px">{{ $title }}
             <img src="{{config('report.url')}}/pdf/report/icons/id-card-2.png" height="40" alt="">
         </h3>
         <hr style="width: 95%;margin-top: 0">
@@ -40,13 +40,11 @@
                 <thead>
                 <tr>
                     <th class="head">م</th>
-                    <th class="head">IP</th>
-                    <th class="head"> الدولة</th>
-                    <th class="head"> نظام التشغيل</th>
-                    <th class="head">الدورات</th>
+                    <th class="head">العنوان</th>
+                    <th class="head">العدد</th>
                 </tr>
                 </thead>
-                @foreach($items as $item)
+                @foreach($data as $item)
                     @if($loop->iteration %15 == 0)
             </table>
         </div>
@@ -60,7 +58,7 @@
     <img src="{{config('report.url')}}/pdf/report/Page.png" alt=""  style="width: 110%;margin: 0;padding: 0">
     <div id="header">
         <div style="margin-top: -1115px"></div>
-        <h3 style="text-align: right;color:#2e8b9f;font-weight: bold;padding-top:10px;margin-right: 20px">كل البيانات
+        <h3 style="text-align: right;color:#2e8b9f;font-weight: bold;padding-top:10px;margin-right: 20px">{{ $title }}
             <img src="{{config('report.url')}}/pdf/report/icons/id-card-2.png" height="40" alt="">
         </h3>
         <hr style="width: 95%;margin-top: 0">
@@ -69,20 +67,16 @@
                 <thead>
                 <tr>
                     <th class="head">م</th>
-                    <th class="head">IP</th>
-                    <th class="head"> الدولة</th>
-                    <th class="head"> نظام التشغيل</th>
-                    <th class="head">الدورات</th>
+                    <th class="head">العنوان</th>
+                    <th class="head">العدد</th>
                 </tr>
                 </thead>
                 @endif
 
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$item->ip}}</td>
-                    <td>{{ $item->country_name }}</td>
-                    <td>{{$item->os}}</td>
-                    <td>{{ $item->seenable->title }}</td>
+                    <td>{{$item->{$val} }}</td>
+                    <td>{{ $item->{$key}  }}</td>
                 </tr>
                 @endforeach
 

@@ -3,7 +3,7 @@
 <html  lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sumo Report</title>
+<title>Althiga Report</title>
 <style>
     /* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
     html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
@@ -244,7 +244,12 @@
 <body>
     @include('admin.statistics.pages.01')
     @include('admin.statistics.pages.02')
-    @include('admin.statistics.pages.03')
+    @include('admin.statistics.pages.05', ['title'=> "الصفحات الاكثر زيارة", 'data'=> $pages, 'key'=> 'count', 'val'=> 'url'])
+    @include('admin.statistics.pages.05', ['title'=> "الاجهزه الاكثر استخدام", 'data'=> $devices, 'key'=> 'count', 'val'=> 'device_name'])
+    @include('admin.statistics.pages.05', ['title'=> " المتصفحات الاعلي استخدام", 'data'=> $browsers, 'key'=> 'count', 'val'=> 'browser'])
+    @include('admin.statistics.pages.05', ['title'=> " الدومين الاعلي استخدام", 'data'=> $domains, 'key'=> 'domain_count', 'val'=> 'main_domain'])
+    @include('admin.statistics.pages.05', ['title'=> "الدورات الاكثر زيارة", 'data'=> $courses, 'key'=> 'seens_count', 'val'=> 'title'])
+    @include('admin.statistics.pages.05', ['title'=> "انظمة التشغيل الاعلي استخدام", 'data'=> $top_os, 'key'=> 'count', 'val'=> 'os_type'])
     @include('admin.statistics.pages.04')
     @include('admin.statistics.pages.cover')
 </body>

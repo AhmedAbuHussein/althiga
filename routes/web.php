@@ -30,7 +30,7 @@ Route::get('/artisan', function(){
 Route::group(['middleware'=> 'seen'], function() {
 
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
-    Route::get('/about', [\App\Http\Controllers\IndexController::class, 'about'])->name('about');
+    Route::get('/about-us', [\App\Http\Controllers\IndexController::class, 'about'])->name('about');
     Route::get('/gallery', [\App\Http\Controllers\IndexController::class, 'gallery'])->name('gallery');
     Route::get('/contact-us', [\App\Http\Controllers\IndexController::class, 'contact'])->name('contact');
     Route::post('/contact-us', [\App\Http\Controllers\IndexController::class, 'contact_post']);
