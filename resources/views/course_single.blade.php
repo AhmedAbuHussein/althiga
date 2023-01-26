@@ -225,6 +225,13 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
         content: "\f192";
     }
 
+    .page-title-section h1,
+    .page-title-section ul li:after,
+    .page-title-section ul li a
+    {
+        color: {{ $panners->where('key', 'course_panner_color')->pluck('value')->first() ?? '#FFF' }} !important;
+    }
+
 </style>
 @else
 <style>
