@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Mail\ContactTicketMail;
 use App\Models\Team;
 use App\Models\Tour;
@@ -119,6 +120,7 @@ class IndexController extends Controller
             $contact = Contact::create($data);
             try {
                 Mail::to($request->email)->send(new ContactTicketMail($ticket));
+                Mail::to("admin@althiga.com")->send(new ContactMail($request->title, $contact->id));
             } catch (\Throwable $th) {
                 Toastr::warning($th->getMessage(), __('alert'));
             }
