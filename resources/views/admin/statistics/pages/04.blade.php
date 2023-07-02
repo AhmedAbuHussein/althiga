@@ -82,7 +82,7 @@
                     <td>{{$item->ip}}</td>
                     <td>{{ $item->country_name }}</td>
                     <td>{{$item->os}}</td>
-                    <td>{{ $item->seenable->title }}</td>
+                    <td>{{ optional($item->seenable)->title }}</td>
                 </tr>
                 @endforeach
 
