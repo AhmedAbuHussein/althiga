@@ -59,7 +59,9 @@ class Category extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom(function($model) {
+                return $model->getTranslation('title', 'en');
+            })
             ->saveSlugsTo('slug');
     }
 

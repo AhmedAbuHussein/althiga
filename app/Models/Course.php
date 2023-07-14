@@ -17,6 +17,7 @@ class Course extends Model
     protected $guarded = ['id'];
     protected $casts = ['days' => "array"];
     protected $appends = ['url', 'fileUrl'];
+
     public $translatable = [
         'title', 
         'title2', 
@@ -67,7 +68,9 @@ class Course extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom(function($model) {
+                return $model->getTranslation('title', 'en');
+            })
             ->saveSlugsTo('slug');
     }
     

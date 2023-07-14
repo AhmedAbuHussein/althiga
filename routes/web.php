@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\RoutingController;
 use App\Models\Course;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\RoutingController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/artisan', function(){
+    $items = Category::get();
+    foreach($items as $item){
+        $item->update([
+            "slug"=> Str::slug($item->getTranslation('title', 'en'))
+        ]);
+    }
     //Artisan::call("storage:link");
     Artisan::call("optimize:clear");
     //Artisan::call("migrate");
