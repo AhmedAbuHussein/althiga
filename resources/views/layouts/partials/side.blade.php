@@ -178,6 +178,26 @@
                 </a>
             </div>
             @endif
+            @if (auth()->user()->can("institute_terms_show"))
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.terms') }}" href="{{ route('admin.terms.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-lock"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.terms')</span>
+                </a>
+            </div>
+            @endif
+            @if (auth()->user()->can("course_terms_show"))
+            <div class="menu-item">
+                <a class="menu-link {{ active('admin.privacies') }}" href="{{ route('admin.privacies.index') }}">
+                    <span class="menu-icon">
+                        <i class="la la-lock"></i>
+                    </span>
+                    <span class="menu-title">@lang('site.privacies')</span>
+                </a>
+            </div>
+            @endif
             @if (auth()->user()->can("setting"))
             <div class="menu-item">
                 <a class="menu-link {{ active('admin.setting') }}" href="{{ route('admin.setting.index') }}">

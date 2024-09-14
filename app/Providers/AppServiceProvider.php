@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['_notifys'=> $notifications ?? []]);
         });
 
-        view()->composer(['layouts.admin', 'layouts.app' , 'layouts.website.header', 'layouts.website.footer', 'about-us', 'contact-us', 'index', 'SEO.index', 'admin.setting.index', 'layouts.website'], function($view) {
+        view()->composer(['layouts.admin', 'layouts.app' , 'layouts.website.header', 'layouts.website.footer', 'about-us', 'contact-us', 'index', 'SEO.index', 'admin.setting.index', 'layouts.website', 'aramco.index'], function($view) {
             $settings = Cache::remember("SETTING", Carbon::now()->addDays(30), function(){
                 return \App\Models\Setting::get();
             });

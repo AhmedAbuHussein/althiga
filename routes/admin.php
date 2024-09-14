@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> "dashboard", 'as'
     Route::resource("accreditations", \App\Http\Controllers\Admin\AccreditationController::class);
     Route::resource("statistics", \App\Http\Controllers\Admin\StatisticsController::class)->only(['index', 'show', 'destroy']);
     Route::resource("categories", \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource("terms", \App\Http\Controllers\Admin\InstituteTermController::class);
+    Route::resource("privacies", \App\Http\Controllers\Admin\CourseTermController::class);
     Route::resource("galleries", \App\Http\Controllers\Admin\GalleryController::class);
     Route::resource("partners", \App\Http\Controllers\Admin\PartnerController::class);
     Route::resource("sliders", \App\Http\Controllers\Admin\SliderController::class);

@@ -53,6 +53,10 @@
                             data-opentab="codes-tab">
                             <span class="la la-code me-2"></span> @lang('site.codes')
                         </div>
+                        <div class="d-flex justify-content-center align-items-center p-0 settings-tab-opener"
+                            data-opentab="aramco-tab">
+                            <span class="la la-code me-2"></span> @lang('Aramco')
+                        </div>
                     </div>
                     <form class="col-12 row " id="validate-form" method="POST" action="{{ route('admin.setting.update') }}"
                         enctype="multipart/form-data">
@@ -538,6 +542,86 @@
                                         style="min-height: 200px;text-align: left;direction: ltr;">{{ $settings->where('key', 'map')->pluck('value')->first() }}</textarea>
                                 </div>
                             </div>
+
+                            <div class="row col-12 p-0 taber" id="aramco-tab">
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Banner title Arabic')
+                                        </label>
+                                        <input type="text" name="settings[aramco_banner_title_ar]" class="form-control"
+                                            value="{{ $settings->where('key', 'aramco_banner_title_ar')->pluck('value')->first() }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Banner title english')
+                                        </label>
+                                        <input type="text" name="settings[aramco_banner_title_en]" class="form-control"
+                                            value="{{ $settings->where('key', 'aramco_banner_title_en')->pluck('value')->first() }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Banner details Arabic')
+                                        </label>
+                                        <textarea rows="2" name="settings[aramco_banner_details_ar]" class="form-control"
+                                            >{!! $settings->where('key', 'aramco_banner_details_ar')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Banner details english')
+                                        </label>
+                                        <textarea rows="2" name="settings[aramco_banner_details_en]" class="form-control"
+                                        >{!! $settings->where('key', 'aramco_banner_details_en')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Form Message Arabic (Single)')
+                                        </label>
+                                        <textarea rows="2" name="settings[single_regestration_msg_ar]" class="form-control summernote_ar"
+                                            >{!! $settings->where('key', 'single_regestration_msg_ar')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Form Message english (Single)')
+                                        </label>
+                                        <textarea rows="2" name="settings[single_regestration_msg_en]" class="form-control summernote_en"
+                                        >{!! $settings->where('key', 'single_regestration_msg_en')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Form Message Arabic (Company)')
+                                        </label>
+                                        <textarea rows="2" name="settings[company_regestration_msg_ar]" class="form-control summernote_ar"
+                                            >{!! $settings->where('key', 'company_regestration_msg_ar')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Form Message english (Company)')
+                                        </label>
+                                        <textarea rows="2" name="settings[company_regestration_msg_en]" class="form-control summernote_en"
+                                        >{!! $settings->where('key', 'company_regestration_msg_en')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <div class="form-group pb-3">

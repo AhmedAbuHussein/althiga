@@ -224,5 +224,10 @@ return [
     "partner panner"=>"Partners Panner",
     "perfect size"=>"The perfect size 2048x512",
     "phone"=>"Phone",
+    "terms"=>"Institute Terms",
+    "privacies"=>"Course Terms",
+    ""=>"",
+    ""=>"",
+    ""=>"",
     ""=>"",
 ];
