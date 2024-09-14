@@ -141,7 +141,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                 <h5>@lang('Download the Registration Form')
                                     <span>(.{{ Str::after(substr($course->register_form_file, -6), ".") }})</span>
                                 </h5>
-                                <i class="fa fa-file-word-o"></i>
+                                <i class="fa fa-file-pdf-o"></i>
                             </div>
                         </a>
                         <!-- Download Button END -->
@@ -224,7 +224,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
     .ul-container > ul li ul li:before{
         content: "\f192";
     }
-
+    
     .page-title-section h1,
     .page-title-section ul li:after,
     .page-title-section ul li a

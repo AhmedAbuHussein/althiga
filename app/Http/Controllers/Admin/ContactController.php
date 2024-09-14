@@ -115,8 +115,8 @@ class ContactController extends Controller
             "type"=> "admin",
         ];
         Conversation::create($data);
-        try {
             Mail::to($contact->email)->send(new GeneralMail($request->title, $request->body));
+        try {
             $contact->update(['has_communicated'=> 1]);
 
             return redirect()->route('admin.contacts.index')->with([

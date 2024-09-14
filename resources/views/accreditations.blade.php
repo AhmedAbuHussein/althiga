@@ -38,15 +38,20 @@
                 @foreach ($items->where('type', 'national') as $item)
                     <!-- Case Block Start -->
                     <div class="col-md-6 col-sm-12 col-12">
-                        <div class="case-block">
+                        <div class="case-block py-2">
                             <div class="row">
-                                <div class="col-md-4 col-sm-4 col-12 pr-0">
-                                    <img style="width: auto;" loading="lazy" src="{{ $item->url }}" alt="TVTC">
+                                <div class="col-md-4 col-sm-4 col-12">
+                                    <img style="max-width: 95%;max-height:130px;" loading="lazy" src="{{ $item->url }}" alt="TVTC">
                                 </div>
                                 <div class="col-md-8 col-sm-8 col-12">
                                     <div class="case-block-inner">
                                         <h4>{{ $item->title }}</h4>
-                                        <p>{{ $item->text }}</p>
+                                        @if ($item->text)
+                                            <p>{{ $item->text }}</p>
+                                        @endif
+                                        @if ($item->file)
+                                            <a target="_blank" download="" href="{{ $item->file_url }}">{{ $item->file_title }}</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -73,14 +78,17 @@
                 @foreach ($items->where('type', 'international') as $item)
                     <!-- Case Block Start -->
                     <div class="col-md-6 col-sm-12 col-12">
-                        <div class="case-block">
+                        <div class="case-block py-2">
                             <div class="row">
-                                <div class="col-md-4 col-sm-4 col-12 pr-0">
-                                    <img style="width: auto;" loading="lazy" src="{{ $item->url }}" alt="TVTC">
+                                <div class="col-md-4 col-sm-4 col-12">
+                                    <img style="max-width: 95%;max-height:130px;" loading="lazy" src="{{ $item->url }}" alt="TVTC">
                                 </div>
                                 <div class="col-md-8 col-sm-8 col-12">
                                     <div class="case-block-inner">
                                         <h4>{{ $item->title }}</h4>
+                                         @if ($item->text)
+                                            <p>{{ $item->text }}</p>
+                                        @endif
                                         @if ($item->file)
                                             <a target="_blank" download="" href="{{ $item->file_url }}">{{ $item->file_title }}</a>
                                         @endif

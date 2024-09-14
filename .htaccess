@@ -1,0 +1,24 @@
+# RewriteEngine on
+# RewriteCond %{REQUEST_URI} !^public
+# RewriteRule ^(.*)$ public/$1 [L]
+
+<IfModule mod_rewrite.c>
+# That was ONLY to protect you from 500 errors
+# if your server did not have mod_rewrite enabled
+
+RewriteEngine On
+# RewriteBase /
+# NOT needed unless you're using mod_alias to redirect
+
+RewriteCond %{REQUEST_URI} !/public
+RewriteRule ^(.*)$ public/$1 [L]
+# Direct all requests to /public folder
+
+</IfModule>
+RewriteCond %{HTTP_HOST} ^althiga\.net\.sa$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.althiga\.net\.sa$
+RewriteRule ^(.*)$ "http\:\/\/www\.althiga\.net\/$1" [R=301,L]
+RewriteCond %{HTTP_HOST} ^althiga\.com\.sa$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.althiga\.com\.sa$
+RewriteRule ^/?$ "https\:\/\/althiga\.com\/" [R=301,L]
+

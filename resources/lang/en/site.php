@@ -223,6 +223,6 @@ return [
     "accreditation panner"=>"Accreditation Panner",
     "partner panner"=>"Partners Panner",
     "perfect size"=>"The perfect size 2048x512",
-    ""=>"",
+    "phone"=>"Phone",
     ""=>"",
 ];

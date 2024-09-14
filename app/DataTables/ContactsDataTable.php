@@ -32,6 +32,9 @@ class ContactsDataTable extends DataTable
         ->editColumn('email', function($item){
             return '<a href="mailto:'.$item->email.'">'.$item->email.'</a>';
         })
+        ->editColumn('created_at', function($item){
+            return $item->created_at->format('Y-m-d H:ia');
+        })
         ->editColumn('has_communicated', function($item){
             return $item->has_communicated ? '<span class="badge badge-primary">'.__('site.yes').'</span>' : '<span class="badge badge-danger">'.__('site.no').'</span>';
         })
@@ -103,6 +106,8 @@ class ContactsDataTable extends DataTable
             Column::make('name')->title(__('site.name'))->addClass("text-center"),
             Column::make('email')->title(__('site.email'))->addClass("text-center"),
             Column::make('title')->title(__('site.title'))->addClass("text-center"),
+            Column::make('phone')->title(__('site.phone'))->addClass("text-center"),
+            Column::make('created_at')->title(__('site.created_at'))->addClass("text-center"),
             Column::make('has_communicated')->title(__('site.has_communicated'))->addClass("text-center"),
             Column::computed('action', __('site.action')) ->exportable(false)
             ->printable(false)

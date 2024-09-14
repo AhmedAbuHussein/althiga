@@ -23,12 +23,12 @@ use App\Models\Category;
 
 
 Route::get('/artisan', function(){
-    $items = Category::get();
-    foreach($items as $item){
-        $item->update([
-            "slug"=> Str::slug($item->getTranslation('title', 'en'))
-        ]);
-    }
+    // $items = Category::get();
+    // foreach($items as $item){
+    //     $item->update([
+    //         "slug"=> Str::slug($item->getTranslation('title', 'en'))
+    //     ]);
+    // }
     //Artisan::call("storage:link");
     Artisan::call("optimize:clear");
     //Artisan::call("migrate");

@@ -51,7 +51,7 @@
                             @enderror
                         </div>
 
-                        <div class="d-none" id="text">
+                        <div id="text">
                             <div class="form-group">
                                 <label for="">@lang('site.english extra data')</label>
                                 <input type="text" name="text[en]" class="form-control" placeholder="@lang('site.en_extra_ex')" value="{{ old('text.en') }}" >
@@ -67,7 +67,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="d-none" id="file_type">
+                        <div  id="file_type">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -123,6 +123,7 @@
 @endsection
 @push('js')
     <script>
+    /*
         $(()=> {
             let item = $("#type").val();
             handleInputs(item);
@@ -156,5 +157,6 @@
                 $("#text input").val('');
             }
         }
+        */
     </script>
 @endpush

@@ -104,13 +104,25 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                     @enderror
                                 </div>
                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                    <input type="text" placeholder="@lang('phone')" name="phone" autocomplete="off" value="{{ old('phone') }}" required class="form-control">
+                                    @error('phone')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                    <input type="text" placeholder="@lang('title')" name="title" autocomplete="off" value="{{ old('title') }}" required class="form-control">
+                                    @error('title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                             </div>
+                            
                         </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="@lang('title')" name="title" autocomplete="off" value="{{ old('title') }}" required class="form-control">
-                            @error('title')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
+                        
                         <div class="form-group">
                             <textarea rows="8" name="message" placeholder="@lang('message')" autocomplete="off" required class="form-control">{{ old('message') }}</textarea>
                             @error('name')
