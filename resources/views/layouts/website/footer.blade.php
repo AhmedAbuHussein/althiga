@@ -21,6 +21,7 @@
                     @foreach ($_courses as $item)
                         <li><a href="{{ route('courses.show', ['slug' => $item->slug]) }}">{{ $item->title }}</a></li>
                     @endforeach
+                    <li><a href="{{ route('aramco.register') }}">@lang('Register')</a></li>
                     <li><a href="{{ route('courses.index') }}">@lang('Courses_Schedule')</a></li>
                     <li><a href="{{ route('tours') }}">@lang('Virtual_Tour')</a></li>
                     <li><a href="{{ route('gallery') }}">@lang('Pictures_for_Courses')</a></li>
@@ -28,6 +29,7 @@
                     <li><a href="{{ route('partners') }}">@lang('Valuable_Customers')</a></li>
                     <li><a href="{{ route('about') }}">@lang('About')</a></li>
                     <li><a href="{{ route('contact') }}">@lang('ContactUs')</a></li>
+                    
                    
                 </ul>
             </div>

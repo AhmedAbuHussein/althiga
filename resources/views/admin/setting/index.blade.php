@@ -587,7 +587,7 @@
                                         <label>
                                             @lang('Form Message Arabic (Single)')
                                         </label>
-                                        <textarea rows="2" name="settings[single_regestration_msg_ar]" class="form-control summernote_ar"
+                                        <textarea rows="2" name="settings[single_regestration_msg_ar]" class="form-control editor"
                                             >{!! $settings->where('key', 'single_regestration_msg_ar')->pluck('value')->first() !!}</textarea>
                                     </div>
                                 </div>
@@ -596,7 +596,7 @@
                                         <label>
                                             @lang('Form Message english (Single)')
                                         </label>
-                                        <textarea rows="2" name="settings[single_regestration_msg_en]" class="form-control summernote_en"
+                                        <textarea rows="2" name="settings[single_regestration_msg_en]" class="form-control editor"
                                         >{!! $settings->where('key', 'single_regestration_msg_en')->pluck('value')->first() !!}</textarea>
                                     </div>
                                 </div>
@@ -606,7 +606,7 @@
                                         <label>
                                             @lang('Form Message Arabic (Company)')
                                         </label>
-                                        <textarea rows="2" name="settings[company_regestration_msg_ar]" class="form-control summernote_ar"
+                                        <textarea rows="2" name="settings[company_regestration_msg_ar]" class="form-control editor"
                                             >{!! $settings->where('key', 'company_regestration_msg_ar')->pluck('value')->first() !!}</textarea>
                                     </div>
                                 </div>
@@ -615,8 +615,18 @@
                                         <label>
                                             @lang('Form Message english (Company)')
                                         </label>
-                                        <textarea rows="2" name="settings[company_regestration_msg_en]" class="form-control summernote_en"
+                                        <textarea rows="2" name="settings[company_regestration_msg_en]" class="form-control editor"
                                         >{!! $settings->where('key', 'company_regestration_msg_en')->pluck('value')->first() !!}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group pb-3">
+                                        <label>
+                                            @lang('Email Message for clients after register aramco course (English)')
+                                        </label>
+                                        <textarea rows="2" name="settings[aramco_client_email]" class="form-control editor"
+                                        >{!! $settings->where('key', 'aramco_client_email')->pluck('value')->first() !!}</textarea>
                                     </div>
                                 </div>
 

@@ -1,5 +1,5 @@
 <div class="accordion" id="accordionExample">
-    @foreach ($items as $item)
+    @forelse ($items as $item)
     <div class="card">
         <div class="card-header" id="heading_{{$loop->iteration}}">
             <h2 class="mb-0">
@@ -15,6 +15,10 @@
             </div>
         </div>
     </div>
-    @endforeach
+    @empty
+    <div class="card-body">
+        No Data Available!
+    </div>
+    @endforelse
     
 </div>

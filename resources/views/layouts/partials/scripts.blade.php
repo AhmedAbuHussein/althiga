@@ -9,8 +9,13 @@
     <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
     <script src="{{ asset('assets/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('assets/summernote/summernote-ar-AR.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tinymce/tinymce.min.js') }}"></script>
+
     <script src="{{ asset('js/app.js') }}"></script>
     @livewireScripts
+
+    @include('layouts.partials.tinymce')
+
     
     @if (Session::get('notify-message'))
         @include("layouts.partials.notify")

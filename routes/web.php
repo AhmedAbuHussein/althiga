@@ -53,7 +53,7 @@ Route::group(['middleware'=> 'seen'], function() {
     Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services');
     Route::get('services/{slug}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
 
-    Route::get('aramco-registration', [\App\Http\Controllers\AramcoRegistrationController::class, 'index'])->name('aramco.register');
+    Route::get('aramco-registration-wpr', [\App\Http\Controllers\AramcoRegistrationController::class, 'index'])->name('aramco.register');
 });
 Route::get('terms', [\App\Http\Controllers\AramcoRegistrationController::class, 'terms'])->name('aramco.register.terms');
 Route::get('privacy', [\App\Http\Controllers\AramcoRegistrationController::class, 'privacy'])->name('aramco.register.privacy');

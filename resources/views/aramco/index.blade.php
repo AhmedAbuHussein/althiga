@@ -102,31 +102,31 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="card main-card my-4">
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">@lang('Individual/Group')</button>
+                                <button class="nav-link {{ !request()->has('company') ? 'active' : '' }}" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">@lang('Individual/Group')</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">@lang('Company')</button>
+                                <button class="nav-link {{ request()->has('company') ? 'active' : '' }}" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">@lang('Company')</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active pt-4" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade {{ !request()->has('company') ? 'show active' : '' }} pt-4" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="my-3">
                                     <div class="alert alert-info" role="alert">
                                         <p><strong>@lang('Alert')!! </strong></p>
                                         {!! $settings->where('key', 'single_regestration_msg_'.app()->getLocale())->pluck('value')->first() !!}
                                     </div>
                                 </div>
-                                <form action="{{route('aramco.register.single')}}" method="POST">
+                                <form action="{{route('aramco.register.single')}}" id="contact_form" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="text-muted" for="fname">@lang('First Name')</label>
+                                                <label class="text-muted" for="fname">@lang('First Name') <span class="required">*</span> </label>
                                                 <input type="text" name="fname" class="form-control" value="{{old('fname')}}" id="fname" placeholder="@lang('First Name')" required>
                                                 @error('fname')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="text-muted" for="lname">@lang('Last Name')</label>
+                                                <label class="text-muted" for="lname">@lang('Last Name') <span class="required">*</span> </label>
                                                 <input type="text" name="lname" class="form-control" value="{{old('lname')}}" id="lname" placeholder="@lang('Last Name')" required>
                                                 @error('lname')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -145,7 +145,7 @@
                                     </div>
                                    
                                     <div class="form-group">
-                                        <label class="text-muted" for="national_id">@lang('National ID / Passport')</label>
+                                        <label class="text-muted" for="national_id">@lang('National ID / Passport') <span class="required">*</span> </label>
                                         <input type="text" name="national_id" class="form-control" value="{{old('national_id')}}" id="national_id" placeholder="@lang('National ID / Passport')" required>
                                         @error('national_id')
                                         <span class="text-danger">{{ $message }}</span>
@@ -153,21 +153,21 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="text-muted" for="email">@lang('Email Address')</label>
+                                        <label class="text-muted" for="email">@lang('Email Address') <span class="required">*</span> </label>
                                         <input type="email" name="email" class="form-control" value="{{old('email')}}" id="email" placeholder="@lang('Email Address')" required>
                                         @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-muted" for="phone">@lang('Phone Number')</label>
+                                        <label class="text-muted" for="phone">@lang('Phone Number') <span class="required">*</span> </label>
                                         <input type="number" pattern="/^(\+)?(05|9665|009665)([0-9]{8})$/" name="phone" class="form-control" value="{{old('phone')}}" id="phone" placeholder="@lang('Phone Number')" required>
                                         @error('phone')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-muted" for="group_number">@lang('Group Number')</label>
+                                        <label class="text-muted" for="group_number">@lang('Group Number') <span class="required">*</span> </label>
                                         <input type="number" step="1" min="1" value="{{old('group_number', 1)}}" name="group_number" class="form-control" id="group_number" placeholder="@lang('Group Number')" required>
                                         @error('group_number')
                                         <span class="text-danger">{{ $message }}</span>
@@ -179,7 +179,7 @@
                                             <input class="form-check-input" required value="1" {{ old('terms_institute', 0) == '1' ? 'checked' : '' }} type="checkbox" name="terms_institute" id="terms_institute">
                                             <label class="form-check-label text-muted" for="terms_institute">
                                             @lang("Acceptance of the Institute's Terms and Conditions", ['href'=> route('aramco.register.terms')])
-                                            </label>
+                                             <span class="required">*</span> </label>
                                         </div>
                                     </div>
 
@@ -188,10 +188,16 @@
                                             <input class="form-check-input" required value="1" {{ old('terms_course', 0) == '1' ? 'checked' : '' }} type="checkbox" name="terms_course" id="terms_course">
                                             <label class="form-check-label text-muted" for="terms_course">
                                             @lang("Accept the course terms and conditions", ['href'=> route('aramco.register.privacy')])
-                                            </label>
+                                             <span class="required">*</span> </label>
                                         </div>
                                     </div>
 
+                                    <div class="form-group mb-4">
+                                        <div id="recaptcha1"></div>
+                                        @error('g-recaptcha-response')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
                                     <div class="form-group mb-3">
                                         <button type="submit" class="btn btn-primary w-100">@lang('Submit')</button>
@@ -199,82 +205,87 @@
 
                                 </form>
                             </div>
-                            <div class="tab-pane fade pt-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade {{ request()->has('company') ? 'show active' : '' }} pt-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="my-3">
                                     <div class="alert alert-info" role="alert">
                                         <p><strong>@lang('Alert')!! </strong></p>
                                         {!! $settings->where('key', 'company_regestration_msg_'.app()->getLocale())->pluck('value')->first() !!}
                                     </div>
                                 </div>
-                                <form action="{{route('aramco.register.company')}}" method="POST">
+                                <form action="{{route('aramco.register.company')}}" id="contact_form2" method="POST">
                                     @csrf
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="text-muted" for="fname">@lang('First Name')</label>
-                                                <input type="text" name="fname" class="form-control" value="{{old('fname')}}" id="fname" placeholder="@lang('First Name')" required>
-                                                @error('fname')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="text-muted" for="lname">@lang('Last Name')</label>
-                                                <input type="text" name="lname" class="form-control" value="{{old('lname')}}" id="lname" placeholder="@lang('Last Name')" required>
-                                                @error('lname')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
+                                  
                                     <div class="form-group">
-                                        <label class="text-muted" for="national_id">@lang('National ID / Passport')</label>
-                                        <input type="text" name="national_id" class="form-control" value="{{old('national_id')}}" id="national_id" placeholder="@lang('National ID / Passport')" required>
-                                        @error('national_id')
+                                        <label class="text-muted" for="c_name">@lang('Company Name') <span class="required">*</span> </label>
+                                        <input type="text" name="c_name" class="form-control" value="{{old('c_name')}}" id="c_name" placeholder="@lang('Company Name')" required>
+                                        @error('c_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-muted" for="c_city">@lang('Company City') <span class="required">*</span> </label>
+                                        <select name="c_city" class="form-control select_two" id="c_city" required>
+                                            <option value="">@lang('--select--')</option>
+                                            @foreach ($cities ?? [] as $item)
+                                                <option {{old('c_city') == $item['id'] ? 'selected' : '' }} value="{{ $item['id'] }}">{{ $item['name'][app()->getLocale('en')] }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('c_city')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="text-muted" for="c_employee_number">@lang('Company Employee Number') <span class="required">*</span> </label>
+                                        <select name="c_employee_number" class="form-control select_two" id="c_employee_number" required>
+                                            <option value="">@lang('--select--')</option>
+                                            @foreach ($employees ??[] as $item)
+                                                <option {{old('c_employee_number') == $item['id'] ? 'selected' : '' }} value="{{ $item['id'] }}">{{$item['range']}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('c_employee_number')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="text-muted" for="email">@lang('Email Address')</label>
-                                        <input type="email" name="email" class="form-control" value="{{old('email')}}" id="email" placeholder="@lang('Email Address')" required>
-                                        @error('email')
+                                        <label class="text-muted" for="c_email">@lang('Email Address') <span class="required">*</span> </label>
+                                        <input type="email" name="c_email" class="form-control" value="{{old('c_email')}}" id="c_email" placeholder="@lang('Email Address')" required>
+                                        @error('c_email')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-muted" for="phone">@lang('Phone Number')</label>
-                                        <input type="number" pattern="/^(\+)?(05|9665|009665)([0-9]{8})$/" name="phone" class="form-control" value="{{old('phone')}}" id="phone" placeholder="@lang('Phone Number')" required>
-                                        @error('phone')
+                                        <label class="text-muted" for="c_phone">@lang('Phone Number') <span class="required">*</span> </label>
+                                        <input type="number" name="c_phone" class="form-control" value="{{old('c_phone')}}" id="c_phone" placeholder="@lang('Phone Number')" required>
+                                        @error('c_phone')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <label class="text-muted" for="group_number">@lang('Group Number')</label>
-                                        <input type="number" step="1" min="1" value="{{old('group_number', 1)}}" name="group_number" class="form-control" id="group_number" placeholder="@lang('Group Number')" required>
-                                        @error('group_number')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                                                        
+                                    <div class="form-group mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" required value="1" {{ old('terms_institute', 0) == '1' ? 'checked' : '' }} type="checkbox" name="terms_institute" id="terms_institute_company">
+                                            <label class="form-check-label text-muted" for="terms_institute_company">
+                                                @lang("Acceptance of the Institute's Terms and Conditions", ['href'=> route('aramco.register.terms')])
+                                             <span class="required">*</span> </label>
+                                        </div>
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <div class="form-check">
-                                            <input class="form-check-input" required value="1" {{ old('terms_institute', 0) == '1' ? 'checked' : '' }} type="checkbox" name="terms_institute" id="terms_institute">
-                                            <label class="form-check-label text-muted" for="terms_institute">
-                                            @lang("Acceptance of the Institute's Terms and Conditions", ['href'=> route('aramco.register.terms')])
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" required value="1" {{ old('terms_course', 0) == '1' ? 'checked' : '' }} type="checkbox" name="terms_course" id="terms_course">
-                                            <label class="form-check-label text-muted" for="terms_course">
+                                            <input class="form-check-input" required value="1" {{ old('terms_course', 0) == '1' ? 'checked' : '' }} type="checkbox" name="terms_course" id="terms_course_company">
+                                            <label class="form-check-label text-muted" for="terms_course_company">
                                             @lang("Accept the course terms and conditions", ['href'=> route('aramco.register.privacy')])
-                                            </label>
+                                             <span class="required">*</span> </label>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <div id="recaptcha2"></div>
+                                        @error('g-recaptcha-response')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
 
@@ -326,10 +337,21 @@
 @endsection
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('css/aramco-registration.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/aramco-registration.css') }}">
+    <style>
+        .grecaptcha-badge{
+            z-index: 1;
+        }
+        .required{
+            color: #ff7171
+        }
+    </style>
 @endpush
 
 @push('js')
+   
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(function(){
             $('.open-model').on('click', function(){
@@ -350,7 +372,24 @@
                 $('#staticBackdrop .content').html("")
                 .addClass('d-none');
             });
+
+            $('.select_two').select2();
         });
 
+        var recaptcha1;
+        var recaptcha2;
+        var myCallBack = function() {
+            recaptcha1 = grecaptcha.render('recaptcha1', {
+                'sitekey' : '{{ env('RECAPTHA2_KEY') }}'
+            });
+            recaptcha2 = grecaptcha.render('recaptcha2', {
+                'sitekey' : '{{ env('RECAPTHA2_KEY') }}'
+            });
+        }
+        
     </script>
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async></script>
+
+
 @endpush

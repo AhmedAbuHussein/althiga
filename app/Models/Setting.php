@@ -31,9 +31,19 @@ class Setting extends Model
         });
     }
 
+    
+    public static function email_website_logo()
+    {
+        $item = Setting::select("value")->where('key', 'website_logo')->first();
+        if ($item)
+            return Storage::url($item->value);
+        else
+            return asset('web/img/Althiga_hand.png');
+    }
+
     public function website_logo()
     {
-        $item = $this->select("value")->where('key', 'website_logo')->first();
+        $item = Setting::select("value")->where('key', 'website_logo')->first();
         if ($item)
             return Storage::url($item->value);
         else
@@ -42,7 +52,7 @@ class Setting extends Model
 
     public function website_cover()
     {
-        $item = $this->select("value")->where('key', 'website_cover')->first();
+        $item = Setting::select("value")->where('key', 'website_cover')->first();
         if ($item)
             return Storage::url($item->value);
         else
@@ -51,7 +61,7 @@ class Setting extends Model
 
     public function website_wide_logo()
     {
-        $item = $this->select("value")->where('key', 'website_wide_logo')->first();
+        $item = Setting::select("value")->where('key', 'website_wide_logo')->first();
         if ($item)
             return Storage::url($item->value);
         else
@@ -60,7 +70,7 @@ class Setting extends Model
     
     public function website_icon()
     {
-        $item = $this->select("value")->where('key', 'website_icon')->first();
+        $item = Setting::select("value")->where('key', 'website_icon')->first();
         if ($item)
             return Storage::url($item->value);
         else
@@ -69,7 +79,7 @@ class Setting extends Model
 
     public function main_color()
     {
-        $item = $this->select("value")->where('key', 'main_color')->first();
+        $item = Setting::select("value")->where('key', 'main_color')->first();
         if ($item)
             return $item->value;
         else
@@ -78,7 +88,7 @@ class Setting extends Model
     }
     public function hover_color()
     {
-        $item = $this->select("value")->where('key', 'hover_color')->first();
+        $item = Setting::select("value")->where('key', 'hover_color')->first();
         if ($item)
             return $item->value;
         else
@@ -87,7 +97,7 @@ class Setting extends Model
     }
     public function phone()
     {
-        $item = $this->select("value")->where('key', 'phone')->first();
+        $item = Setting::select("value")->where('key', 'phone')->first();
         if ($item)
             return $item->value;
         else

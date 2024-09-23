@@ -1,3 +1,11 @@
+body{
+    overflow-x: hidden;
+    position: relative;
+}
+.scroll-to-top{
+    bottom: 1px;
+}
+
 .modal-content{
     min-width: 800px;
 }
@@ -114,65 +122,6 @@
     right: 0;
 }
 
-@media (min-width: 650px) {
-    .responsive-banner .col-xs-12 {
-        -webkit-align-self: center;
-        -ms-flex-item-align: center;
-        align-self: center;
-    }
-
-    .responsive-banner .container-envelope {
-        max-width: calc(100% - 300px);
-    }
-}
-
-@media (max-width: 920px) {
-    .responsive-banner h1 {
-        font-size: 35px;
-    }
-
-    .responsive-banner p {
-        font-size: 20px;
-        text-align: justify;
-    }
-
-    .container-envelope {
-        margin-top: 80px;
-        min-height: 35vh;
-        margin-left: 30px;
-    }
-}
-
-@media (max-width: 720px) {
-    .modal-content{
-        min-width: 100%;
-    }
-    .responsive-banner {
-        min-height: 30vh;
-    }
-
-    .responsive-banner .container-envelope {
-        max-width: 100%;
-        min-height: 20vh;
-        margin: auto 30px;
-        margin-top: 165px;
-    }
-
-    .small-hidden {
-        display: none !important;
-    }
-
-    .responsive-banner h1 {
-        font-size: 25px;
-    }
-
-    .responsive-banner p {
-        font-size: 13px;
-        text-align: justify;
-    }
-
-}
-
 .main {
     min-height: 100vh;
     background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
@@ -208,11 +157,7 @@
     animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
 }
 
-@media screen and (max-width: 750px) {
-    .star {
-        animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
-    }
-}
+
 
 .star:nth-child(1) {
     --star-tail-length: 5.62em;
@@ -659,7 +604,7 @@ label.text-muted {
 }
 
 .form-check-label{
-    padding: 0px 20px;
+    padding: 0px 20px 0px 6px;
 }
 
 input[type="radio"], input[type="checkbox"]{
@@ -673,3 +618,104 @@ label a:hover,
 label a:focus{
     color: #2c2c91;
 } 
+
+.select2-container {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+    display: block;
+    width: 100% !important;
+}
+.select2-container .select2-selection--single{
+    height: 38px;
+}
+
+.select2-container--default .select2-selection--single{
+    background-color: #3939398f;
+    border-radius: 7px;
+    color: #e5e5e5;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 38px;
+    color: #e5e5e5
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 38px;
+}
+.select2-results__option{
+    color: #0c0d13;
+}
+@media (min-width: 650px) {
+    .responsive-banner .col-xs-12 {
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+    }
+
+    .responsive-banner .container-envelope {
+        max-width: calc(100% - 300px);
+    }
+}
+
+@media (max-width: 920px) {
+    .responsive-banner h1 {
+        font-size: 35px;
+    }
+
+    .responsive-banner p {
+        font-size: 20px;
+        text-align: justify;
+    }
+
+    .container-envelope {
+        margin-top: 80px;
+        min-height: 35vh;
+        margin-left: 30px;
+    }
+}
+
+@media (max-width: 720px) {
+    .card.main-card{
+        padding: 8px 0;
+        border-radius: 0;
+    }
+    .modal-content{
+        min-width: 100%;
+    }
+    .responsive-banner {
+        min-height: 30vh;
+    }
+
+    .responsive-banner .container-envelope {
+        max-width: 100%;
+        min-height: 20vh;
+        margin: auto 30px;
+        margin-top: 165px;
+    }
+
+    .small-hidden {
+        display: none !important;
+    }
+
+    .responsive-banner h1 {
+        font-size: 25px;
+    }
+
+    .responsive-banner p {
+        font-size: 13px;
+        text-align: justify;
+    }
+
+    .main-card .card-body{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .star {
+        animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+    }
+}
