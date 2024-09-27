@@ -23,6 +23,10 @@ if (!function_exists("uploadImage")) {
     {
         if (!Storage::exists("$folder")) {
             Storage::makeDirectory("$folder");
+            try {
+                chmod(storage_path("app/public/$folder"), 0777);
+            } catch (Throwable $th) {
+            }
         }
         if ($oldFileName && $oldFileName != "default.png") {
             try {

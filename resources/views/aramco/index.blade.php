@@ -121,7 +121,7 @@
                                         {!! $settings->where('key', 'single_regestration_msg_'.app()->getLocale())->pluck('value')->first() !!}
                                     </div>
                                 </div>
-                                <form action="{{route('aramco.register.single')}}" id="contact_form" method="POST">
+                                <form action="{{route('aramco.register.single')}}" id="contact_form" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -170,6 +170,13 @@
                                         <label class="text-muted" for="group_number">@lang('Group Number') <span class="required">*</span> </label>
                                         <input type="number" step="1" min="1" value="{{old('group_number', 1)}}" name="group_number" class="form-control" id="group_number" placeholder="@lang('Group Number')" required>
                                         @error('group_number')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-muted" for="image">@lang('Personal Image')</label>
+                                        <input type="file" accept="image/*" name="image" class="form-control" id="image" >
+                                        @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

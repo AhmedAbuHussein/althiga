@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegistrationCompanyRequest;
-use App\Http\Requests\RegistrationSingleRequest;
-use App\Mail\RegisterClientEmail;
+use Throwable;
 use App\Models\CourseTerm;
+use Illuminate\Support\Str;
 use App\Models\InstituteTerm;
+use App\Events\UploadImageEvent;
+use App\Mail\RegisterClientEmail;
+use Illuminate\Support\Facades\Log;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Throwable;
+use App\Http\Requests\RegistrationSingleRequest;
+use App\Http\Requests\RegistrationCompanyRequest;
 
 class AramcoRegistrationController extends Controller
 {
     public function index(){
         $cities = [];
         $employees = [];
-        $response = Http::get(env('CRM_FEATCH_DATA'));
+        $response = Http::get(env('CRM_BASE_URL')."/fetch-selection");
         if($response->successful()){
             $data = $response->json();
             $cities = $data['cities'];
@@ -41,15 +44,15 @@ class AramcoRegistrationController extends Controller
     public function single(RegistrationSingleRequest $request){
         $validated = $request->validated();
         try{
-            $response = Http::get("https://www.google.com/recaptcha/api/siteverify", [
-                "secret"=> env("RECAPTCHA2_SECRET", "6Lf8kUwqAAAAAJNL_xkc9wIR7EVM5G-Ij47bIuG8"),
-                "response"=> $request->get('g-recaptcha-response'),
-            ]);
-            if(!$response['success']){
-                $message = $response['error-codes'][0];
-                Toastr::error($message , __('alert'));
-                return redirect()->route('aramco.register')->withInput($validated);
-            }  
+            // $response = Http::get("https://www.google.com/recaptcha/api/siteverify", [
+            //     "secret"=> env("RECAPTCHA2_SECRET", "6Lf8kUwqAAAAAJNL_xkc9wIR7EVM5G-Ij47bIuG8"),
+            //     "response"=> $request->get('g-recaptcha-response'),
+            // ]);
+            // if(!$response['success']){
+            //     $message = $response['error-codes'][0];
+            //     Toastr::error($message , __('alert'));
+            //     return redirect()->route('aramco.register')->withInput($validated);
+            // }  
             $data = [
                 "fname" => $validated['fname'],
                 "lname" => $validated['lname'],
@@ -60,7 +63,12 @@ class AramcoRegistrationController extends Controller
                 "terms_institute"=> $validated['terms_institute'] ?? false,
                 "terms_course"=> $validated['terms_course'] ?? false,
             ];
-            $response = Http::post(env('CRM_SINGLE_STORE'), $data);
+            if($request->hasFile('image')){    
+                $image = uploadImage($request->file('image'), null, 'registration_', false, null, null, 'registrations');
+                $path = storage_path("app/public/$image");
+            }
+
+            $response = Http::post(env('CRM_BASE_URL')."/store-single", $data);
 
             if($response->successful()){
                 Toastr::success(__('Feel free to let me know if you need any adjustments!') , __('alert'));
@@ -74,6 +82,12 @@ class AramcoRegistrationController extends Controller
                     ));
                 } catch (\Throwable $th) {
                     Toastr::warning($th->getMessage(), __('alert'));
+                }
+                if(isset($path) && isset($image)){
+                    $imageName = Str::after($image, 'registrations/');
+                    $itemId = $response->json("item")['id'];
+                    Log::info("[****] Individual Item ID: $itemId", [$response->json()]);
+                    event(new UploadImageEvent($path, $imageName, $itemId));
                 }
                 return redirect()->route('aramco.register');
             }else{
@@ -108,7 +122,7 @@ class AramcoRegistrationController extends Controller
                 "terms_institute"=> $validated['terms_institute'] ?? false,
                 "terms_course"=> $validated['terms_course'] ?? false,
             ];
-            $response = Http::post(env('CRM_COMPANY_STORE'), $data);
+            $response = Http::post(env('CRM_BASE_URL')."/store-company", $data);
             if($response->successful()){
                 Toastr::success(__('Feel free to let me know if you need any adjustments!') , __('alert'));
                 try {

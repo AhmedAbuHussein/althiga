@@ -33,6 +33,7 @@ class RegistrationSingleRequest extends FormRequest
             "group_number"=> "required|min:1",
             "terms_institute"=> "required|boolean",
             "terms_course"=> "required|boolean",
+            "image"=> "sometimes|nullable|image|max:2048",
         ];
     }
 }
