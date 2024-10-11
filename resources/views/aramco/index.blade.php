@@ -91,8 +91,8 @@
             <svg class="cirle-h small-hidden" height="150" width="150">
                 <circle cx="60" cy="60" r="60" />
             </svg>
-            <img src="{{asset('images/aramco.png')}}" />
-            <div class="col-xs-12">
+            <img class="hide-sm" src="{{asset('images/aramco.png')}}" />
+            <div class="box">
                 <h1>{!! $settings->where('key', 'aramco_banner_title_'.app()->getLocale())->pluck('value')->first() !!}</h1>
                 <p> {!! $settings->where('key', 'aramco_banner_details_'.app()->getLocale())->pluck('value')->first() !!}</p>
             </div>

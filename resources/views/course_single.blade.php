@@ -129,6 +129,11 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                     @if ($course->tags->count())
                                     <li><i style="font-weight: 500">@lang('tags'):</i>{{ implode(", ", $course->tags->pluck('title')->toArray()) }}</li>
                                     @endif
+                                    @if ($course->register_url)
+                                    <li>
+                                        <a class="btn btn-block btn-warning text-white" target="_blank" href="{{ $course->register_url }}">@lang('Registration Url')</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

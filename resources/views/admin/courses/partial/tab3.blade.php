@@ -119,6 +119,17 @@
             </div>
         </div>
 
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">@lang('site.course_register_url')</label>
+                <input type="url" name="register_url" class="form-control"
+                    value="{{ old('register_url', isset($course) ? $course->register_url: '') }}">
+                @error('register_url')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
     </div>
     <div class="form-group d-flex @if(isset($prev) && (isset($next) || isset($submit))) justify-content-between @else justify-content-end @endif" style="margin-top: 40px">
        

@@ -226,7 +226,7 @@ return [
     "phone"=>"Phone",
     "terms"=>"Institute Terms",
     "privacies"=>"Course Terms",
-    ""=>"",
+    "course_register_url"=>"Course Register Url",
     ""=>"",
     ""=>"",
     ""=>"",

@@ -15,7 +15,7 @@ body{
     width: 100%;
     min-width: 320px;
     position: relative;
-    min-height: 50vh;
+    height: 600px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: hidden;
@@ -34,11 +34,11 @@ body{
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    min-height: 60vh;
+    /* min-height: 60vh; */
     margin-top: 95px;
 }
 
-.responsive-banner .col-xs-12 {
+.responsive-banner .box {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 100%;
     -ms-flex: 0 0 100%;
@@ -48,12 +48,17 @@ body{
     -ms-flex-item-align: end;
     align-self: flex-end;
     z-index: 2;
+    margin-left: 50px;
 }
 
 .responsive-banner h1 {
     text-align: center;
     margin: 30px 15px;
-    color: #fff
+    color: #fff;
+    max-width: 600px;
+    margin: 0 auto 35px;
+    font-size: 32px;
+    margin-left: inherit;
 }
 
 .responsive-banner p {
@@ -64,6 +69,7 @@ body{
     margin: auto;
     margin-bottom: 20px;
     text-align: start;
+    margin-left: inherit;
 }
 
 
@@ -648,7 +654,7 @@ label a:focus{
     color: #0c0d13;
 }
 @media (min-width: 650px) {
-    .responsive-banner .col-xs-12 {
+    .responsive-banner .box {
         -webkit-align-self: center;
         -ms-flex-item-align: center;
         align-self: center;
@@ -660,13 +666,16 @@ label a:focus{
 }
 
 @media (max-width: 920px) {
+    
     .responsive-banner h1 {
-        font-size: 35px;
+        font-size: 30px;
+        margin-left: inherit;
     }
 
     .responsive-banner p {
         font-size: 20px;
         text-align: justify;
+        margin-left: inherit;
     }
 
     .container-envelope {
@@ -674,9 +683,18 @@ label a:focus{
         min-height: 35vh;
         margin-left: 30px;
     }
+    .responsive-banner .box {
+        margin-left: 15px;
+    }
 }
 
 @media (max-width: 720px) {
+    .hide-sm {
+        display: none !important;
+    }
+    .responsive-banner .box {
+        margin-left: 0;
+    }
     .card.main-card{
         padding: 8px 0;
         border-radius: 0;
@@ -685,14 +703,16 @@ label a:focus{
         min-width: 100%;
     }
     .responsive-banner {
-        min-height: 30vh;
+        height: auto;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
     .responsive-banner .container-envelope {
         max-width: 100%;
         min-height: 20vh;
         margin: auto 30px;
-        margin-top: 165px;
+        margin-top: 10px;
     }
 
     .small-hidden {
@@ -700,12 +720,14 @@ label a:focus{
     }
 
     .responsive-banner h1 {
-        font-size: 25px;
+        font-size: 20px;
+        margin-left: inherit;
     }
 
     .responsive-banner p {
         font-size: 13px;
         text-align: justify;
+        margin-left: inherit;
     }
 
     .main-card .card-body{

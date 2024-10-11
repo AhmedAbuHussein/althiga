@@ -66,6 +66,8 @@ class CourseRequest extends FormRequest
             "discount_group_price"=> "nullable|required_if:show_group_price,1|numeric",
             "group_price_role"=> "nullable|required_if:show_group_price,0|array",
 
+            "register_url"=> "nullable|url",
+
             "file"  => "nullable|file",
             "image"=> "nullable|image",
         ];
