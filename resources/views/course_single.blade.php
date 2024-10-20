@@ -131,7 +131,7 @@ $dir = app()->isLocale('en') ? 'left' : 'right';
                                     @endif
                                     @if ($course->register_url)
                                     <li>
-                                        <a class="btn btn-block btn-warning text-white" target="_blank" href="{{ $course->register_url }}">@lang('Registration Url')</a>
+                                        <a class="btn btn-block btn-warning text-white" target="_blank" href="{{ $course->register_url }}">@lang('Register Now')</a>
                                     </li>
                                     @endif
                                 </ul>

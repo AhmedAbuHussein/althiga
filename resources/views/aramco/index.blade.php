@@ -93,8 +93,8 @@
             </svg>
             <img class="hide-sm" src="{{asset('images/aramco.png')}}" />
             <div class="box">
-                <h1>{!! $settings->where('key', 'aramco_banner_title_'.app()->getLocale())->pluck('value')->first() !!}</h1>
-                <p> {!! $settings->where('key', 'aramco_banner_details_'.app()->getLocale())->pluck('value')->first() !!}</p>
+                <h1 style="text-align: start">{!! $settings->where('key', 'aramco_banner_title_'.app()->getLocale())->pluck('value')->first() !!}</h1>
+                <p style="text-align: justify"> {!! $settings->where('key', 'aramco_banner_details_'.app()->getLocale())->pluck('value')->first() !!}</p>
             </div>
         </div>
     </aside>
@@ -310,7 +310,7 @@
     </div>
 </main>
 
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
