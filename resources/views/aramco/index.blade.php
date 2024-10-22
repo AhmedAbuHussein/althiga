@@ -92,9 +92,11 @@
                 <circle cx="60" cy="60" r="60" />
             </svg>
             <img class="hide-sm" src="{{asset('images/aramco.png')}}" />
-            <div class="box">
-                <h1 style="text-align: start">{!! $settings->where('key', 'aramco_banner_title_'.app()->getLocale())->pluck('value')->first() !!}</h1>
-                <p style="text-align: justify"> {!! $settings->where('key', 'aramco_banner_details_'.app()->getLocale())->pluck('value')->first() !!}</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center" style="width:50%;margin:auto;">
+            <div class="box mx-auto">
+                <h1 class="mx-auto text-center">{!! $settings->where('key', 'aramco_banner_title_'.app()->getLocale())->pluck('value')->first() !!}</h1>
+                <p class="mx-auto text-center"> {!! $settings->where('key', 'aramco_banner_details_'.app()->getLocale())->pluck('value')->first() !!}</p>
             </div>
         </div>
     </aside>
